@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Grad-Project.slnx"
+    "dotnet.defaultSolution": "Graduation-project.slnx"
 }
