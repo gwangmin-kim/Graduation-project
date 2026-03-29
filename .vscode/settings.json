@@ -67,5 +67,7 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Graduation-project.slnx"
+    "dotnet.defaultSolution": "Graduation-Project.slnx",
+    "editor.formatOnSave": true,
+    "unity-code-snippets.style": "allman",
 }
