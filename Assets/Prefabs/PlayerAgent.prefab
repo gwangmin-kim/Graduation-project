@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 8150651438042456054}
   - component: {fileID: 1577028289006684658}
   - component: {fileID: 7145150774133636132}
+  - component: {fileID: 6771385580805263824}
   m_Layer: 0
   m_Name: Right_Foot
   m_TagString: Untagged
@@ -128,7 +129,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 1.5
-  m_ParentAnchorPosition: {x: -0.0000007327203, y: -0.4140397, z: -0.000000020489097}
+  m_ParentAnchorPosition: {x: -0.00000074762147, y: -0.4140397, z: -0.000000027939677}
   m_ParentAnchorRotation: {x: 0.0100809485, y: 0.060569696, z: 0.6917952, w: 0.7194788}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
@@ -184,6 +185,23 @@ ArticulationBody:
   m_Immovable: 0
   m_UseGravity: 1
   m_CollisionDetectionMode: 0
+--- !u!114 &6771385580805263824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 359731465947113559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  agent: {fileID: 0}
+  earlyTerminateOnGroundContact: 0
+  penalizeOnGroundContact: 0
+  groundContactPenalty: 0
+  touchingGround: 0
 --- !u!1 &374586408810648194
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,7 +580,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 9.5
-  m_ParentAnchorPosition: {x: -0.08610317, y: -0.053458035, z: -0.0114706755}
+  m_ParentAnchorPosition: {x: -0.08610317, y: -0.053458035, z: -0.011470642}
   m_ParentAnchorRotation: {x: 0.6944392, y: -0.7195468, z: -0.0018110323, w: -0.0018765106}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
@@ -676,14 +694,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294718076117716848}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17423268, y: 0.022938177, z: 0.9760153, w: 0.12849492}
-  m_LocalPosition: {x: -0.16743502, y: -5.684341e-16, z: -2.664535e-17}
+  m_LocalRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
+  m_LocalPosition: {x: -0.167435, y: -5.684341e-16, z: -2.664535e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9080910980786723235}
   m_Father: {fileID: 6660465439885334496}
-  m_LocalEulerAnglesHint: {x: 0, y: 20.243, z: 165}
+  m_LocalEulerAnglesHint: {x: 5.071, y: 20.243, z: 165}
 --- !u!136 &3447714681239407274
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -717,8 +735,8 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 2.5
-  m_ParentAnchorPosition: {x: -0.16344948, y: 0.17692004, z: -0.04638908}
-  m_ParentAnchorRotation: {x: 0.05732083, y: -0.028256338, z: 0.76563424, w: -0.640094}
+  m_ParentAnchorPosition: {x: -0.16344947, y: 0.17692004, z: -0.04638908}
+  m_ParentAnchorRotation: {x: 0.031877346, y: -0.064346805, z: 0.7670105, w: -0.6376036}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_MatchAnchors: 1
@@ -964,7 +982,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 9.5
-  m_ParentAnchorPosition: {x: 0.08610317, y: -0.053458154, z: -0.0114706755}
+  m_ParentAnchorPosition: {x: 0.086103186, y: -0.053458154, z: -0.0114706475}
   m_ParentAnchorRotation: {x: 0.0018765231, y: -0.0018110444, z: 0.71954674, w: 0.6944391}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
@@ -1121,8 +1139,8 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 0.5
-  m_ParentAnchorPosition: {x: 0.0000014880081, y: -0.24036397, z: 0.0000018104911}
-  m_ParentAnchorRotation: {x: -0.02948256, y: 0.030965688, z: 0.72357595, w: 0.68891966}
+  m_ParentAnchorPosition: {x: 0.000001562514, y: -0.24036402, z: 0.0000018142164}
+  m_ParentAnchorRotation: {x: -0.029482566, y: 0.030965693, z: 0.72357607, w: 0.6889198}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_MatchAnchors: 1
@@ -1946,6 +1964,7 @@ GameObject:
   - component: {fileID: 7469504623529790106}
   - component: {fileID: 6193695108339404882}
   - component: {fileID: 4005649858202803408}
+  - component: {fileID: 2245603771348668527}
   m_Layer: 0
   m_Name: Left_Foot
   m_TagString: Untagged
@@ -2000,7 +2019,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 1.5
-  m_ParentAnchorPosition: {x: 2.9864513e-16, y: 0.41403946, z: 0.00000005029142}
+  m_ParentAnchorPosition: {x: 0.000000007450581, y: 0.41403943, z: 0.0000000018626451}
   m_ParentAnchorRotation: {x: 0.010080952, y: 0.060569685, z: 0.69179505, w: 0.71947867}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
@@ -2056,6 +2075,23 @@ ArticulationBody:
   m_Immovable: 0
   m_UseGravity: 1
   m_CollisionDetectionMode: 0
+--- !u!114 &2245603771348668527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4006223620926119128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  agent: {fileID: 0}
+  earlyTerminateOnGroundContact: 0
+  penalizeOnGroundContact: 0
+  groundContactPenalty: 0
+  touchingGround: 0
 --- !u!1 &4151872751908981305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,7 +2566,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 4.5
-  m_ParentAnchorPosition: {x: 0.0000004498288, y: -0.41334414, z: -0.0000000020954758}
+  m_ParentAnchorPosition: {x: 0.0000004498288, y: -0.41334414, z: 0.000000025844201}
   m_ParentAnchorRotation: {x: 0.7307711, y: -3.3361324e-11, z: 3.35221e-11, w: 0.68262273}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
@@ -2543,7 +2579,7 @@ ArticulationBody:
   m_SwingZ: 2
   m_Twist: 1
   m_XDrive:
-    lowerLimit: 0
+    lowerLimit: -5
     upperLimit: 140
     stiffness: 500
     damping: 50
@@ -2805,6 +2841,50 @@ Transform:
   - {fileID: 2790334055197974379}
   m_Father: {fileID: 709981993169956293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6172030741904162540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 778416191324611992}
+  - component: {fileID: 3833573549857445121}
+  m_Layer: 8
+  m_Name: LocalOrientationFrame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &778416191324611992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6172030741904162540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1859334317376422839}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3833573549857445121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6172030741904162540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dabc29270ca78bb4fa3192a47c2849f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LocalFrameController
 --- !u!1 &6304926350267239307
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,8 +3080,8 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 0.5
-  m_ParentAnchorPosition: {x: 2.8421706e-16, y: 0.24036224, z: -0.000000011175871}
-  m_ParentAnchorRotation: {x: -0.029482564, y: 0.030965703, z: 0.72357595, w: 0.68891966}
+  m_ParentAnchorPosition: {x: -0.00000000745058, y: 0.24036244, z: -0.000000029802322}
+  m_ParentAnchorRotation: {x: -0.029482566, y: 0.030965693, z: 0.72357607, w: 0.6889198}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_MatchAnchors: 1
@@ -3210,14 +3290,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575611747393196506}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
   m_LocalPosition: {x: 0.0000037273983, y: -0.285085, z: -0.00000035927226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 777798858619073714}
   m_Father: {fileID: 7358001275744486264}
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!136 &4989141836948222361
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3252,7 +3332,7 @@ ArticulationBody:
   serializedVersion: 6
   m_Mass: 1.5
   m_ParentAnchorPosition: {x: 0.0000037401915, y: -0.28508517, z: -0.00000035762787}
-  m_ParentAnchorRotation: {x: 0.043619413, y: -0.000000015250407, z: 0.000000007450581, w: 0.9990484}
+  m_ParentAnchorRotation: {x: 0.08715578, y: 0.0000000027939677, z: 0.000000007450581, w: 0.99619484}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0, w: 1}
   m_MatchAnchors: 1
@@ -3367,14 +3447,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7991007193764429207}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
+  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
   m_LocalPosition: {x: -2.8421706e-16, y: 0.28508067, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 709981993169956293}
   m_Father: {fileID: 3085303970221277104}
-  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
 --- !u!136 &417351531688590102
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3408,8 +3488,8 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 1.5
-  m_ParentAnchorPosition: {x: -0.000000014901161, y: 0.28508073, z: 2.3283064e-10}
-  m_ParentAnchorRotation: {x: 0.043619417, y: -0.0000000037252903, z: -0.000000007566996, w: 0.99904835}
+  m_ParentAnchorPosition: {x: 0.000000014901161, y: 0.2850807, z: -0.000000007450581}
+  m_ParentAnchorRotation: {x: 0.08715578, y: 0.000000007450581, z: 0.00000001071021, w: 0.99619484}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: 0, y: 0, z: 0, w: 1}
   m_MatchAnchors: 1
@@ -3570,6 +3650,7 @@ GameObject:
   - component: {fileID: 1859334317376422839}
   - component: {fileID: 9067659752767705255}
   - component: {fileID: 2891880378749516472}
+  - component: {fileID: 3462249807660799793}
   m_Layer: 8
   m_Name: PlayerAgent
   m_TagString: Player
@@ -3593,6 +3674,7 @@ Transform:
   - {fileID: 5803187692275149378}
   - {fileID: 5469621795696352142}
   - {fileID: 8269204481502560142}
+  - {fileID: 778416191324611992}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9067659752767705255
@@ -3608,7 +3690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 1
+    VectorObservationSize: 207
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -3620,7 +3702,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Player
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -3642,7 +3724,32 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  m_TargetWalkingSpeed: 10
+  hips: {fileID: 8588323273553474820}
+  _endEffectorList: []
+  _childList: []
+  referenceCharacter: {fileID: 0}
+  _isRSIEnabled: 0
+  _currentSkill: 1
+  _targetWalkingSpeed: 10
+  _targetDirection: {x: 0, y: 0, z: 1}
+  randomizeWalkSpeedEachEpisode: 0
+--- !u!114 &3462249807660799793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630088158969153604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6906b01851266b4896caf8f21d55695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
+  maxJointForce: 1000
+  jointStiffness: 500
+  jointDamping: 50
+  bodyPartList: []
+  _referenceCharacter: {fileID: 0}
 --- !u!1 &8765993042395321230
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,7 +3848,7 @@ ArticulationBody:
   m_Enabled: 1
   serializedVersion: 6
   m_Mass: 4.5
-  m_ParentAnchorPosition: {x: -0.000000009313226, y: 0.4133444, z: 0.000000022118911}
+  m_ParentAnchorPosition: {x: -0.0000000018626451, y: 0.4133444, z: -2.3283064e-10}
   m_ParentAnchorRotation: {x: -0.68262273, y: -4.115903e-11, z: -4.115903e-11, w: 0.7307711}
   m_AnchorPosition: {x: 0, y: 0, z: 0}
   m_AnchorRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
@@ -3754,7 +3861,7 @@ ArticulationBody:
   m_SwingZ: 2
   m_Twist: 1
   m_XDrive:
-    lowerLimit: 0
+    lowerLimit: -5
     upperLimit: 140
     stiffness: 500
     damping: 50

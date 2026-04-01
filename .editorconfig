@@ -1,0 +1,56 @@
+# 최상위 설정 파일임을 명시
+root = true
+
+# 모든 파일에 적용
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 4
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# C# 파일에 대한 설정
+[*.cs]
+
+# --------------------------------------------------------
+# 1. 포맷팅 규칙 (저장 시 자동 적용됨)
+# --------------------------------------------------------
+
+# 중괄호 스타일: 모든 중괄호는 새 줄에서 시작 (Unity/C# 표준인 Allman 스타일)
+csharp_new_line_before_open_brace = all
+
+# using 구문 정렬 (System.* 먼저 배치)
+dotnet_sort_system_directives_first = true
+
+
+# --------------------------------------------------------
+# 2. 이름 규칙 (지키지 않으면 경고 표시)
+# --------------------------------------------------------
+
+# (1) 클래스, 메서드, 프로퍼티는 PascalCase (대문자로 시작)
+dotnet_naming_rule.types_and_methods_must_be_pascal_case.symbols = types_and_methods
+dotnet_naming_rule.types_and_methods_must_be_pascal_case.style   = pascal_case_style
+dotnet_naming_rule.types_and_methods_must_be_pascal_case.severity = warning
+
+dotnet_naming_symbols.types_and_methods.applicable_kinds = class, struct, interface, enum, method, property
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+# (2) 인터페이스는 'I'로 시작해야 함 (예: IManager)
+dotnet_naming_rule.interfaces_must_start_with_i.symbols = interface_types
+dotnet_naming_rule.interfaces_must_start_with_i.style   = interface_style
+dotnet_naming_rule.interfaces_must_start_with_i.severity = warning
+
+dotnet_naming_symbols.interface_types.applicable_kinds = interface
+dotnet_naming_style.interface_style.capitalization = pascal_case
+dotnet_naming_style.interface_style.required_prefix = I
+
+# (3) private 필드(멤버 변수)는 _(언더바) + camelCase (예: _playerSpeed)
+# Unity 개발자들이 가장 많이 쓰는 패턴입니다.
+dotnet_naming_rule.private_fields_must_be_underscore_camel.symbols  = private_fields
+dotnet_naming_rule.private_fields_must_be_underscore_camel.style    = underscore_camel_style
+dotnet_naming_rule.private_fields_must_be_underscore_camel.severity = warning
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+dotnet_naming_style.underscore_camel_style.capitalization = camel_case
+dotnet_naming_style.underscore_camel_style.required_prefix = _
