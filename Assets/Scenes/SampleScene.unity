@@ -1433,10 +1433,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2891880378749516472, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: _isRSIEnabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2891880378749516472, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: referenceCharacter
       value: 
       objectReference: {fileID: 755947843}
@@ -1447,14 +1443,6 @@ PrefabInstance:
     - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
-      objectReference: {fileID: 0}
-    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_BrainParameters.VectorActionSize.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
-      value: 37
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
