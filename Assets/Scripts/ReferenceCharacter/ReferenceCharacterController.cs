@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(ReferenceAnimationManager))]
+[RequireComponent(typeof(Animator))]
 public class ReferenceCharacterController : MonoBehaviour
 {
     [Header("Current States")]
@@ -18,10 +19,16 @@ public class ReferenceCharacterController : MonoBehaviour
 
     // animation
     private ReferenceAnimationManager _referenceAnimationManager;
+    private Animator _animator;
+    public string currentClipName;
 
     private void Awake()
     {
         _referenceAnimationManager = GetComponent<ReferenceAnimationManager>();
+
+        _animator = GetComponent<Animator>();
+        _animator.enabled = true;
+        _animator.speed = 0; // 자동 재생 방지
     }
 
     private void Start()
@@ -32,17 +39,27 @@ public class ReferenceCharacterController : MonoBehaviour
             if (body.transform == hips) continue;
             childList.Add(body);
         }
+
+        // InitPose(Skill.Walk, Random.value);
+    }
+
+    private bool _isPlaying = false;
+    private void Update()
+    {
+        if (_isPlaying) Tick(Time.deltaTime);
+    }
+    public void TogglePlay()
+    {
+        _isPlaying = !_isPlaying;
     }
 
     public void InitPose(Skill skill, float initPhase)
     {
-        var clip = _referenceAnimationManager.GetClipFromSkill(skill);
+        currentClip = _referenceAnimationManager.GetClipFromSkill(skill);
+        currentClipName = skill.ToString();
+        CurrentPhase = initPhase;
 
-        CurrentPhase = Mathf.Clamp01(initPhase);
-        float sampleTime = CurrentPhase * clip.length;
-
-        clip.SampleAnimation(gameObject, sampleTime);
-        currentClip = clip;
+        _animator.Play(currentClipName, 0, CurrentPhase);
 
         foreach (var body in childList)
         {
@@ -54,13 +71,7 @@ public class ReferenceCharacterController : MonoBehaviour
     public void SetPhase(float phase)
     {
         CurrentPhase = Mathf.Clamp01(phase);
-        ApplyPhase();
-    }
-
-    private void ApplyPhase()
-    {
-        float sampleTime = CurrentPhase * currentClip.length;
-        currentClip.SampleAnimation(gameObject, sampleTime);
+        _animator.Play(currentClipName, 0, CurrentPhase);
     }
 
     public void Tick(float deltaTime)
@@ -69,11 +80,13 @@ public class ReferenceCharacterController : MonoBehaviour
         CurrentPhase = (CurrentPhase + (deltaTime / currentClip.length)) % 1f;
 
         // 동작 샘플링
-        ApplyPhase();
+        _animator.Play(currentClipName, 0, CurrentPhase);
+        _animator.Update(0);
 
         // 속도 업데이트
         foreach (var body in childList)
         {
+            body.UpdateJointPosition();
             body.UpdateVelocities(deltaTime);
         }
     }

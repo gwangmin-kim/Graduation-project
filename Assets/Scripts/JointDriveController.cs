@@ -68,7 +68,7 @@ public class JointDriveController : MonoBehaviour
     public float jointDamping = 50f;
 
     [HideInInspector] public Dictionary<ArticulationBody, BodyPart> bodyPartDict = new Dictionary<ArticulationBody, BodyPart>();
-    [HideInInspector] public List<BodyPart> bodyPartList = new List<BodyPart>();
+    public List<BodyPart> bodyPartList = new List<BodyPart>();
 
     [Header("Reference Character")]
     [SerializeField] private ReferenceCharacterController _referenceCharacter;
@@ -131,16 +131,50 @@ public class JointDriveController : MonoBehaviour
 
     public void ApplyReferenceStateInitialization(Skill skill, float phase)
     {
-        _referenceCharacter.InitPose(skill, phase);
+        if (bodyPartList.Count != _referenceCharacter.childList.Count)
+        {
+            Debug.LogError($"Referenece Character has different number of body parts.");
+            ResetAllBodyParts();
+            return;
+        }
 
+        _referenceCharacter.InitPose(skill, phase);
+        CopyReferencePose();
+
+    }
+
+    private void CopyReferencePose()
+    {
         for (int i = 0; i < bodyPartList.Count; i++)
         {
             var bodyPart = bodyPartList[i];
             var referenceBody = _referenceCharacter.childList[i];
             var referenceJointPosition = referenceBody.GetJointPosition();
+            Physics.SyncTransforms();
 
             bodyPart.body.jointPosition = referenceJointPosition;
             bodyPart.Reset(referenceJointPosition);
         }
+    }
+
+    void Start()
+    {
+        var hips = transform.Find("Hips");
+        var bodyList = hips.GetComponentsInChildren<ArticulationBody>();
+        foreach (var body in bodyList)
+        {
+            if (body.transform == hips) continue;
+            SetupBodyPart(body);
+        }
+    }
+
+    public void TestRSI()
+    {
+        ApplyReferenceStateInitialization(Skill.Walk, Random.value);
+    }
+
+    void FixedUpdate()
+    {
+        CopyReferencePose();
     }
 }

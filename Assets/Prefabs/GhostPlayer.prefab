@@ -428,12 +428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 1.07635, y: 0.9810986, z: 1.4084154}
+  initRotation: {x: -0, y: -0, z: -0, w: 1}
   jointType: 0
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1055910618897576488
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,12 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -0.16743502, y: -5.684341e-16, z: -2.664535e-17}
+  initRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1488935758421613882
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,12 +781,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -0, y: 0.058229383, z: 0.0012229546}
+  initRotation: {x: 0, y: -0, z: -0, w: 1}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2658184220267875324
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,7 +923,8 @@ GameObject:
   - component: {fileID: 6744173443014668708}
   - component: {fileID: 5026827439104636931}
   - component: {fileID: 3634919361438861853}
-  m_Layer: 8
+  - component: {fileID: 7620635129760273909}
+  m_Layer: 0
   m_Name: GhostPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -985,8 +980,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d123d3b54b5392943a9a52e09bf48c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceCharacterController
+  currentClip: {fileID: 0}
   hips: {fileID: 4560303629480737219}
+  endEffectorList: []
   childList: []
+  currentClipName: 
+--- !u!95 &7620635129760273909
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159591246172632123}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+  m_Controller: {fileID: 9100000, guid: 00c32227f6a825f418f1569f6887b89d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3172487001262367566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1036,12 +1056,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 0.0000014923929, y: -0.24036367, z: 0.0000017856368}
+  initRotation: {x: -0.042743362, y: 0.0010487299, z: 0.024505692, w: 0.998785}
   jointType: 0
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &3268657212721768739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,12 +1169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -2.8421706e-16, y: 0.28508067, z: 0}
+  initRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
   jointType: 2
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &3589694142246580258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,12 +1345,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -0.08610317, y: -0.053458035, z: -0.011470641}
+  initRotation: {x: 0.999839, y: -0.01775374, z: 0.000046300094, w: -0.0026074864}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4352848499983051925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1443,12 +1457,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -0.0000007472542, y: -0.41403967, z: -0.000000032847502}
+  initRotation: {x: -0.035700925, y: 0.049957544, z: -0.019575229, w: 0.9979211}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4587793115330422925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1587,12 +1599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 0.086103186, y: -0.053458147, z: -0.0114706475}
+  initRotation: {x: 0.0026075041, y: 0.000046300407, z: 0.01775374, w: 0.999839}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4822835286937523116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,12 +1937,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -0, y: 0.25104657, z: -0.015329581}
+  initRotation: {x: 0.060688436, y: -0, z: -0, w: 0.9981568}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &6430505491732167499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,12 +2210,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 0.0000037273983, y: -0.285085, z: -0.00000035927226}
+  initRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
   jointType: 2
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7467720932801302315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,12 +2259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -2.9864513e-16, y: 0.4133444, z: -5.4956034e-17}
+  initRotation: {x: 0.034046065, y: 2.2687323e-19, z: 7.728622e-21, w: 0.9994203}
   jointType: 2
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7651428185137147121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,12 +2502,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -2.4123817e-10, y: 0.24036221, z: -1.4210853e-16}
+  initRotation: {x: -0.042743362, y: 0.0010487299, z: 0.024505692, w: 0.998785}
   jointType: 0
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &8532800778517102147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,12 +2553,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: -0, y: 0.1034043, z: 0}
+  initRotation: {x: 0, y: -0, z: -0, w: 1}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &8737481565049297644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,12 +2634,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 0.16743432, y: -0.0000022099182, z: 0.00000012213746}
+  initRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &9008016940227226520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2716,12 +2714,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 0.0000000017320426, y: 0.41403946, z: 7.141509e-16}
+  initRotation: {x: -0.035700925, y: 0.049957544, z: -0.019575229, w: 0.9979211}
   jointType: 3
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &9121133878959112900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2799,9 +2795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 092654aaf19a4bd4cb50c4f2975688f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
-  initPosition: {x: 0, y: 0, z: 0}
-  initRotation: {x: 0, y: 0, z: 0, w: 0}
+  initPosition: {x: 0.0000004514609, y: -0.41334414, z: 0.000000025994435}
+  initRotation: {x: 0.034046065, y: 2.2687323e-19, z: 7.728622e-21, w: 0.9994203}
   jointType: 2
-  referencePosition: {x: 0, y: 0, z: 0}
-  jointPosition: {x: 0, y: 0, z: 0}
-  DebugLog: 
+  _jointPosition: {x: 0, y: 0, z: 0}

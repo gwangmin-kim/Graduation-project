@@ -1,14 +1,15 @@
+using Unity.Collections;
 using UnityEngine;
 
 public class ReferenceBodyPart : MonoBehaviour
 {
-    [HideInInspector] public Vector3 initPosition;
-    [HideInInspector] public Quaternion initRotation;
+    [ReadOnly] public Vector3 initPosition;
+    [ReadOnly] public Quaternion initRotation;
 
     public ArticulationJointType jointType;
     // public Vector3 jointPosition;
     [SerializeField] private Vector3 _jointPosition;
-    [TextArea(10, 10)] public string DebugLog;
+    // [TextArea(10, 10)] public string DebugLog;
 
     // 속도 계산용
     private Vector3 _prevPosition;
@@ -18,11 +19,21 @@ public class ReferenceBodyPart : MonoBehaviour
     public Vector3 AngularVelocity { get; private set; }
     public Quaternion JointOrientation => transform.localRotation * Quaternion.Inverse(initRotation);
 
-    private void Awake()
+    [ContextMenu("Record Initial State")]
+    private void RecordInitialState()
     {
-        initPosition = transform.position;
+        initPosition = transform.localPosition;
         initRotation = transform.localRotation;
+
+        UnityEditor.EditorUtility.SetDirty(this);
+        Debug.Log($"[{name}] Initial State Recorded");
     }
+
+    // private void Awake()
+    // {
+    //     initPosition = transform.localPosition;
+    //     initRotation = transform.localRotation;
+    // }
 
     public void UpdateVelocities(float deltaTime)
     {

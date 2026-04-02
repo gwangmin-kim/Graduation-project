@@ -63,9 +63,8 @@ public class PlayerAgent : Agent
         var bodyList = hips.transform.GetComponentsInChildren<ArticulationBody>();
         foreach (var body in bodyList)
         {
-            _jointDriveController.SetupBodyPart(body);
-
             if (body == hips) continue;
+            _jointDriveController.SetupBodyPart(body);
             _childList.Add(body);
         }
     }
@@ -82,7 +81,7 @@ public class PlayerAgent : Agent
         if (_isRSIEnabled)
         {
             float initPhase = Random.value;
-            _jointDriveController.ApplyReferenceStateInitialization(Skill.Walk, initPhase);
+            _jointDriveController.ApplyReferenceStateInitialization(_currentSkill, initPhase);
         }
         else
         {
