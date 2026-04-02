@@ -37,6 +37,7 @@ public class PlayerAgent : Agent
     [SerializeField][Range(0.1f, 10f)] private float _targetWalkingSpeed = _maxWalkingSpeed;
     [SerializeField] private Vector3 _targetDirection = Vector3.forward;
     public bool randomizeWalkSpeedEachEpisode;
+    public bool randomizeInitialRotation;
 
     const float _maxWalkingSpeed = 10f;
     public float TargetWalkingSpeed
@@ -72,8 +73,8 @@ public class PlayerAgent : Agent
     public override void OnEpisodeBegin()
     {
         // 위치 초기화
-        Quaternion randomRotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
-        hips.TeleportRoot(_initPosition, randomRotation);
+        Quaternion initRotation = randomizeInitialRotation ? Quaternion.Euler(0f, Random.Range(0f, 360f), 0f) : Quaternion.identity;
+        hips.TeleportRoot(_initPosition, initRotation);
         hips.linearVelocity = Vector3.zero;
         hips.angularVelocity = Vector3.zero;
 
@@ -162,17 +163,17 @@ public class PlayerAgent : Agent
                     break;
             }
         }
-    }
-
-    private void FixedUpdate()
-    {
-        UpdateLocalFrame();
 
         var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, GetAverageVelocity());
         var imitationReward = GetImitationReward();
 
         float reward = 0.3f * targetHeadingReward + 0.7f * imitationReward;
         AddReward(reward);
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateLocalFrame();
     }
 
     private void UpdateLocalFrame()

@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Sample Pose
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1159,7 +1159,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Play Animation
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1392,30 +1392,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 530164418142629751, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 530164418142629751, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 530164418142629751, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 825873406919609171, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 825873406919609171, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 825873406919609171, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 1859334317376422839, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1456,149 +1432,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2555083388432367231, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2555083388432367231, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2555083388432367231, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2638518003450270896, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2638518003450270896, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2638518003450270896, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2891880378749516472, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2891880378749516472, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _isRSIEnabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2891880378749516472, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: referenceCharacter
       value: 
       objectReference: {fileID: 755947843}
-    - target: {fileID: 2891880378749516472, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: _targetWalkingSpeed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 3462249807660799793, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _referenceCharacter
       value: 
       objectReference: {fileID: 755947843}
-    - target: {fileID: 4005649858202803408, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005649858202803408, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4005649858202803408, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369439378757700289, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369439378757700289, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6369439378757700289, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6944941312637293547, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6994450512189050430, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7109886250224996422, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7109886250224996422, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7109886250224996422, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134985373393711583, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134985373393711583, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7134985373393711583, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145150774133636132, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145150774133636132, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7145150774133636132, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8417247535020592749, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8588323273553474820, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_Immovable
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
       objectReference: {fileID: 0}
-    - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898369058602741434, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_XDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898369058602741434, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_YDrive.driveType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8898369058602741434, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_ZDrive.driveType
-      value: 2
+    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 37
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

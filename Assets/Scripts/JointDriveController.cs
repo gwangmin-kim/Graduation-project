@@ -157,24 +157,24 @@ public class JointDriveController : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        var hips = transform.Find("Hips");
-        var bodyList = hips.GetComponentsInChildren<ArticulationBody>();
-        foreach (var body in bodyList)
-        {
-            if (body.transform == hips) continue;
-            SetupBodyPart(body);
-        }
-    }
+    // void Start()
+    // {
+    //     var hips = transform.Find("Hips");
+    //     var bodyList = hips.GetComponentsInChildren<ArticulationBody>();
+    //     foreach (var body in bodyList)
+    //     {
+    //         if (body.transform == hips) continue;
+    //         SetupBodyPart(body);
+    //     }
+    // }
 
     public void TestRSI()
     {
         ApplyReferenceStateInitialization(Skill.Walk, Random.value);
     }
 
-    void FixedUpdate()
-    {
-        CopyReferencePose();
-    }
+    // void FixedUpdate()
+    // {
+    //     CopyReferencePose();
+    // }
 }

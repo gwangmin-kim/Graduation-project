@@ -3693,9 +3693,9 @@ MonoBehaviour:
     VectorObservationSize: 207
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 0
+      m_NumContinuousActions: 37
       BranchSizes: 01000000
-    VectorActionSize: 01000000
+    VectorActionSize: 
     VectorActionDescriptions: []
     VectorActionSpaceType: 0
     hasUpgradedBrainParametersWithActionSpec: 1
@@ -3730,7 +3730,7 @@ MonoBehaviour:
   referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
-  _targetWalkingSpeed: 10
+  _targetWalkingSpeed: 5
   _targetDirection: {x: 0, y: 0, z: 1}
   randomizeWalkSpeedEachEpisode: 0
 --- !u!114 &3462249807660799793
