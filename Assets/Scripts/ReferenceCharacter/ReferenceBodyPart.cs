@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class ReferenceBodyPart : MonoBehaviour
 {
-    [ReadOnly] public Vector3 initPosition;
-    [ReadOnly] public Quaternion initRotation;
+    [HideInInspector][ReadOnly] public Vector3 initPosition;
+    [HideInInspector][ReadOnly] public Quaternion initRotation;
 
     public ArticulationJointType jointType;
     // public Vector3 jointPosition;

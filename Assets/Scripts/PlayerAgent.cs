@@ -133,14 +133,6 @@ public class PlayerAgent : Agent
         var continuousActions = actionBuffers.ContinuousActions;
         int actionIndex = 0;
 
-        ArticulationDrive ApplyTarget(ArticulationDrive drive)
-        {
-            float t = (continuousActions[actionIndex++] + 1f) / 2f;
-            float target = Mathf.Lerp(drive.lowerLimit, drive.upperLimit, t);
-            drive.target = target;
-            return drive;
-        }
-
         foreach (var body in _childList)
         {
             switch (body.jointType)
@@ -149,17 +141,23 @@ public class PlayerAgent : Agent
                     break;
 
                 case ArticulationJointType.PrismaticJoint:
-                    body.xDrive = ApplyTarget(body.xDrive);
+                    Debug.LogError($"[{body.name}] Unexpected Joint Type: Prismatic Joint");
                     break;
 
                 case ArticulationJointType.RevoluteJoint:
-                    body.xDrive = ApplyTarget(body.xDrive);
+                    float target = (continuousActions[actionIndex++] + 1f) / 2f;
+                    body.SetDriveTarget(ArticulationDriveAxis.X, target);
                     break;
 
                 case ArticulationJointType.SphericalJoint:
-                    body.xDrive = ApplyTarget(body.xDrive);
-                    body.yDrive = ApplyTarget(body.yDrive);
-                    body.zDrive = ApplyTarget(body.zDrive);
+                    List<float> targets = new List<float>(3)
+                    {
+                        (continuousActions[actionIndex] + 1f) / 2f,
+                        (continuousActions[actionIndex + 1] + 1f) / 2f,
+                        (continuousActions[actionIndex + 2] + 1f) / 2f
+                    };
+                    actionIndex += 3;
+                    body.SetDriveTargets(targets);
                     break;
             }
         }

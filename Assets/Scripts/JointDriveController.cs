@@ -16,12 +16,6 @@ public class BodyPart
 
     public void Reset(ArticulationReducedSpace? target = null)
     {
-        static ArticulationDrive ResetTarget(ArticulationDrive drive, float target = 0f)
-        {
-            drive.target = target;
-            return drive;
-        }
-
         if (body.isRoot)
         {
             body.linearVelocity = Vector3.zero;
@@ -36,21 +30,25 @@ public class BodyPart
                 break;
 
             case ArticulationJointType.PrismaticJoint:
-                body.xDrive = ResetTarget(body.xDrive);
-                body.jointPosition = new ArticulationReducedSpace(0f);
-                body.jointVelocity = new ArticulationReducedSpace(0f);
+                Debug.LogError($"[{body.name}] Unexpected Joint Type: Prismatic Joint");
                 break;
 
             case ArticulationJointType.RevoluteJoint:
-                body.xDrive = ResetTarget(body.xDrive, target?[0] ?? 0f);
+                body.SetDriveTarget(ArticulationDriveAxis.X, target?[0] ?? 0f);
+                // body.jointPosition = target ?? new ArticulationReducedSpace(0f);
                 body.jointPosition = new ArticulationReducedSpace(0f);
                 body.jointVelocity = new ArticulationReducedSpace(0f);
                 break;
 
             case ArticulationJointType.SphericalJoint:
-                body.xDrive = ResetTarget(body.xDrive, target?[0] ?? 0f);
-                body.yDrive = ResetTarget(body.yDrive, target?[1] ?? 0f);
-                body.zDrive = ResetTarget(body.zDrive, target?[2] ?? 0f);
+                List<float> targets = new List<float>(3)
+                {
+                    target?[0] ?? 0f,
+                    target?[1] ?? 0f,
+                    target?[2] ?? 0f,
+                };
+                body.SetDriveTargets(targets);
+                // body.jointPosition = target ?? new ArticulationReducedSpace(0f, 0f, 0f);
                 body.jointPosition = new ArticulationReducedSpace(0f, 0f, 0f);
                 body.jointVelocity = new ArticulationReducedSpace(0f, 0f, 0f);
                 break;

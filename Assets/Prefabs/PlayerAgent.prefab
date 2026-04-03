@@ -602,8 +602,8 @@ ArticulationBody:
     targetVelocity: 0
     driveType: 0
   m_YDrive:
-    lowerLimit: -140
-    upperLimit: 60
+    lowerLimit: -100
+    upperLimit: 140
     stiffness: 500
     damping: 50
     forceLimit: 3.4028235e+38
@@ -1004,8 +1004,8 @@ ArticulationBody:
     targetVelocity: 0
     driveType: 0
   m_YDrive:
-    lowerLimit: -140
-    upperLimit: 60
+    lowerLimit: -100
+    upperLimit: 140
     stiffness: 500
     damping: 50
     forceLimit: 3.4028235e+38
@@ -2579,7 +2579,7 @@ ArticulationBody:
   m_SwingZ: 2
   m_Twist: 1
   m_XDrive:
-    lowerLimit: -5
+    lowerLimit: -10
     upperLimit: 140
     stiffness: 500
     damping: 50
@@ -3733,6 +3733,7 @@ MonoBehaviour:
   _targetWalkingSpeed: 5
   _targetDirection: {x: 0, y: 0, z: 1}
   randomizeWalkSpeedEachEpisode: 0
+  randomizeInitialRotation: 0
 --- !u!114 &3462249807660799793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3861,7 +3862,7 @@ ArticulationBody:
   m_SwingZ: 2
   m_Twist: 1
   m_XDrive:
-    lowerLimit: -5
+    lowerLimit: -10
     upperLimit: 140
     stiffness: 500
     damping: 50
