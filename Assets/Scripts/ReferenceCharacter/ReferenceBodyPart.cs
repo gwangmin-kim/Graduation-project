@@ -30,9 +30,10 @@ public class ReferenceBodyPart : MonoBehaviour
         if (hips == null) hips = transform.root.Find("Hips");
         initUpAxis = hips.InverseTransformDirection(transform.up);
         initForwardAxis = hips.InverseTransformDirection(transform.forward);
-
+#if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
         Debug.Log($"[{name}] Initial State Recorded");
+#endif
     }
 
     // private void Awake()
