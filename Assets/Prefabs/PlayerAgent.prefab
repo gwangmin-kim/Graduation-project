@@ -3649,6 +3649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1859334317376422839}
   - component: {fileID: 9067659752767705255}
+  - component: {fileID: 3441019356390322015}
   - component: {fileID: 2891880378749516472}
   - component: {fileID: 3462249807660799793}
   m_Layer: 6
@@ -3693,7 +3694,7 @@ MonoBehaviour:
     VectorObservationSize: 207
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 37
+      m_NumContinuousActions: 68
       BranchSizes: 01000000
     VectorActionSize: 
     VectorActionDescriptions: []
@@ -3708,6 +3709,21 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
+--- !u!114 &3441019356390322015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630088158969153604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
+  DecisionPeriod: 5
+  DecisionStep: 0
+  TakeActionsBetweenDecisions: 1
 --- !u!114 &2891880378749516472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3724,6 +3740,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  testLog: 
   hips: {fileID: 8588323273553474820}
   _endEffectorList: []
   _childList: []
@@ -3746,9 +3763,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6906b01851266b4896caf8f21d55695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
+  testLog: 
   maxJointForce: 10000
   jointStiffness: 500
   jointDamping: 50
+  hips: {fileID: 8588323273553474820}
   bodyPartList: []
   _referenceCharacter: {fileID: 0}
 --- !u!1 &8765993042395321230

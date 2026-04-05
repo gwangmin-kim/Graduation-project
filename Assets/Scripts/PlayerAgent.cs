@@ -3,6 +3,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public enum Skill
 {
@@ -15,6 +16,8 @@ public enum Skill
 [RequireComponent(typeof(JointDriveController))]
 public class PlayerAgent : Agent
 {
+    public string testLog = "";
+
     [Header("Body Parts")]
     public ArticulationBody hips; // 루트
 
@@ -25,6 +28,7 @@ public class PlayerAgent : Agent
 
     [SerializeField] private List<ArticulationBody> _childList = new List<ArticulationBody>();
     private Vector3 _initPosition; // 초기 루트 포지션
+    private List<float> _masterTargetList = new List<float>();
 
     [Header("Reference Character")]
     public ReferenceCharacterController referenceCharacter;
@@ -62,12 +66,22 @@ public class PlayerAgent : Agent
         _initPosition = hips.transform.position;
 
         var bodyList = hips.transform.GetComponentsInChildren<ArticulationBody>();
+
+        int currentIndex = 0;
+        // 루트가 Movable이라면 6개의 인덱스를 건너뛰기 (위치/회전용)
+        if (!hips.immovable) currentIndex += 6;
+
+        _jointDriveController.hips = hips;
         foreach (var body in bodyList)
         {
             if (body == hips) continue;
-            _jointDriveController.SetupBodyPart(body);
+            _jointDriveController.SetupBodyPart(body, currentIndex);
             _childList.Add(body);
+
+            currentIndex += body.dofCount;
         }
+
+        _masterTargetList = new List<float>(new float[currentIndex]);
     }
 
     public override void OnEpisodeBegin()
@@ -81,12 +95,12 @@ public class PlayerAgent : Agent
         // 자세 초기화
         if (_isRSIEnabled)
         {
-            float initPhase = Random.value;
-            _jointDriveController.ApplyReferenceStateInitialization(_currentSkill, initPhase);
+            _jointDriveController.ApplyReferenceStateInitialization(_currentSkill, Random.value);
         }
         else
         {
             _jointDriveController.ResetAllBodyParts();
+            referenceCharacter.InitPose(_currentSkill, Random.value);
         }
 
         // 목표 속력 재설정
@@ -130,38 +144,61 @@ public class PlayerAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        var continuousActions = actionBuffers.ContinuousActions;
-        int actionIndex = 0;
+        testLog = "";
 
+        var continuousActions = actionBuffers.ContinuousActions;
+        int actionIndex = -1;
+
+        // 목표 각도 설정
+        // List<float> targets = new List<float>();
+        // int targetCount = hips.GetDriveTargets(targets);
+        // log += $"target count: {targetCount}\n";
+        // for (int i = 0; i < targetCount; i++)
+        // {
+        //     targets[i] = continuousActions[++actionIndex];
+        // }
+        // hips.SetDriveTargets(targets);
         foreach (var body in _childList)
         {
             switch (body.jointType)
             {
                 case ArticulationJointType.FixedJoint:
                     break;
-
                 case ArticulationJointType.PrismaticJoint:
-                    Debug.LogError($"[{body.name}] Unexpected Joint Type: Prismatic Joint");
+                    Debug.LogError($"[{body.name}] unexpected joint type: PrismaticJoint");
                     break;
-
                 case ArticulationJointType.RevoluteJoint:
-                    float target = (continuousActions[actionIndex++] + 1f) / 2f;
+                    var lowerLimit = body.xDrive.lowerLimit;
+                    var upperLimit = body.xDrive.upperLimit;
+                    var actionValue = (continuousActions[++actionIndex] + 1f) * 0.5f;
+                    var target = Mathf.Lerp(lowerLimit, upperLimit, actionValue);
+
                     body.SetDriveTarget(ArticulationDriveAxis.X, target);
                     break;
-
                 case ArticulationJointType.SphericalJoint:
-                    List<float> targets = new List<float>(3)
-                    {
-                        (continuousActions[actionIndex] + 1f) / 2f,
-                        (continuousActions[actionIndex + 1] + 1f) / 2f,
-                        (continuousActions[actionIndex + 2] + 1f) / 2f
-                    };
-                    actionIndex += 3;
-                    body.SetDriveTargets(targets);
+                    var targetX = Mathf.Lerp(body.xDrive.lowerLimit, body.xDrive.upperLimit, (continuousActions[++actionIndex] + 1f) * 0.5f);
+                    var targetY = Mathf.Lerp(body.yDrive.lowerLimit, body.yDrive.upperLimit, (continuousActions[++actionIndex] + 1f) * 0.5f);
+                    var targetZ = Mathf.Lerp(body.zDrive.lowerLimit, body.zDrive.upperLimit, (continuousActions[++actionIndex] + 1f) * 0.5f);
+
+                    body.SetDriveTarget(ArticulationDriveAxis.X, targetX);
+                    body.SetDriveTarget(ArticulationDriveAxis.Y, targetY);
+                    body.SetDriveTarget(ArticulationDriveAxis.Z, targetZ);
                     break;
             }
         }
 
+        // 최대 힘 결정
+        List<float> forces = new List<float>();
+        int forceCount = hips.GetDriveForces(forces);
+        testLog += $"force count: {forceCount}\n";
+        for (int i = 0; i < forceCount; i++)
+        {
+            forces[i] = (continuousActions[++actionIndex] + 1f) * 0.5f * _jointDriveController.maxJointForce;
+        }
+
+        Debug.Log($"action count: {actionIndex}");
+
+        // 보상 지급
         var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, GetAverageVelocity());
         var imitationReward = GetImitationReward();
 
@@ -172,6 +209,7 @@ public class PlayerAgent : Agent
     private void FixedUpdate()
     {
         UpdateLocalFrame();
+        referenceCharacter.Tick(Time.fixedDeltaTime);
     }
 
     private void UpdateLocalFrame()
@@ -273,5 +311,29 @@ public class PlayerAgent : Agent
             diffSquaredSum += Vector3.SqrMagnitude(agentPosition - referencePosition);
         }
         return Mathf.Exp(-40f * diffSquaredSum);
+    }
+
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        var continuousActions = actionsOut.ContinuousActions;
+        // 테스트용
+        var keyboard = Keyboard.current;
+        if (keyboard == null) return;
+        if (keyboard.wKey.wasPressedThisFrame)
+        {
+            continuousActions[0] = -1f;
+        }
+        if (keyboard.sKey.wasPressedThisFrame)
+        {
+            continuousActions[0] = 1f;
+        }
+        if (keyboard.aKey.wasPressedThisFrame)
+        {
+            continuousActions[1] = -1f;
+        }
+        if (keyboard.dKey.wasPressedThisFrame)
+        {
+            continuousActions[1] = 1f;
+        }
     }
 }

@@ -27,8 +27,8 @@ public class ReferenceCharacterController : MonoBehaviour
         _referenceAnimationManager = GetComponent<ReferenceAnimationManager>();
 
         _animator = GetComponent<Animator>();
-        _animator.enabled = true;
         _animator.speed = 0; // 자동 재생 방지
+        _animator.enabled = false;
     }
 
     private void Start()
@@ -40,7 +40,7 @@ public class ReferenceCharacterController : MonoBehaviour
             childList.Add(body);
         }
 
-        // InitPose(Skill.Walk, Random.value);
+        _animator.enabled = true;
     }
 
     private bool _isPlaying = false;
@@ -60,6 +60,7 @@ public class ReferenceCharacterController : MonoBehaviour
         CurrentPhase = initPhase;
 
         _animator.Play(currentClipName, 0, CurrentPhase);
+        _animator.Update(0);
 
         foreach (var body in childList)
         {
