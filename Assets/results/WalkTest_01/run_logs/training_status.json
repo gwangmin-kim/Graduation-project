@@ -1,4 +1,26 @@
 {
+    "PlayerAgent": {
+        "checkpoints": [
+            {
+                "steps": 63753,
+                "file_path": "results\\WalkTest_01\\PlayerAgent\\PlayerAgent-63753.onnx",
+                "reward": 7.594993861608727,
+                "creation_time": 1775393410.626688,
+                "auxillary_file_paths": [
+                    "results\\WalkTest_01\\PlayerAgent\\PlayerAgent-63753.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 63753,
+            "file_path": "results\\WalkTest_01\\PlayerAgent.onnx",
+            "reward": 7.594993861608727,
+            "creation_time": 1775393410.626688,
+            "auxillary_file_paths": [
+                "results\\WalkTest_01\\PlayerAgent\\PlayerAgent-63753.pt"
+            ]
+        }
+    },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "1.1.0",

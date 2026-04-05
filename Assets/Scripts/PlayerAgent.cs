@@ -196,7 +196,7 @@ public class PlayerAgent : Agent
             forces[i] = (continuousActions[++actionIndex] + 1f) * 0.5f * _jointDriveController.maxJointForce;
         }
 
-        Debug.Log($"action count: {actionIndex}");
+        // Debug.Log($"action count: {actionIndex}");
 
         // 보상 지급
         var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, GetAverageVelocity());
