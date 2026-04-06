@@ -197,19 +197,22 @@ public class PlayerAgent : Agent
         }
 
         // Debug.Log($"action count: {actionIndex}");
-
-        // 보상 지급
-        var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, GetAverageVelocity());
-        var imitationReward = GetImitationReward();
-
-        float reward = 0.3f * targetHeadingReward + 0.7f * imitationReward;
-        AddReward(reward);
     }
 
     private void FixedUpdate()
     {
         UpdateLocalFrame();
         referenceCharacter.Tick(Time.fixedDeltaTime);
+
+        // 보상 지급
+        var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, GetAverageVelocity());
+        var imitationReward = GetImitationReward();
+
+        // Debug.Log($"target heading reward: {targetHeadingReward}");
+        // Debug.Log($"imitation reward: {imitationReward}");
+
+        float reward = 0.3f * targetHeadingReward + 0.7f * imitationReward;
+        AddReward(reward);
     }
 
     private void UpdateLocalFrame()
@@ -246,6 +249,10 @@ public class PlayerAgent : Agent
         float poseReward = GetPoseReward();
         float velocityReward = GetVelocityReward();
         float endEffectorreward = GetEndEffectorReward();
+
+        // Debug.Log($"pose reward: {poseReward}");
+        // Debug.Log($"velocity reward: {velocityReward}");
+        // Debug.Log($"end effector reward: {endEffectorreward}");
 
         return 0.7f * poseReward + 0.1f * velocityReward + 0.2f * endEffectorreward;
     }
