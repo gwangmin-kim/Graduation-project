@@ -170,6 +170,9 @@ public class PlayerAgent : Agent
             bodyPart.SetJointStrength(continuousActions[++actionIndex]);
         }
         // Debug.Log(actionIndex);
+
+        // 생존 보상 (서 있는 것이 유리하도록)
+        AddReward(0.1f);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -204,9 +207,9 @@ public class PlayerAgent : Agent
             Debug.LogError($"Referenece Character has different number of body parts.");
         }
 
-        float poseReward = GetPoseReward();
-        float velocityReward = GetVelocityReward();
-        float endEffectorreward = GetEndEffectorReward();
+        float poseReward = GetPoseReward(-0.5f);
+        float velocityReward = GetVelocityReward(-0.02f);
+        float endEffectorreward = GetEndEffectorReward(-10f);
 
         // Debug.Log($"pose reward: {poseReward}");
         // Debug.Log($"velocity reward: {velocityReward}");
@@ -250,7 +253,7 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetEndEffectorReward()
+    private float GetEndEffectorReward(float weight = -40f)
     {
         if (_endEffectorList.Count != _referenceCharacter.endEffectorList.Count)
         {
@@ -270,7 +273,7 @@ public class PlayerAgent : Agent
 
             diffSquaredSum += Vector3.SqrMagnitude(position - refPosition);
         }
-        return Mathf.Exp(-40f * diffSquaredSum);
+        return Mathf.Exp(weight * diffSquaredSum);
     }
 
     public float GetTargetHeadingReward(float targetSpeed, Vector3 targetDirection, Vector3 actualVelocity, float weight = 2.5f)
