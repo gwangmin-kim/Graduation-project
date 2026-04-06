@@ -1,172 +1,148 @@
-using UnityEngine;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using Unity.MLAgents;
+using Unity.VisualScripting;
+using UnityEngine;
 
-[RequireComponent(typeof(Agent))]
+// [RequireComponent(typeof(Agent))]
 public class JointDriveController : MonoBehaviour
 {
-    [TextArea(10, 10)]
-    public string testLog = "";
+    [Header("Joint Drive Settings")]
+    public float jointSpring;
+    public float jointDamper;
+    public float maxJointForce;
 
-    [Header("Physics Settings")]
-    // 현재는 일괄 적용
-    public float maxJointForce = 10000f;
-    public float jointStiffness = 500f;
-    public float jointDamping = 50f;
-
-    [HideInInspector] public Dictionary<ArticulationBody, BodyPart> bodyPartDict = new Dictionary<ArticulationBody, BodyPart>();
-    public ArticulationBody hips;
+    public Transform hips;
     public List<BodyPart> bodyPartList = new List<BodyPart>();
+    [HideInInspector] public Dictionary<Transform, BodyPart> bodyPartDict = new Dictionary<Transform, BodyPart>();
 
-    [Header("Reference Character")]
-    [SerializeField] private ReferenceCharacterController _referenceCharacter;
+    private const float _maxAngularVelocity = 100.0f;
 
-    public void SetupBodyPart(ArticulationBody body, int startIndex)
-    {
-        switch (body.jointType)
-        {
-            case ArticulationJointType.FixedJoint:
-                break;
-
-            case ArticulationJointType.PrismaticJoint:
-                Debug.LogError($"[{body.name}] unexpected joint type: PrismaticJoint");
-                break;
-
-            case ArticulationJointType.RevoluteJoint:
-                body.SetDriveStiffness(ArticulationDriveAxis.X, jointStiffness);
-                body.SetDriveDamping(ArticulationDriveAxis.X, jointDamping);
-                body.SetDriveForceLimit(ArticulationDriveAxis.X, maxJointForce);
-                break;
-
-            case ArticulationJointType.SphericalJoint:
-                body.SetDriveStiffness(ArticulationDriveAxis.X, jointStiffness);
-                body.SetDriveStiffness(ArticulationDriveAxis.Y, jointStiffness);
-                body.SetDriveStiffness(ArticulationDriveAxis.Z, jointStiffness);
-
-                body.SetDriveDamping(ArticulationDriveAxis.X, jointDamping);
-                body.SetDriveDamping(ArticulationDriveAxis.Y, jointDamping);
-                body.SetDriveDamping(ArticulationDriveAxis.Z, jointDamping);
-
-                body.SetDriveForceLimit(ArticulationDriveAxis.X, maxJointForce);
-                body.SetDriveForceLimit(ArticulationDriveAxis.Y, maxJointForce);
-                body.SetDriveForceLimit(ArticulationDriveAxis.Z, maxJointForce);
-                break;
-        }
-
-        var bodyPart = new BodyPart
-        {
-            body = body,
-            startIndex = startIndex,
-            jointDriveController = this,
-            groundContact = body.transform.GetComponent<GroundContact>()
-        };
-
-        if (bodyPart.groundContact == null)
-        {
-            bodyPart.groundContact = body.transform.AddComponent<GroundContact>();
-        }
-        bodyPart.groundContact.agent = GetComponent<Agent>();
-
-        bodyPartDict.Add(body, bodyPart);
-        bodyPartList.Add(bodyPart);
-    }
-
-    public void ResetAllBodyParts()
+    public void Reset()
     {
         foreach (var bodyPart in bodyPartList)
         {
-            bodyPart.Reset();
+            bodyPart.Reset(bodyPart);
         }
     }
 
-    public void ApplyReferenceStateInitialization(Skill skill, float phase)
+    public void RandomSampleInitialize(ReferenceCharacterController reference, Skill skill)
     {
-        if (bodyPartList.Count != _referenceCharacter.childList.Count)
+        if (bodyPartList.Count != reference.bodyPartList.Count)
         {
             Debug.LogError($"Referenece Character has different number of body parts.");
-            ResetAllBodyParts();
+            Reset();
             return;
         }
 
-        _referenceCharacter.InitPose(skill, phase);
+        reference.InitPose(skill, Random.value);
 
-        CopyReferencePose();
+        CopyReferencePose(reference);
     }
 
-    private void CopyReferencePose()
+    private void CopyReferencePose(ReferenceCharacterController reference)
     {
+
         for (int i = 0; i < bodyPartList.Count; i++)
         {
             var bodyPart = bodyPartList[i];
-            var referenceBody = _referenceCharacter.childList[i];
-            var referenceJointPosition = referenceBody.GetJointPosition();
+            if (bodyPart.rigidbody.transform == hips) continue;
 
-            bodyPart.body.jointPosition = referenceJointPosition;
-            bodyPart.Reset(referenceJointPosition);
+            bodyPart.Reset(bodyPart);
+
+            var refBodyPart = reference.bodyPartList[i];
+            var targetRotation = refBodyPart.JointOrientation;
+
+            bodyPart.joint.targetRotation = targetRotation;
         }
     }
 
-    // void Start()
-    // {
-    //     hips = transform.Find("Hips").GetComponent<ArticulationBody>();
-    //     var bodyList = hips.GetComponentsInChildren<ArticulationBody>();
+    public void SetupBodyPart(Transform transform)
+    {
+        var bodyPart = new BodyPart
+        {
+            initPosition = transform.position,
+            initRotation = transform.rotation,
 
-    //     int currentIndex = 0;
-    //     if (!hips.immovable) currentIndex += 6;
-    //     int dof = 0;
-    //     foreach (var body in bodyList)
-    //     {
-    //         if (body == hips) continue;
-    //         SetupBodyPart(body, currentIndex);
-    //         currentIndex += body.dofCount;
-    //         dof += body.dofCount;
-    //     }
-    //     Debug.Log(dof);
+            controller = this,
 
-    //     // TestLog();
-    // }
+            rigidbody = transform.GetComponent<Rigidbody>(),
+            joint = transform.GetComponent<ConfigurableJoint>(),
 
-    // void FixedUpdate()
-    // {
-    //     CopyReferencePose();
-    // }
+            groundContact = transform.GetComponent<GroundContact>(),
+        };
 
-    // public void TestRSI()
-    // {
-    //     ApplyReferenceStateInitialization(Skill.Walk, Random.value);
-    // }
+        bodyPart.rigidbody.maxAngularVelocity = _maxAngularVelocity;
+        if (!bodyPart.groundContact) bodyPart.groundContact = transform.AddComponent<GroundContact>();
+        bodyPart.groundContact.agent = GetComponent<Agent>();
 
-    // public void TestLog()
-    // {
-    //     log = "";
+        if (bodyPart.joint)
+        {
+            var jointDrive = new JointDrive
+            {
+                positionSpring = jointSpring,
+                positionDamper = jointDamper,
+                maximumForce = maxJointForce,
+            };
 
-    //     List<int> testIntList = new List<int>();
-    //     int count = hips.GetDofStartIndices(testIntList);
-    //     log += $"count: {count}, length: {testIntList.Count}\n[";
-    //     foreach (int i in testIntList)
-    //     {
-    //         log += $"{i}, ";
-    //     }
-    //     log += "]\n";
+            bodyPart.joint.slerpDrive = jointDrive;
 
-    //     List<float> testFloatList = new List<float>();
-    //     count = hips.GetDriveTargets(testFloatList);
-    //     log += $"count: {count}, length: {testFloatList.Count}\n[";
-    //     foreach (float i in testFloatList)
-    //     {
-    //         log += $"{i:F2}, ";
-    //     }
-    //     log += "]\n";
+            int dofCount = 3;
+            if (bodyPart.joint.angularXMotion == ConfigurableJointMotion.Locked) dofCount--;
+            if (bodyPart.joint.angularYMotion == ConfigurableJointMotion.Locked) dofCount--;
+            if (bodyPart.joint.angularZMotion == ConfigurableJointMotion.Locked) dofCount--;
 
-    //     count = hips.GetDriveForces(testFloatList);
-    //     log += $"count: {count}, length: {testFloatList.Count}\n[";
-    //     foreach (float i in testFloatList)
-    //     {
-    //         log += $"{i:F2}, ";
-    //     }
-    //     log += "]\n";
+            bodyPart.dofCount = dofCount;
+        }
 
-    //     // Debug.Log(log);
-    // }
+        bodyPartList.Add(bodyPart);
+        bodyPartDict.Add(transform, bodyPart);
+    }
+
+    public void GetCurrentJointForces()
+    {
+        foreach (var bodyPart in bodyPartList)
+        {
+            if (bodyPart.joint)
+            {
+                bodyPart.currentJointForce = bodyPart.joint.currentForce;
+                bodyPart.currentJointForceSqrMag = bodyPart.joint.currentForce.magnitude;
+                bodyPart.currentJointTorque = bodyPart.joint.currentTorque;
+                bodyPart.currentJointTorqueSqrMag = bodyPart.joint.currentTorque.magnitude;
+                if (Application.isEditor)
+                {
+                    if (bodyPart.jointForceCurve.length > 1000)
+                    {
+                        bodyPart.jointForceCurve = new AnimationCurve();
+                    }
+
+                    if (bodyPart.jointTorqueCurve.length > 1000)
+                    {
+                        bodyPart.jointTorqueCurve = new AnimationCurve();
+                    }
+
+                    bodyPart.jointForceCurve.AddKey(Time.time, bodyPart.currentJointForceSqrMag);
+                    bodyPart.jointTorqueCurve.AddKey(Time.time, bodyPart.currentJointTorqueSqrMag);
+                }
+            }
+        }
+    }
+
+    // 테스트용
+    private void Start()
+    {
+        if (TryGetComponent<PlayerAgent>(out var playerAgent) && playerAgent.enabled) return;
+
+        Debug.Log("Test");
+
+        if (hips == null) hips = transform.Find("Hips");
+        var childList = hips.GetComponentsInChildren<Rigidbody>();
+        foreach (var rigidbody in childList)
+        {
+            var body = rigidbody.transform;
+            SetupBodyPart(body);
+        }
+
+        var reference = FindAnyObjectByType<ReferenceCharacterController>();
+        RandomSampleInitialize(reference, Skill.Walk);
+    }
 }

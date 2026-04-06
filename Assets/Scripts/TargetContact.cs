@@ -5,14 +5,14 @@ using UnityEngine;
 public class TargetContact : MonoBehaviour
 {
     [Header("Detect Targets")]
-    public bool touchingTarget;
+    public bool isTouchingTarget;
     const string _targetTag = "Target";
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.CompareTag(_targetTag))
         {
-            touchingTarget = true;
+            isTouchingTarget = true;
         }
     }
 
@@ -20,7 +20,7 @@ public class TargetContact : MonoBehaviour
     {
         if (other.transform.CompareTag(_targetTag))
         {
-            touchingTarget = false;
+            isTouchingTarget = false;
         }
     }
 }

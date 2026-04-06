@@ -1,53 +1,44 @@
-using UnityEngine;
-using Unity.MLAgents;
-using Unity.MLAgents.Sensors;
-using Unity.MLAgents.Actuators;
+using System;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
-
-public enum Skill
-{
-    Idle,
-    Walk,
-    Run,
-
-}
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(JointDriveController))]
 public class PlayerAgent : Agent
 {
-    public string testLog = "";
-
     [Header("Body Parts")]
-    public ArticulationBody hips; // 루트
-
-    // public Transform head; // 바라보는 방향을 기반으로 보상을 판단하기 위한 변수
-
+    [SerializeField] private Transform _hips;
+    [SerializeField] private Transform _head;
+    // 전체 신체 부위
+    [SerializeField] private List<Transform> _childTransformList = new List<Transform>();
     // 말단 부위 (L-hand, R-hand, L-foot, R-foot 순서)
-    [SerializeField] private List<Transform> _endEffectorList;
+    [SerializeField] private List<Transform> _endEffectorList = new List<Transform>();
 
-    [SerializeField] private List<ArticulationBody> _childList = new List<ArticulationBody>();
-    private Vector3 _initPosition; // 초기 루트 포지션
-    private List<float> _masterTargetList = new List<float>();
+    private LocalFrameController _localFrameController;
+    private JointDriveController _jointDriveController;
+    private EnvironmentParameters _resetParams;
 
-    [Header("Reference Character")]
-    public ReferenceCharacterController referenceCharacter;
-    [SerializeField] private bool _isRSIEnabled;
-
-    [Header("Current State")]
+    [Header("Motion Imitation")]
+    [SerializeField] private ReferenceCharacterController _referenceCharacter;
+    [SerializeField] private bool _isRSIEnabled = false;
     [SerializeField] private Skill _currentSkill = Skill.Walk;
 
     [Header("Walk")]
-    [SerializeField][Range(0.1f, 10f)] private float _targetWalkingSpeed = _maxWalkingSpeed;
+    [SerializeField][Range(_minWalkingSpeed, _maxWalkingSpeed)] private float _targetWalkingSpeed = _maxWalkingSpeed;
     [SerializeField] private Vector3 _targetDirection = Vector3.forward;
-    public bool randomizeWalkSpeedEachEpisode;
-    public bool randomizeInitialRotation;
+    [SerializeField] private bool _randomizeWalkSpeedEachEpisode;
+    [SerializeField] private bool _randomizeInitialRotation;
+    [SerializeField] private float _maxWalkEpisodeTime;
 
-    const float _maxWalkingSpeed = 10f;
+    private const float _minWalkingSpeed = 0.1f;
+    private const float _maxWalkingSpeed = 10f;
     public float TargetWalkingSpeed
     {
         get { return _targetWalkingSpeed; }
-        set { _targetWalkingSpeed = Mathf.Clamp(value, 0.1f, _maxWalkingSpeed); }
+        set { _targetWalkingSpeed = Mathf.Clamp(value, _minWalkingSpeed, _maxWalkingSpeed); }
     }
     public Vector3 TargetDirection
     {
@@ -55,193 +46,160 @@ public class PlayerAgent : Agent
         set { value.y = 0f; _targetDirection = value.normalized; }
     }
 
-    private JointDriveController _jointDriveController;
-    private LocalFrameController _localFrameController;
+    private float _timer = 0f;
+
+    [Header("Debug Info")]
+    [TextArea(10, 10)][SerializeField] private string _debugLog;
 
     public override void Initialize()
     {
         _jointDriveController = GetComponent<JointDriveController>();
         _localFrameController = GetComponentInChildren<LocalFrameController>();
 
-        _initPosition = hips.transform.position;
-
-        var bodyList = hips.transform.GetComponentsInChildren<ArticulationBody>();
-
-        int currentIndex = 0;
-        // 루트가 Movable이라면 6개의 인덱스를 건너뛰기 (위치/회전용)
-        if (!hips.immovable) currentIndex += 6;
-
-        _jointDriveController.hips = hips;
-        foreach (var body in bodyList)
+        var childList = _hips.GetComponentsInChildren<Rigidbody>();
+        foreach (var rigidbody in childList)
         {
-            if (body == hips) continue;
-            _jointDriveController.SetupBodyPart(body, currentIndex);
-            _childList.Add(body);
-
-            currentIndex += body.dofCount;
+            var body = rigidbody.transform;
+            _childTransformList.Add(body);
+            _jointDriveController.SetupBodyPart(body);
         }
+        _jointDriveController.hips = _hips;
 
-        _masterTargetList = new List<float>(new float[currentIndex]);
+        _resetParams = Academy.Instance.EnvironmentParameters;
     }
 
     public override void OnEpisodeBegin()
     {
-        // 위치 초기화
-        Quaternion initRotation = randomizeInitialRotation ? Quaternion.Euler(0f, Random.Range(0f, 360f), 0f) : Quaternion.identity;
-        hips.TeleportRoot(_initPosition, initRotation);
-        hips.linearVelocity = Vector3.zero;
-        hips.angularVelocity = Vector3.zero;
+        _timer = _maxWalkEpisodeTime;
 
-        // 자세 초기화
         if (_isRSIEnabled)
         {
-            _jointDriveController.ApplyReferenceStateInitialization(_currentSkill, Random.value);
+            _jointDriveController.Reset();
+            _referenceCharacter.InitPose(_currentSkill, Random.value);
         }
         else
         {
-            _jointDriveController.ResetAllBodyParts();
-            referenceCharacter.InitPose(_currentSkill, Random.value);
+            _jointDriveController.RandomSampleInitialize(_referenceCharacter, _currentSkill);
         }
 
-        // 목표 속력 재설정
-        TargetWalkingSpeed = randomizeWalkSpeedEachEpisode ? Random.Range(0.1f, _maxWalkingSpeed) : TargetWalkingSpeed;
+        _hips.rotation = _randomizeInitialRotation ? Quaternion.Euler(0f, Random.Range(0f, 360f), 0f) : Quaternion.identity;
+        TargetWalkingSpeed = _randomizeInitialRotation ? Random.Range(_minWalkingSpeed, _maxWalkingSpeed) : TargetWalkingSpeed;
+
+        UpdateLocalFrame();
+    }
+
+    public void CollectObservationBodyPart(BodyPart bodyPart, VectorSensor sensor)
+    {
+        // 지면 접촉 여부
+        sensor.AddObservation(bodyPart.groundContact.isTouchingGround);
+
+        // 선속도, 각속도
+        sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(bodyPart.rigidbody.linearVelocity));
+        sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(bodyPart.rigidbody.angularVelocity));
+
+        // 상대위치
+        sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(bodyPart.rigidbody.position - _hips.position));
+
+        // 관절 정보 (방향, 힘)
+        if (bodyPart.rigidbody.transform != _hips)
+        {
+            sensor.AddObservation(bodyPart.rigidbody.transform.localRotation);
+            sensor.AddObservation(bodyPart.currentStrength / _jointDriveController.maxJointForce);
+        }
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // state information
-        // 위상 정보
-        sensor.AddObservation(referenceCharacter.CurrentPhase);
-
-        // 루트 정보
-        // sensor.AddObservation(hips.transform.localPosition.y); // 위치 (높이 정보만)
-        // // ? 평지 테스트용. 이후 지형에 변화를 준다면, '지면으로부터의 상대 높이'를 넘겨줘야 할 수도
-        sensor.AddObservation(_localFrameController.GetLocalRotation(hips.transform.rotation)); // 회전
-        sensor.AddObservation(_localFrameController.GetLocalDirection(hips.linearVelocity)); // 선속도
-        sensor.AddObservation(_localFrameController.GetLocalDirection(hips.angularVelocity)); // 각속도
-
-        // 관절 정보
-        foreach (var body in _childList)
-        {
-            sensor.AddObservation(_localFrameController.GetLocalPosition(body.transform.position)); // 상대위치
-            sensor.AddObservation(_localFrameController.GetLocalRotation(body.transform.rotation)); // 상대회전
-            sensor.AddObservation(_localFrameController.GetLocalDirection(body.linearVelocity)); // 선속도
-            sensor.AddObservation(_localFrameController.GetLocalDirection(body.angularVelocity)); // 각속도
-
-            // sensor.AddObservation(hips.transform.InverseTransformPoint(body.transform.position)); // 상대위치
-            // sensor.AddObservation(body.transform.rotation * Quaternion.Inverse(hips.transform.rotation)); // 상대회전
-            // sensor.AddObservation(hips.transform.InverseTransformDirection(body.linearVelocity)); // 선속도
-            // sensor.AddObservation(hips.transform.InverseTransformDirection(body.angularVelocity)); // 각속도
-        }
-
         // 목표 정보
-        // Walk
-        var velocityGoal = TargetWalkingSpeed * TargetDirection;
-        var averageVelocity = GetAverageVelocity();
+        sensor.AddObservation(_referenceCharacter.CurrentPhase);
 
-        sensor.AddObservation(Vector3.Distance(velocityGoal, averageVelocity));
+        var currentVelocity = GetAverageVelocity();
+        var targetVelocity = TargetDirection * TargetWalkingSpeed;
+
+        sensor.AddObservation(Vector3.Distance(targetVelocity, currentVelocity));
+        sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(currentVelocity));
+        sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(targetVelocity));
+
+        // 전체 회전 상태
+        var localForward = _localFrameController.transform.forward;
+
+        sensor.AddObservation(Quaternion.FromToRotation(_hips.forward, localForward));
+        sensor.AddObservation(Quaternion.FromToRotation(_head.forward, localForward));
+
+        // 각 관절 상태
+        foreach (var bodyPart in _jointDriveController.bodyPartList)
+        {
+            CollectObservationBodyPart(bodyPart, sensor);
+        }
     }
 
-    public override void OnActionReceived(ActionBuffers actionBuffers)
+    public override void OnActionReceived(ActionBuffers actions)
     {
-        testLog = "";
-
-        var continuousActions = actionBuffers.ContinuousActions;
+        var continuousActions = actions.ContinuousActions;
         int actionIndex = -1;
 
-        // 목표 각도 설정
-        // List<float> targets = new List<float>();
-        // int targetCount = hips.GetDriveTargets(targets);
-        // log += $"target count: {targetCount}\n";
-        // for (int i = 0; i < targetCount; i++)
-        // {
-        //     targets[i] = continuousActions[++actionIndex];
-        // }
-        // hips.SetDriveTargets(targets);
-        foreach (var body in _childList)
+        // 관절 각도 설정
+        foreach (var bodyPart in _jointDriveController.bodyPartList)
         {
-            switch (body.jointType)
+            if (bodyPart.rigidbody.transform == _hips) continue;
+            switch (bodyPart.dofCount)
             {
-                case ArticulationJointType.FixedJoint:
+                case 0:
                     break;
-                case ArticulationJointType.PrismaticJoint:
-                    Debug.LogError($"[{body.name}] unexpected joint type: PrismaticJoint");
+                case 1:
+                    bodyPart.SetJointTargetRotation(continuousActions[++actionIndex], 0f, 0f);
                     break;
-                case ArticulationJointType.RevoluteJoint:
-                    var lowerLimit = body.xDrive.lowerLimit;
-                    var upperLimit = body.xDrive.upperLimit;
-                    var actionValue = (continuousActions[++actionIndex] + 1f) * 0.5f;
-                    var target = Mathf.Lerp(lowerLimit, upperLimit, actionValue);
-
-                    body.SetDriveTarget(ArticulationDriveAxis.X, target);
+                case 2:
+                    // 이 경우 반드시 x축과 y축 회전만 존재하도록 Configurable Joint의 축을 설정해야 함
+                    // 현재 휴머노이드 모델엔 해당 관절은 존재하지 않음
+                    bodyPart.SetJointTargetRotation(continuousActions[++actionIndex], continuousActions[++actionIndex], 0f);
                     break;
-                case ArticulationJointType.SphericalJoint:
-                    var targetX = Mathf.Lerp(body.xDrive.lowerLimit, body.xDrive.upperLimit, (continuousActions[++actionIndex] + 1f) * 0.5f);
-                    var targetY = Mathf.Lerp(body.yDrive.lowerLimit, body.yDrive.upperLimit, (continuousActions[++actionIndex] + 1f) * 0.5f);
-                    var targetZ = Mathf.Lerp(body.zDrive.lowerLimit, body.zDrive.upperLimit, (continuousActions[++actionIndex] + 1f) * 0.5f);
-
-                    body.SetDriveTarget(ArticulationDriveAxis.X, targetX);
-                    body.SetDriveTarget(ArticulationDriveAxis.Y, targetY);
-                    body.SetDriveTarget(ArticulationDriveAxis.Z, targetZ);
+                case 3:
+                    bodyPart.SetJointTargetRotation(continuousActions[++actionIndex], continuousActions[++actionIndex], continuousActions[++actionIndex]);
+                    break;
+                default:
+                    Debug.LogError($"Unexpected Dof: {bodyPart.dofCount}");
                     break;
             }
         }
 
-        // 최대 힘 결정
-        List<float> forces = new List<float>();
-        int forceCount = hips.GetDriveForces(forces);
-        testLog += $"force count: {forceCount}\n";
-        for (int i = 0; i < forceCount; i++)
+        // 관절 힘 설정
+        foreach (var bodyPart in _jointDriveController.bodyPartList)
         {
-            forces[i] = (continuousActions[++actionIndex] + 1f) * 0.5f * _jointDriveController.maxJointForce;
+            if (bodyPart.rigidbody.transform == _hips) continue;
+            bodyPart.SetJointStrength(continuousActions[++actionIndex]);
         }
-
-        // Debug.Log($"action count: {actionIndex}");
+        // Debug.Log(actionIndex);
     }
 
-    private void FixedUpdate()
+    public override void Heuristic(in ActionBuffers actionsOut)
     {
-        UpdateLocalFrame();
-        referenceCharacter.Tick(Time.fixedDeltaTime);
-
-        // 보상 지급
-        var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, GetAverageVelocity());
-        var imitationReward = GetImitationReward();
-
-        // Debug.Log($"target heading reward: {targetHeadingReward}");
-        // Debug.Log($"imitation reward: {imitationReward}");
-
-        float reward = 0.3f * targetHeadingReward + 0.7f * imitationReward;
-        AddReward(reward);
+        // base.Heuristic(actionsOut);
     }
 
     private void UpdateLocalFrame()
     {
-        _localFrameController.UpdateOrientation(hips.transform, TargetDirection);
+        _localFrameController.UpdateOrientation(_hips, TargetDirection);
     }
 
     private Vector3 GetAverageVelocity()
     {
-        Vector3 velocitySum = Vector3.zero;
+        Vector3 totalVelocity = Vector3.zero;
+        int count = 0;
+
         foreach (var bodyPart in _jointDriveController.bodyPartList)
         {
-            velocitySum += bodyPart.body.linearVelocity;
+            count++;
+            totalVelocity += bodyPart.rigidbody.linearVelocity;
         }
 
-        return velocitySum / _jointDriveController.bodyPartList.Count;
+        Vector3 averageVelocity = totalVelocity / count;
+        return averageVelocity;
     }
 
-    private float GetTargetHeadingReward(float targetSpeed, Vector3 currentVelocity, float weight = 2.5f)
+    public float GetImitationReward(float poseWeight = 0.7f, float velocityWeight = 0.1f, float endEffectorWeight = 0.2f)
     {
-        var diff = targetSpeed - Vector3.Dot(currentVelocity, TargetDirection);
-        var matchSpeedReward = Mathf.Exp(-weight * diff * diff);
-
-        return matchSpeedReward;
-    }
-
-    private float GetImitationReward()
-    {
-        if (_childList.Count != referenceCharacter.childList.Count)
+        if (_jointDriveController.bodyPartList.Count != _referenceCharacter.bodyPartList.Count)
         {
             Debug.LogError($"Referenece Character has different number of body parts.");
         }
@@ -254,52 +212,47 @@ public class PlayerAgent : Agent
         // Debug.Log($"velocity reward: {velocityReward}");
         // Debug.Log($"end effector reward: {endEffectorreward}");
 
-        return 0.7f * poseReward + 0.1f * velocityReward + 0.2f * endEffectorreward;
+        return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorreward;
     }
 
-    private float GetPoseReward()
+    private float GetPoseReward(float weight = -2f)
     {
-        float GetQuaternionDifference(Quaternion q1, Quaternion q2)
-        {
-            return Quaternion.Angle(q1, q2) * Mathf.Deg2Rad;
-        }
-
         float diffSquaredSum = 0f;
-        for (int i = 0; i < _childList.Count; i++)
+        for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
         {
-            var agent = _childList[i];
-            var reference = referenceCharacter.childList[i];
+            var bodyPart = _jointDriveController.bodyPartList[i];
+            var refbodyPart = _referenceCharacter.bodyPartList[i];
 
             // Pose Error
-            var agentPosition = agent.transform.localRotation;
-            var referencePosition = reference.transform.localRotation;
-            float diff = GetQuaternionDifference(agentPosition, referencePosition);
+            var orientation = bodyPart.rigidbody.transform.localRotation;
+            var refOrientation = refbodyPart.transform.localRotation;
+            float diff = Quaternion.Angle(orientation, refOrientation) * Mathf.Deg2Rad;
 
             diffSquaredSum += diff * diff;
         }
-        return Mathf.Exp(-2f * diffSquaredSum);
+        return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetVelocityReward()
+    private float GetVelocityReward(float weight = -0.1f)
     {
         float diffSquaredSum = 0f;
-        for (int i = 0; i < _childList.Count; i++)
+        for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
         {
-            var agent = _childList[i];
-            var reference = referenceCharacter.childList[i];
+            var bodyPart = _jointDriveController.bodyPartList[i];
+            var refbodyPart = _referenceCharacter.bodyPartList[i];
 
             // Pose Error
-            var agentVelocity = agent.angularVelocity;
-            var referenceVelocity = reference.AngularVelocity;
+            var velocity = bodyPart.rigidbody.angularVelocity;
+            var refVelocity = refbodyPart.AngularVelocity;
 
-            diffSquaredSum += Vector3.SqrMagnitude(agentVelocity - referenceVelocity);
+            diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
         }
-        return Mathf.Exp(-0.1f * diffSquaredSum);
+        return Mathf.Exp(weight * diffSquaredSum);
     }
 
     private float GetEndEffectorReward()
     {
-        if (_endEffectorList.Count != referenceCharacter.endEffectorList.Count)
+        if (_endEffectorList.Count != _referenceCharacter.endEffectorList.Count)
         {
             Debug.LogError($"Referenece Character has different number of end-effectors.");
             return 1f;
@@ -308,39 +261,64 @@ public class PlayerAgent : Agent
         float diffSquaredSum = 0f;
         for (int i = 0; i < _endEffectorList.Count; i++)
         {
-            var agent = _endEffectorList[i];
-            var reference = referenceCharacter.endEffectorList[i];
+            var endEffector = _endEffectorList[i];
+            var refEndEffector = _referenceCharacter.endEffectorList[i];
 
             // Pose Error
-            var agentPosition = agent.position - hips.transform.position;
-            var referencePosition = reference.position - referenceCharacter.hips.position;
+            var position = endEffector.position - _hips.position;
+            var refPosition = refEndEffector.position - _referenceCharacter.hips.position;
 
-            diffSquaredSum += Vector3.SqrMagnitude(agentPosition - referencePosition);
+            diffSquaredSum += Vector3.SqrMagnitude(position - refPosition);
         }
         return Mathf.Exp(-40f * diffSquaredSum);
     }
 
-    public override void Heuristic(in ActionBuffers actionsOut)
+    public float GetTargetHeadingReward(float targetSpeed, Vector3 targetDirection, Vector3 actualVelocity, float weight = 2.5f)
     {
-        var continuousActions = actionsOut.ContinuousActions;
-        // 테스트용
-        var keyboard = Keyboard.current;
-        if (keyboard == null) return;
-        if (keyboard.wKey.wasPressedThisFrame)
+        var diff = targetSpeed - Vector3.Dot(actualVelocity, TargetDirection);
+        var matchSpeedReward = Mathf.Exp(-weight * diff * diff);
+
+        var headForward = _head.forward;
+        headForward.y = 0;
+        var lookAtTargetReward = (Vector3.Dot(TargetDirection, headForward) + 1) * 0.5f;
+
+        return matchSpeedReward * lookAtTargetReward;
+    }
+
+    private void FixedUpdate()
+    {
+        UpdateLocalFrame();
+        _referenceCharacter.Tick(Time.fixedDeltaTime);
+
+        // 보상 지급
+        var imitationReward = GetImitationReward();
+        var targetHeadingReward = GetTargetHeadingReward(TargetWalkingSpeed, TargetDirection, GetAverageVelocity());
+
+        // Check for NaNs
+        if (float.IsNaN(targetHeadingReward))
         {
-            continuousActions[0] = -1f;
+            throw new ArgumentException(
+                "NaN in targetHeadingReward.\n" +
+                $" targetd Speed/Direction: {TargetWalkingSpeed} / {TargetDirection}\n" +
+                $" hips.velocity: {_jointDriveController.bodyPartDict[_hips].rigidbody.linearVelocity}\n" +
+                $" maximum walking speed: {_maxWalkingSpeed}"
+            );
         }
-        if (keyboard.sKey.wasPressedThisFrame)
+
+        var reward = 0.7f * imitationReward + 0.3f * targetHeadingReward;
+        AddReward(reward);
+
+#if UNITY_EDITOR
+        _debugLog = "";
+        _debugLog += $"imitation reward: {imitationReward}\n";
+        _debugLog += $"task reward: {targetHeadingReward}\n";
+        _debugLog += $"total reward: {reward}\n";
+#endif
+
+        _timer -= Time.fixedDeltaTime;
+        if (_timer < 0f)
         {
-            continuousActions[0] = 1f;
-        }
-        if (keyboard.aKey.wasPressedThisFrame)
-        {
-            continuousActions[1] = -1f;
-        }
-        if (keyboard.dKey.wasPressedThisFrame)
-        {
-            continuousActions[1] = 1f;
+            EndEpisode();
         }
     }
 }

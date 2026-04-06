@@ -4,50 +4,84 @@ using UnityEngine;
 public class BodyPart
 {
     [Header("Body Part Info")]
-    public ArticulationBody body;
-    public JointDriveController jointDriveController;
-    public int startIndex; // 전체 관절 데이터를 단일 리스트로 관리할 때, 이 파츠는 몇 번 인덱스부터 시작하는지
+    public ConfigurableJoint joint;
+    public Rigidbody rigidbody;
+    public int dofCount;
+    [HideInInspector] public Vector3 initPosition;
+    [HideInInspector] public Quaternion initRotation;
 
     [Header("Ground & Target Contact")]
     public GroundContact groundContact;
     public TargetContact targetContact;
 
-    public void Reset(ArticulationReducedSpace? target = null)
+    [HideInInspector] public JointDriveController controller;
+
+    [Header("Current Joint Settings")]
+    public Vector3 currentEularJointRotation;
+    public float currentStrength;
+    public float currentXNormalizedRot;
+    public float currentYNormalizedRot;
+    public float currentZNormalizedRot;
+
+    [Header("Debug Info")]
+    public Vector3 currentJointForce;
+
+    public float currentJointForceSqrMag;
+    public Vector3 currentJointTorque;
+    public float currentJointTorqueSqrMag;
+    public AnimationCurve jointForceCurve = new AnimationCurve();
+    public AnimationCurve jointTorqueCurve = new AnimationCurve();
+
+    /// <summary>
+    /// 초기 상태로 되돌림 (글로벌 위치까지)
+    /// </summary>
+    public void Reset(BodyPart bodyPart)
     {
-        if (body.isRoot)
+        bodyPart.rigidbody.transform.SetPositionAndRotation(bodyPart.initPosition, bodyPart.initRotation);
+        bodyPart.rigidbody.linearVelocity = Vector3.zero;
+        bodyPart.rigidbody.angularVelocity = Vector3.zero;
+
+        if (bodyPart.groundContact)
         {
-            body.linearVelocity = Vector3.zero;
-            body.angularVelocity = Vector3.zero;
+            bodyPart.groundContact.isTouchingGround = false;
         }
-
-        switch (body.jointType)
+        if (bodyPart.targetContact)
         {
-            case ArticulationJointType.FixedJoint:
-                body.jointPosition = new ArticulationReducedSpace();
-                body.jointVelocity = new ArticulationReducedSpace();
-                break;
-
-            case ArticulationJointType.PrismaticJoint:
-                Debug.LogError($"[{body.name}] Unexpected Joint Type: Prismatic Joint");
-                break;
-
-            case ArticulationJointType.RevoluteJoint:
-                // Debug.Log($"[{body.name}] target: [{target?[0] ?? 0f}]");
-                body.SetDriveTarget(ArticulationDriveAxis.X, target?[0] ?? 0f);
-                // body.jointPosition = target ?? new ArticulationReducedSpace(0f);
-                body.jointPosition = new ArticulationReducedSpace(0f);
-                body.jointVelocity = new ArticulationReducedSpace(0f);
-                break;
-
-            case ArticulationJointType.SphericalJoint:
-                // Debug.Log($"[{body.name}] target: [{target?[0] ?? 0f}, {target?[1] ?? 0f}, {target?[2] ?? 0f}]");
-                body.SetDriveTarget(ArticulationDriveAxis.X, target?[0] ?? 0f);
-                body.SetDriveTarget(ArticulationDriveAxis.Y, target?[1] ?? 0f);
-                body.SetDriveTarget(ArticulationDriveAxis.Z, target?[2] ?? 0f);
-                // body.jointPosition = target ?? new ArticulationReducedSpace(0f, 0f, 0f);
-                body.jointPosition = new ArticulationReducedSpace(0f, 0f, 0f);
-                body.jointVelocity = new ArticulationReducedSpace(0f, 0f, 0f);
-                break;
+            bodyPart.targetContact.isTouchingTarget = false;
         }
+    }
+
+    /// <summary>
+    /// Apply torque according to defined goal `x, y, z` angle and force `strength`.
+    /// </summary>
+    public void SetJointTargetRotation(float x, float y, float z)
+    {
+        x = (x + 1f) * 0.5f;
+        y = (y + 1f) * 0.5f;
+        z = (z + 1f) * 0.5f;
+
+        var xRot = Mathf.Lerp(joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, x);
+        var yRot = Mathf.Lerp(-joint.angularYLimit.limit, joint.angularYLimit.limit, y);
+        var zRot = Mathf.Lerp(-joint.angularZLimit.limit, joint.angularZLimit.limit, z);
+
+        currentXNormalizedRot = Mathf.InverseLerp(joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, xRot);
+        currentYNormalizedRot = Mathf.InverseLerp(-joint.angularYLimit.limit, joint.angularYLimit.limit, yRot);
+        currentZNormalizedRot = Mathf.InverseLerp(-joint.angularZLimit.limit, joint.angularZLimit.limit, zRot);
+
+        joint.targetRotation = Quaternion.Euler(xRot, yRot, zRot);
+        currentEularJointRotation = new Vector3(xRot, yRot, zRot);
+    }
+
+    public void SetJointStrength(float strength)
+    {
+        var maxForce = (strength + 1f) * 0.5f * controller.maxJointForce;
+        var jointDrive = new JointDrive
+        {
+            positionSpring = controller.jointSpring,
+            positionDamper = controller.jointDamper,
+            maximumForce = maxForce
+        };
+        joint.slerpDrive = jointDrive;
+        currentStrength = jointDrive.maximumForce;
     }
 }

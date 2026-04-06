@@ -390,7 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4560303629480737219}
-  - component: {fileID: 575920983507960192}
+  - component: {fileID: 2356454253226405954}
   m_Layer: 0
   m_Name: Hips
   m_TagString: Untagged
@@ -416,7 +416,7 @@ Transform:
   - {fileID: 5279829173534293491}
   m_Father: {fileID: 944288763713957857}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &575920983507960192
+--- !u!114 &2356454253226405954
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,12 +430,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 1.07635, y: 0.9810986, z: 1.4084154}
   initRotation: {x: -0, y: -0, z: -0, w: 1}
-  initUpAxis: {x: 0, y: 1, z: 0}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 0
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &1055910618897576488
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,7 +503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7933229248185889676}
-  - component: {fileID: 3532262586253384267}
+  - component: {fileID: 4808319607654350387}
   m_Layer: 0
   m_Name: Left_UpperArm
   m_TagString: Untagged
@@ -525,15 +519,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380118500669705308}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
+  m_LocalRotation: {x: 0.06162845, y: 0.06162845, z: 0.70441604, w: 0.70441604}
   m_LocalPosition: {x: -0.16743502, y: -5.684341e-16, z: -2.664535e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8303722082620684371}
   m_Father: {fileID: 3625685746387399954}
-  m_LocalEulerAnglesHint: {x: 5.071, y: 20.243, z: 165}
---- !u!114 &3532262586253384267
+  m_LocalEulerAnglesHint: {x: 0, y: 10, z: 90}
+--- !u!114 &4808319607654350387
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,13 +540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -0.16743502, y: -5.684341e-16, z: -2.664535e-17}
-  initRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
-  initUpAxis: {x: -0.18489118, y: -0.98219967, z: -0.033154976}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
+  initRotation: {x: 0.06162845, y: 0.06162845, z: 0.70441604, w: 0.70441604}
 --- !u!1 &1488935758421613882
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +741,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5279829173534293491}
-  - component: {fileID: 7198123277293167670}
+  - component: {fileID: 8171961197515364150}
   m_Layer: 0
   m_Name: Spine
   m_TagString: Untagged
@@ -777,7 +765,7 @@ Transform:
   - {fileID: 3588102893968827529}
   m_Father: {fileID: 4560303629480737219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7198123277293167670
+--- !u!114 &8171961197515364150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -791,12 +779,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -0, y: 0.058229383, z: 0.0012229546}
   initRotation: {x: 0, y: -0, z: -0, w: 1}
-  initUpAxis: {x: 0, y: 1, z: 0}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &2658184220267875324
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,9 +915,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6744173443014668708}
-  - component: {fileID: 5026827439104636931}
-  - component: {fileID: 3634919361438861853}
   - component: {fileID: 7620635129760273909}
+  - component: {fileID: -3919808449473875128}
+  - component: {fileID: -4037423650425266179}
   m_Layer: 0
   m_Name: GhostPlayer
   m_TagString: Player
@@ -961,42 +943,6 @@ Transform:
   - {fileID: 944288763713957857}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5026827439104636931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3159591246172632123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f74514edb7f8f541a4deaefba06896b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ReferenceAnimationManager
-  clipList:
-  - skill: 0
-    clip: {fileID: -3100369314251171874, guid: ebe8e22b2644c5b4786794d43b966f30, type: 3}
-  - skill: 1
-    clip: {fileID: 1657602633327794031, guid: a4ff77ffae83a524bbfff0886a94ce4c, type: 3}
-  - skill: 2
-    clip: {fileID: 6564411413370888346, guid: 611325e4b828e4f44a88c576948274ae, type: 3}
---- !u!114 &3634919361438861853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3159591246172632123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d123d3b54b5392943a9a52e09bf48c59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ReferenceCharacterController
-  currentClip: {fileID: 1657602633327794031, guid: a4ff77ffae83a524bbfff0886a94ce4c, type: 3}
-  hips: {fileID: 4560303629480737219}
-  endEffectorList: []
-  childList: []
-  currentClipName: 
 --- !u!95 &7620635129760273909
 Animator:
   serializedVersion: 7
@@ -1019,6 +965,45 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3919808449473875128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159591246172632123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f74514edb7f8f541a4deaefba06896b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReferenceAnimationManager
+  clipList:
+  - skill: 0
+    clip: {fileID: -3100369314251171874, guid: ebe8e22b2644c5b4786794d43b966f30, type: 3}
+  - skill: 1
+    clip: {fileID: 1657602633327794031, guid: a4ff77ffae83a524bbfff0886a94ce4c, type: 3}
+  - skill: 2
+    clip: {fileID: 6564411413370888346, guid: 611325e4b828e4f44a88c576948274ae, type: 3}
+--- !u!114 &-4037423650425266179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3159591246172632123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d123d3b54b5392943a9a52e09bf48c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReferenceCharacterController
+  currentClip: {fileID: 1657602633327794031, guid: a4ff77ffae83a524bbfff0886a94ce4c, type: 3}
+  hips: {fileID: 4560303629480737219}
+  bodyPartList: []
+  endEffectorList:
+  - {fileID: 7432415882706537624}
+  - {fileID: 6554880208904567271}
+  - {fileID: 2895826316175088044}
+  - {fileID: 2717192541364133491}
 --- !u!1 &3172487001262367566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,7 +1013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6554880208904567271}
-  - component: {fileID: 568364389816675335}
+  - component: {fileID: 6750326115012824020}
   m_Layer: 0
   m_Name: Right_Hand
   m_TagString: Untagged
@@ -1056,7 +1041,7 @@ Transform:
   - {fileID: 8155656467765738433}
   m_Father: {fileID: 5328704146555212169}
   m_LocalEulerAnglesHint: {x: -4.901, y: 0, z: 2.811}
---- !u!114 &568364389816675335
+--- !u!114 &6750326115012824020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1070,12 +1055,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 0.0000014923929, y: -0.24036367, z: 0.0000017856368}
   initRotation: {x: -0.042743362, y: 0.0010487299, z: 0.024505692, w: 0.998785}
-  initUpAxis: {x: -0.12454683, y: 0.99105024, z: -0.04803612}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 0
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &3268657212721768739
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8303722082620684371}
-  - component: {fileID: 921222526891940579}
+  - component: {fileID: 6820679985802465824}
   m_Layer: 0
   m_Name: Left_LowerArm
   m_TagString: Untagged
@@ -1165,15 +1144,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3374111393099841962}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
   m_LocalPosition: {x: -2.8421706e-16, y: 0.28508067, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7432415882706537624}
   m_Father: {fileID: 7933229248185889676}
-  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
---- !u!114 &921222526891940579
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+--- !u!114 &6820679985802465824
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1186,13 +1165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -2.8421706e-16, y: 0.28508067, z: 0}
-  initRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  initUpAxis: {x: -0.159342, y: -0.97735995, z: 0.13920608}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 2
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
+  initRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
 --- !u!1 &3589694142246580258
 GameObject:
   m_ObjectHideFlags: 0
@@ -1329,7 +1302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8777313867414398285}
-  - component: {fileID: 2245065618030976143}
+  - component: {fileID: 147172389759174641}
   m_Layer: 0
   m_Name: Left_UpperLeg
   m_TagString: Untagged
@@ -1353,7 +1326,7 @@ Transform:
   - {fileID: 3941532700920269030}
   m_Father: {fileID: 4560303629480737219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2245065618030976143
+--- !u!114 &147172389759174641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1367,12 +1340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -0.08610317, y: -0.053458035, z: -0.011470641}
   initRotation: {x: 0.999839, y: -0.01775374, z: 0.000046300094, w: -0.0026074864}
-  initUpAxis: {x: -0.035501525, y: -0.99935603, z: -0.005215777}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &4352848499983051925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1412,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2717192541364133491}
-  - component: {fileID: 1261844272584152052}
+  - component: {fileID: 5588352666625445744}
   m_Layer: 0
   m_Name: Right_Foot
   m_TagString: Untagged
@@ -1469,7 +1436,7 @@ Transform:
   - {fileID: 4554963136839625783}
   m_Father: {fileID: 5600091815267979146}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1261844272584152052
+--- !u!114 &5588352666625445744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1483,12 +1450,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -0.0000007472542, y: -0.41403967, z: -0.000000032847502}
   initRotation: {x: -0.035700925, y: 0.049957544, z: -0.019575229, w: 0.9979211}
-  initUpAxis: {x: 0.0000000051935993, y: 1, z: 0.0000000030004277}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &4587793115330422925
 GameObject:
   m_ObjectHideFlags: 0
@@ -1591,7 +1552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7905624240440868447}
-  - component: {fileID: 7252876314413525376}
+  - component: {fileID: 741583947760083830}
   m_Layer: 0
   m_Name: Right_UpperLeg
   m_TagString: Untagged
@@ -1615,7 +1576,7 @@ Transform:
   - {fileID: 5600091815267979146}
   m_Father: {fileID: 4560303629480737219}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7252876314413525376
+--- !u!114 &741583947760083830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1629,12 +1590,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 0.086103186, y: -0.053458147, z: -0.0114706475}
   initRotation: {x: 0.0026075041, y: 0.000046300407, z: 0.01775374, w: 0.999839}
-  initUpAxis: {x: -0.035501525, y: 0.99935603, z: 0.0052158125}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &4822835286937523116
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,7 +1887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8192509556603159611}
-  - component: {fileID: 1575971931504683993}
+  - component: {fileID: 5773886054336852144}
   m_Layer: 0
   m_Name: Neck
   m_TagString: Untagged
@@ -1957,7 +1912,7 @@ Transform:
   - {fileID: 5692122723767489858}
   m_Father: {fileID: 257527713565975680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1575971931504683993
+--- !u!114 &5773886054336852144
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1971,12 +1926,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -0, y: 0.25104657, z: -0.015329581}
   initRotation: {x: 0.060688436, y: -0, z: -0, w: 0.9981568}
-  initUpAxis: {x: 0, y: 0.9926338, z: 0.121153146}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &6430505491732167499
 GameObject:
   m_ObjectHideFlags: 0
@@ -2210,7 +2159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5328704146555212169}
-  - component: {fileID: 7789327594675450122}
+  - component: {fileID: 3202899649260869772}
   m_Layer: 0
   m_Name: Right_LowerArm
   m_TagString: Untagged
@@ -2226,15 +2175,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7464846951972931973}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
+  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
   m_LocalPosition: {x: 0.0000037273983, y: -0.285085, z: -0.00000035927226}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6554880208904567271}
   m_Father: {fileID: 463910788513404576}
-  m_LocalEulerAnglesHint: {x: 10, y: 0, z: 0}
---- !u!114 &7789327594675450122
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+--- !u!114 &3202899649260869772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2247,13 +2196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 0.0000037273983, y: -0.285085, z: -0.00000035927226}
-  initRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  initUpAxis: {x: -0.15934198, y: 0.9773596, z: -0.13920602}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 2
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
+  initRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
 --- !u!1 &7467720932801302315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,7 +2206,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3941532700920269030}
-  - component: {fileID: 5675887602591102167}
+  - component: {fileID: 193382507252100842}
   m_Layer: 0
   m_Name: Left_LowerLeg
   m_TagString: Untagged
@@ -2287,7 +2230,7 @@ Transform:
   - {fileID: 2895826316175088044}
   m_Father: {fileID: 8777313867414398285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5675887602591102167
+--- !u!114 &193382507252100842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2301,12 +2244,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -2.9864513e-16, y: 0.4133444, z: -5.4956034e-17}
   initRotation: {x: 0.034046065, y: 2.2687323e-19, z: 7.728622e-21, w: 0.9994203}
-  initUpAxis: {x: -0.03540662, y: -0.9966849, z: -0.07325543}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 2
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &7651428185137147121
 GameObject:
   m_ObjectHideFlags: 0
@@ -2506,7 +2443,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7432415882706537624}
-  - component: {fileID: 7858004322471546569}
+  - component: {fileID: 6222413529660825917}
   m_Layer: 0
   m_Name: Left_Hand
   m_TagString: Untagged
@@ -2534,7 +2471,7 @@ Transform:
   - {fileID: 8114219102335209576}
   m_Father: {fileID: 8303722082620684371}
   m_LocalEulerAnglesHint: {x: -4.901, y: 0, z: 2.811}
---- !u!114 &7858004322471546569
+--- !u!114 &6222413529660825917
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2548,12 +2485,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -2.4123817e-10, y: 0.24036221, z: -1.4210853e-16}
   initRotation: {x: -0.042743362, y: 0.0010487299, z: 0.024505692, w: 0.998785}
-  initUpAxis: {x: -0.12454684, y: -0.9910515, z: 0.048036177}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 0
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &8532800778517102147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,7 +2494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 257527713565975680}
-  - component: {fileID: 7812582162590775293}
+  - component: {fileID: 3101348358321406840}
   m_Layer: 0
   m_Name: UpperChest
   m_TagString: Untagged
@@ -2589,7 +2520,7 @@ Transform:
   - {fileID: 384011703988908145}
   m_Father: {fileID: 3588102893968827529}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7812582162590775293
+--- !u!114 &3101348358321406840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2603,12 +2534,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: -0, y: 0.1034043, z: 0}
   initRotation: {x: 0, y: -0, z: -0, w: 1}
-  initUpAxis: {x: 0, y: 1, z: 0}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &8737481565049297644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2650,7 +2575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 463910788513404576}
-  - component: {fileID: 9067433471156958626}
+  - component: {fileID: 8010472954556298020}
   m_Layer: 0
   m_Name: Right_UpperArm
   m_TagString: Untagged
@@ -2666,15 +2591,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8980093450414692459}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
+  m_LocalRotation: {x: 0.06162845, y: 0.06162845, z: 0.70441604, w: 0.70441604}
   m_LocalPosition: {x: 0.16743432, y: -0.0000022099182, z: 0.00000012213746}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5328704146555212169}
   m_Father: {fileID: 384011703988908145}
-  m_LocalEulerAnglesHint: {x: 5.071, y: 20.243, z: 165}
---- !u!114 &9067433471156958626
+  m_LocalEulerAnglesHint: {x: 0, y: 10, z: 90}
+--- !u!114 &8010472954556298020
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2687,13 +2612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 0.16743432, y: -0.0000022099182, z: 0.00000012213746}
-  initRotation: {x: 0.17974652, y: -0.020261569, z: 0.9740451, w: 0.13607687}
-  initUpAxis: {x: -0.18489116, y: 0.98219955, z: 0.033155035}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
+  initRotation: {x: 0.06162845, y: 0.06162845, z: 0.70441604, w: 0.70441604}
 --- !u!1 &9008016940227226520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2734,7 +2653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2895826316175088044}
-  - component: {fileID: 2733522320888155475}
+  - component: {fileID: 8517178762727366925}
   m_Layer: 0
   m_Name: Left_Foot
   m_TagString: Untagged
@@ -2758,7 +2677,7 @@ Transform:
   - {fileID: 5075622053655953301}
   m_Father: {fileID: 3941532700920269030}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2733522320888155475
+--- !u!114 &8517178762727366925
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2772,12 +2691,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 0.0000000017320426, y: 0.41403946, z: 7.141509e-16}
   initRotation: {x: -0.035700925, y: 0.049957544, z: -0.019575229, w: 0.9979211}
-  initUpAxis: {x: 0.00000000581362, y: -1.0000002, z: 0.000000032466758}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 3
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 
 --- !u!1 &9121133878959112900
 GameObject:
   m_ObjectHideFlags: 0
@@ -2819,7 +2732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5600091815267979146}
-  - component: {fileID: 24225343417613568}
+  - component: {fileID: 1136449824301610532}
   m_Layer: 0
   m_Name: Right_LowerLeg
   m_TagString: Untagged
@@ -2843,7 +2756,7 @@ Transform:
   - {fileID: 2717192541364133491}
   m_Father: {fileID: 7905624240440868447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &24225343417613568
+--- !u!114 &1136449824301610532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2857,9 +2770,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceBodyPart
   initPosition: {x: 0.0000004514609, y: -0.41334414, z: 0.000000025994435}
   initRotation: {x: 0.034046065, y: 2.2687323e-19, z: 7.728622e-21, w: 0.9994203}
-  initUpAxis: {x: -0.03540662, y: 0.9966845, z: 0.073255464}
-  initForwardAxis: {x: 0, y: 0, z: 0}
-  hips: {fileID: 4560303629480737219}
-  jointType: 2
-  _jointPosition: {x: 0, y: 0, z: 0}
-  log: 

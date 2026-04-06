@@ -10,17 +10,17 @@ public class ReferenceCharacterController : MonoBehaviour
     public AnimationClip currentClip;
 
     [Header("Body Parts")]
-    public Transform hips; // 루트
-
+    public Transform hips;
+    // 전체 신체 부위
+    // 반드시 에이전트와 동일한 순서의 계층 구조를 가지고 있어야 함
+    public List<ReferenceBodyPart> bodyPartList = new List<ReferenceBodyPart>();
     // 말단 부위 (L-hand, R-hand, L-foot, R-foot 순서)
     public List<Transform> endEffectorList;
-
-    public List<ReferenceBodyPart> childList = new List<ReferenceBodyPart>();
 
     // animation
     private ReferenceAnimationManager _referenceAnimationManager;
     private Animator _animator;
-    public string currentClipName;
+    private string _currentClipName;
 
     private void Awake()
     {
@@ -36,35 +36,23 @@ public class ReferenceCharacterController : MonoBehaviour
         var bodyList = hips.GetComponentsInChildren<ReferenceBodyPart>();
         foreach (var body in bodyList)
         {
-            if (body.transform == hips) continue;
-            childList.Add(body);
+            bodyPartList.Add(body);
         }
 
         _animator.enabled = true;
     }
 
-    private bool _isPlaying = false;
-    private void Update()
-    {
-        if (_isPlaying) Tick(Time.deltaTime);
-    }
-    public void TogglePlay()
-    {
-        _isPlaying = !_isPlaying;
-    }
-
     public void InitPose(Skill skill, float initPhase)
     {
         currentClip = _referenceAnimationManager.GetClipFromSkill(skill);
-        currentClipName = skill.ToString();
+        _currentClipName = skill.ToString();
         CurrentPhase = initPhase;
 
-        _animator.Play(currentClipName, 0, CurrentPhase);
+        _animator.Play(_currentClipName, 0, CurrentPhase);
         _animator.Update(0);
 
-        foreach (var body in childList)
+        foreach (var body in bodyPartList)
         {
-            body.UpdateJointPosition();
             body.ResetVelocities();
         }
     }
@@ -72,7 +60,7 @@ public class ReferenceCharacterController : MonoBehaviour
     public void SetPhase(float phase)
     {
         CurrentPhase = Mathf.Clamp01(phase);
-        _animator.Play(currentClipName, 0, CurrentPhase);
+        _animator.Play(_currentClipName, 0, CurrentPhase);
     }
 
     public void Tick(float deltaTime)
@@ -81,13 +69,12 @@ public class ReferenceCharacterController : MonoBehaviour
         CurrentPhase = (CurrentPhase + (deltaTime / currentClip.length)) % 1f;
 
         // 동작 샘플링
-        _animator.Play(currentClipName, 0, CurrentPhase);
+        _animator.Play(_currentClipName, 0, CurrentPhase);
         _animator.Update(0);
 
         // 속도 업데이트
-        foreach (var body in childList)
+        foreach (var body in bodyPartList)
         {
-            body.UpdateJointPosition();
             body.UpdateVelocities(deltaTime);
         }
     }
