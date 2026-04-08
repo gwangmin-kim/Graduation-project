@@ -1,10 +1,12 @@
 using Unity.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ReferenceBodyPart : MonoBehaviour
 {
     [HideInInspector][ReadOnly] public Vector3 initPosition;
     [HideInInspector][ReadOnly] public Quaternion initRotation;
+    public Transform localFrame;
 
     // 속도 계산용
     private Vector3 _prevPosition;
@@ -12,6 +14,7 @@ public class ReferenceBodyPart : MonoBehaviour
 
     public Vector3 LinearVelocity { get; private set; }
     public Vector3 AngularVelocity { get; private set; }
+    public Vector3 JointPosition => transform.localPosition - initPosition;
     public Quaternion JointOrientation => transform.localRotation * Quaternion.Inverse(initRotation);
 
     [ContextMenu("Record Initial State")]
@@ -19,6 +22,7 @@ public class ReferenceBodyPart : MonoBehaviour
     {
         initPosition = transform.localPosition;
         initRotation = transform.localRotation;
+
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
         Debug.Log($"[{name}] Initial State Recorded");
