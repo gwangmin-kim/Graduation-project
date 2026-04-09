@@ -21,10 +21,15 @@ public class PlayerAgent : Agent
     private JointDriveController _jointDriveController;
     private EnvironmentParameters _resetParams;
 
+    [Header("Motion Cloning")]
+    [SerializeField] private bool _useReferenceMotion;
+    [SerializeField] private ReferenceCharacterController _referenceCharacter;
+    [SerializeField] private bool _isRSIEnabled = false;
+    [SerializeField] private Skill _currentSkill = Skill.Walk;
+
     [Header("Walk")]
     [SerializeField] private Transform _target;
     [SerializeField][Range(_minWalkingSpeed, _maxWalkingSpeed)] private float _targetWalkingSpeed = _maxWalkingSpeed;
-    [SerializeField] private Vector3 _targetDirection = Vector3.forward;
     [SerializeField] private bool _randomizeWalkSpeedEachEpisode;
 
     private const float _minWalkingSpeed = 0.1f;
@@ -38,6 +43,10 @@ public class PlayerAgent : Agent
 
     [Header("Debug Info")]
     [TextArea(10, 10)][SerializeField] private string _debugLog;
+    public bool isTestMode = false;
+    public float poseReward;
+    public float velocityReward;
+    public float endEffectorReward;
 
     public override void Initialize()
     {
@@ -58,8 +67,19 @@ public class PlayerAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        _jointDriveController.Reset();
-        _hips.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+
+        if (_useReferenceMotion && _isRSIEnabled)
+        {
+            _jointDriveController.RandomSampleInitialize(_referenceCharacter, _currentSkill);
+            _hips.Rotate(0f, Random.Range(0f, 360f), 0f);
+        }
+        else
+        {
+            _jointDriveController.Reset();
+            _hips.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            if (_useReferenceMotion) _referenceCharacter.InitPose(_currentSkill, Random.value);
+        }
+
         TargetWalkingSpeed = _randomizeWalkSpeedEachEpisode ? Random.Range(_minWalkingSpeed, _maxWalkingSpeed) : TargetWalkingSpeed;
 
         UpdateOrientation();
@@ -95,6 +115,7 @@ public class PlayerAgent : Agent
             return;
         }
 
+        // 목표 관련 정보
         var localForward = _localFrameController.transform.forward;
         var currentVelocity = GetAverageVelocity();
         var targetVelocity = localForward * TargetWalkingSpeed;
@@ -105,7 +126,7 @@ public class PlayerAgent : Agent
 
         sensor.AddObservation(_localFrameController.transform.InverseTransformPoint(_target.transform.position));
 
-        // 전체 회전 상태
+        // 몸 정렬 상태
         sensor.AddObservation(Quaternion.FromToRotation(_hips.forward, localForward));
         sensor.AddObservation(Quaternion.FromToRotation(_head.forward, localForward));
 
@@ -114,10 +135,15 @@ public class PlayerAgent : Agent
         {
             CollectObservationBodyPart(bodyPart, sensor);
         }
+
+        // (모션 모방 시) 위상 정보
+        sensor.AddObservation(_useReferenceMotion ? _referenceCharacter.CurrentPhase : 0f);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+        if (isTestMode) return;
+
         var continuousActions = actions.ContinuousActions;
         int actionIndex = -1;
 
@@ -154,7 +180,7 @@ public class PlayerAgent : Agent
         }
 
 #if UNITY_EDITOR
-        // Debug.Log(actionIndex);
+        Debug.Log(actionIndex);
 #endif
 
         // // 생존 보상 (서 있는 것이 유리하도록)
@@ -180,6 +206,88 @@ public class PlayerAgent : Agent
 
         Vector3 averageVelocity = totalVelocity / count;
         return averageVelocity;
+    }
+
+    public float GetImitationReward(float poseWeight = 0.7f, float velocityWeight = 0.1f, float endEffectorWeight = 0.2f)
+    {
+        if (_jointDriveController.bodyPartList.Count != _referenceCharacter.bodyPartList.Count)
+        {
+            Debug.LogError($"Referenece Character has different number of body parts.");
+        }
+
+        float poseReward = GetPoseReward();
+        float velocityReward = GetVelocityReward();
+        float endEffectorReward = GetEndEffectorReward();
+
+#if UNITY_EDITOR
+        // Debug.Log($"pose reward: {poseReward}");
+        // Debug.Log($"velocity reward: {velocityReward}");
+        // Debug.Log($"end effector reward: {endEffectorreward}");
+        this.poseReward = poseReward;
+        this.velocityReward = velocityReward;
+        this.endEffectorReward = endEffectorReward;
+#endif
+
+        return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorReward;
+    }
+
+    private float GetPoseReward(float weight = -0.5f)
+    {
+        float diffSquaredSum = 0f;
+        for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
+        {
+            var bodyPart = _jointDriveController.bodyPartList[i];
+            var refbodyPart = _referenceCharacter.bodyPartList[i];
+
+            // Pose Error
+            // 루트(hips) 기준 상대 회전을 비교
+            var orientation = bodyPart.rigidbody.transform.rotation * Quaternion.Inverse(_hips.rotation);
+            var refOrientation = refbodyPart.transform.rotation * Quaternion.Inverse(_referenceCharacter.hips.rotation);
+            float diff = Quaternion.Angle(orientation, refOrientation) * Mathf.Deg2Rad;
+
+            diffSquaredSum += diff * diff;
+        }
+        return Mathf.Exp(weight * diffSquaredSum);
+    }
+
+    private float GetVelocityReward(float weight = -0.1f)
+    {
+        float diffSquaredSum = 0f;
+        for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
+        {
+            var bodyPart = _jointDriveController.bodyPartList[i];
+            var refbodyPart = _referenceCharacter.bodyPartList[i];
+
+            // Velocity Error
+            var velocity = bodyPart.rigidbody.angularVelocity;
+            var refVelocity = refbodyPart.AngularVelocity;
+
+            diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
+        }
+        return Mathf.Exp(weight * diffSquaredSum);
+    }
+
+    private float GetEndEffectorReward(float weight = -1f)
+    {
+        if (_endEffectorList.Count != _referenceCharacter.endEffectorList.Count)
+        {
+            Debug.LogError($"Referenece Character has different number of end-effectors.");
+            return 1f;
+        }
+
+        float diffSquaredSum = 0f;
+        for (int i = 0; i < _endEffectorList.Count; i++)
+        {
+            var endEffector = _endEffectorList[i];
+            var refEndEffector = _referenceCharacter.endEffectorList[i];
+
+            // Position Error
+            var position = _hips.InverseTransformPoint(endEffector.position);
+            var refPosition = _referenceCharacter.hips.InverseTransformPoint(refEndEffector.position);
+
+            diffSquaredSum += Vector3.SqrMagnitude(position - refPosition);
+        }
+        return Mathf.Exp(weight * diffSquaredSum);
     }
 
     /// <summary>
@@ -243,20 +351,49 @@ public class PlayerAgent : Agent
     private void FixedUpdate()
     {
         UpdateOrientation();
+        if (_useReferenceMotion) _referenceCharacter.Tick(Time.fixedDeltaTime);
 
         // 보상 지급
+        var imitationReward = _useReferenceMotion ? GetImitationReward() : 0f;
+
         var localForward = _localFrameController.transform.forward;
         var matchingVelocityReward = GetMatchingVelocityReward(TargetWalkingSpeed * localForward, GetAverageVelocity());
         var targetHeadingReward = GetTargetHeadingReward(localForward, _head.forward);
+        var taskReward = matchingVelocityReward * targetHeadingReward;
 
-        var reward = matchingVelocityReward * targetHeadingReward;
+        var reward = _useReferenceMotion ? (0.7f * imitationReward + 0.3f * taskReward) : taskReward;
         AddReward(reward);
 
 #if UNITY_EDITOR
         _debugLog = "";
+        if (_useReferenceMotion) _debugLog += $"imitation reward: {imitationReward:F5}\n";
+        if (!_useReferenceMotion && isTestMode) _debugLog += $"imitation reward: {GetImitationReward():F5}\n";
         _debugLog += $"velocity reward: {matchingVelocityReward:F5}\n";
         _debugLog += $"heading reward: {targetHeadingReward:F5}\n";
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
+    }
+
+    // 테스트용 함수
+    public void TestRSI()
+    {
+        _jointDriveController.RandomSampleInitialize(_referenceCharacter, _currentSkill);
+        _hips.rotation = Quaternion.identity;
+    }
+
+    public void TestCopy()
+    {
+        _jointDriveController.CopyReferencePose(_referenceCharacter);
+    }
+
+    public void TestResetPose()
+    {
+        _jointDriveController.Reset();
+        _hips.rotation = Quaternion.identity;
+    }
+
+    public void TestStopPlaying()
+    {
+        _useReferenceMotion = !_useReferenceMotion;
     }
 }

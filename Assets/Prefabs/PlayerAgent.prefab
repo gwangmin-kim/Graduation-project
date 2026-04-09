@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1577028289006684658}
   - component: {fileID: 1057374932925279469}
   - component: {fileID: 4353864661311681231}
-  - component: {fileID: 6771385580805263824}
+  - component: {fileID: 9175628569532272842}
   m_Layer: 6
   m_Name: Right_Foot
   m_TagString: Player
@@ -91,14 +91,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359731465947113559}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0010847744, y: 0.05072953, z: -0.021351064, w: 0.9984836}
-  m_LocalPosition: {x: -0.0000007472542, y: -0.41403967, z: -0.000000032847502}
+  m_LocalRotation: {x: 0, y: 0, z: -0.021378603, w: 0.9997715}
+  m_LocalPosition: {x: 0, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6010493697295013400}
   m_Father: {fileID: 8347447395557151379}
-  m_LocalEulerAnglesHint: {x: 0, y: 5.817, z: -2.45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.45}
 --- !u!65 &1577028289006684658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,7 +118,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.06, z: 0.26}
+  m_Size: {x: 0.12, y: 0.06, z: 0.26}
   m_Center: {x: 0, y: -0.06, z: 0.07}
 --- !u!54 &1057374932925279469
 Rigidbody:
@@ -249,7 +249,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &6771385580805263824
+--- !u!114 &9175628569532272842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,16 +258,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 359731465947113559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 0
   penalizeOnGroundContact: 0
   groundContactPenalty: 0
-  isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  isTouchingGround: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &374586408810648194
@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 8269204481502560142}
   - component: {fileID: 549377424344851818}
   - component: {fileID: 1819425278213820866}
-  - component: {fileID: 3291601507929733003}
+  - component: {fileID: 4866626575844751732}
   m_Layer: 6
   m_Name: Hips
   m_TagString: Player
@@ -455,7 +455,7 @@ Transform:
   m_GameObject: {fileID: 742272749638676160}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.9810986, z: -0.015904546}
+  m_LocalPosition: {x: 0, y: 0.961, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -512,7 +512,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &3291601507929733003
+--- !u!114 &4866626575844751732
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -521,16 +521,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 742272749638676160}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &766734018980184892
@@ -576,7 +576,7 @@ GameObject:
   - component: {fileID: 9095815684306513920}
   - component: {fileID: 7217250468409203508}
   - component: {fileID: 2954983800921897868}
-  - component: {fileID: 1401733725665768621}
+  - component: {fileID: 3401245593681881366}
   m_Layer: 6
   m_Name: Left_UpperLeg
   m_TagString: Player
@@ -592,14 +592,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937244917088809031}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.999839, y: -0.01775374, z: 0.000046300094, w: -0.0026074864}
-  m_LocalPosition: {x: -0.08610317, y: -0.053458035, z: -0.011470641}
+  m_LocalRotation: {x: -0.99984235, y: 0.017757814, z: 0, w: 0}
+  m_LocalPosition: {x: -0.09, y: -0.05, z: -0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8087327206794833440}
   m_Father: {fileID: 8269204481502560142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 2.035}
 --- !u!136 &9095815684306513920
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -620,9 +620,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.36
+  m_Height: 0.38
   m_Direction: 1
-  m_Center: {x: -0.02, y: 0.21, z: 0}
+  m_Center: {x: -0.02, y: 0.21, z: -0.01}
 --- !u!54 &7217250468409203508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -752,7 +752,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1401733725665768621
+--- !u!114 &3401245593681881366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -761,16 +761,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 937244917088809031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &1150355159894529709
@@ -816,8 +816,8 @@ GameObject:
   - component: {fileID: 3085303970221277104}
   - component: {fileID: 3447714681239407274}
   - component: {fileID: 1705484303817719283}
-  - component: {fileID: 983385038508964138}
   - component: {fileID: 3710703844488619739}
+  - component: {fileID: 2010232776088591436}
   m_Layer: 6
   m_Name: Left_UpperArm
   m_TagString: Player
@@ -834,7 +834,7 @@ Transform:
   m_GameObject: {fileID: 1294718076117716848}
   serializedVersion: 2
   m_LocalRotation: {x: 0.09229593, y: 0.09229593, z: 0.7010574, w: 0.7010574}
-  m_LocalPosition: {x: -0.167435, y: -5.684341e-16, z: -2.664535e-17}
+  m_LocalPosition: {x: -0.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -891,27 +891,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &983385038508964138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294718076117716848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
-  agent: {fileID: 0}
-  earlyTerminateOnGroundContact: 1
-  penalizeOnGroundContact: 1
-  groundContactPenalty: -1
-  isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
-  wallContactReward: 1
-  isTouchingWall: 0
 --- !u!153 &3710703844488619739
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -926,7 +905,7 @@ ConfigurableJoint:
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SecondaryAxis: {x: 0, y: 0, z: 1}
+  m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
@@ -1014,6 +993,27 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2010232776088591436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294718076117716848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
+  agent: {fileID: 0}
+  earlyTerminateOnGroundContact: 1
+  penalizeOnGroundContact: 1
+  groundContactPenalty: -1
+  isTouchingGround: 0
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
+  wallContactReward: 1
+  isTouchingWall: 0
 --- !u!1 &1358284121837582573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1150,7 @@ GameObject:
   - component: {fileID: 7666530218452517100}
   - component: {fileID: 4703025885412118106}
   - component: {fileID: 6573226299220598746}
-  - component: {fileID: 6854020977201202129}
+  - component: {fileID: 859356491918067526}
   m_Layer: 6
   m_Name: Right_UpperLeg
   m_TagString: Player
@@ -1166,14 +1166,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292312108095308049}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0026075041, y: 0.000046300407, z: 0.01775374, w: 0.999839}
-  m_LocalPosition: {x: 0.086103186, y: -0.053458147, z: -0.0114706475}
+  m_LocalRotation: {x: 0, y: 0, z: 0.017757814, w: 0.99984235}
+  m_LocalPosition: {x: 0.09, y: -0.05, z: -0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8347447395557151379}
   m_Father: {fileID: 8269204481502560142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.035}
 --- !u!136 &7666530218452517100
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1194,9 +1194,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.36
+  m_Height: 0.38
   m_Direction: 1
-  m_Center: {x: 0.02, y: -0.21, z: 0}
+  m_Center: {x: 0.02, y: -0.21, z: 0.01}
 --- !u!54 &4703025885412118106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1326,7 +1326,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &6854020977201202129
+--- !u!114 &859356491918067526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1335,16 +1335,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2292312108095308049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &2306880928180377287
@@ -1391,7 +1391,7 @@ GameObject:
   - component: {fileID: 3408569955703963773}
   - component: {fileID: 8454001064194541738}
   - component: {fileID: 748382988342050713}
-  - component: {fileID: 7855627529623114869}
+  - component: {fileID: 877723044702184786}
   m_Layer: 6
   m_Name: Right_Hand
   m_TagString: Player
@@ -1407,8 +1407,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2352896182941193299}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.042743362, y: 0.0010487299, z: 0.024505692, w: 0.998785}
-  m_LocalPosition: {x: 0.0000014923929, y: -0.24036367, z: 0.0000017856368}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1418,7 +1418,7 @@ Transform:
   - {fileID: 3824648250055064072}
   - {fileID: 9124528446871923600}
   m_Father: {fileID: 3981329082061538535}
-  m_LocalEulerAnglesHint: {x: -4.901, y: 0, z: 2.811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &3408569955703963773
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1569,7 +1569,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7855627529623114869
+--- !u!114 &877723044702184786
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1578,16 +1578,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2352896182941193299}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &2376458647346784436
@@ -1956,7 +1956,7 @@ GameObject:
   - component: {fileID: 8104406191148419614}
   - component: {fileID: 2718109117321515809}
   - component: {fileID: 7034567030581026479}
-  - component: {fileID: 7112096666274779793}
+  - component: {fileID: 8250775735097013615}
   m_Layer: 6
   m_Name: Right_UpperArm
   m_TagString: Player
@@ -1973,7 +1973,7 @@ Transform:
   m_GameObject: {fileID: 2695605392833975485}
   serializedVersion: 2
   m_LocalRotation: {x: 0.09229593, y: 0.09229593, z: 0.7010574, w: 0.7010574}
-  m_LocalPosition: {x: 0.16743432, y: -0.0000022099182, z: 0.00000012213746}
+  m_LocalPosition: {x: 0.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2044,7 +2044,7 @@ ConfigurableJoint:
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SecondaryAxis: {x: 0, y: 0, z: 1}
+  m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
@@ -2132,7 +2132,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7112096666274779793
+--- !u!114 &8250775735097013615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2141,16 +2141,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2695605392833975485}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &2766026226010623784
@@ -2229,7 +2229,7 @@ GameObject:
   - component: {fileID: 7668570975249739140}
   - component: {fileID: 5491527809901098897}
   - component: {fileID: 697620956025137681}
-  - component: {fileID: 4017623587574720833}
+  - component: {fileID: 5157334589143373604}
   m_Layer: 6
   m_Name: Neck
   m_TagString: Player
@@ -2245,8 +2245,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3453336669629074642}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.060688436, y: -0, z: -0, w: 0.9981568}
-  m_LocalPosition: {x: -0, y: 0.25104657, z: -0.015329581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.25, z: -0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2404,7 +2404,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4017623587574720833
+--- !u!114 &5157334589143373604
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2413,16 +2413,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3453336669629074642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &3768896771751895806
@@ -2532,7 +2532,7 @@ GameObject:
   - component: {fileID: 6193695108339404882}
   - component: {fileID: 9125550201156978664}
   - component: {fileID: 1495381789577860895}
-  - component: {fileID: 2245603771348668527}
+  - component: {fileID: 9176992085615637130}
   m_Layer: 6
   m_Name: Left_Foot
   m_TagString: Player
@@ -2548,14 +2548,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006223620926119128}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0010847744, y: 0.05072953, z: -0.021351064, w: 0.9984836}
-  m_LocalPosition: {x: 0.0000000017320426, y: 0.41403946, z: 7.141509e-16}
+  m_LocalRotation: {x: 0, y: 0, z: -0.021378603, w: 0.9997715}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8574593506751001154}
   m_Father: {fileID: 8087327206794833440}
-  m_LocalEulerAnglesHint: {x: 0, y: 5.817, z: -2.45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.45}
 --- !u!65 &6193695108339404882
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2575,7 +2575,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.06, z: 0.26}
+  m_Size: {x: 0.12, y: 0.06, z: 0.26}
   m_Center: {x: 0, y: 0.06, z: -0.07}
 --- !u!54 &9125550201156978664
 Rigidbody:
@@ -2706,7 +2706,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &2245603771348668527
+--- !u!114 &9176992085615637130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2715,16 +2715,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4006223620926119128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 0
   penalizeOnGroundContact: 0
   groundContactPenalty: 0
-  isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  isTouchingGround: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &4151872751908981305
@@ -2770,7 +2770,7 @@ GameObject:
   - component: {fileID: 1956067759279577111}
   - component: {fileID: 651391961063723443}
   - component: {fileID: 5765067783063011959}
-  - component: {fileID: 6037907093190872289}
+  - component: {fileID: 6889890009254878395}
   m_Layer: 6
   m_Name: Spine
   m_TagString: Player
@@ -2787,7 +2787,7 @@ Transform:
   m_GameObject: {fileID: 4272689114713782055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.058229383, z: 0.0012229546}
+  m_LocalPosition: {x: -0, y: 0.06, z: 0.001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2813,8 +2813,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0.16, z: 0.02}
+  m_Radius: 0.09
+  m_Center: {x: 0, y: 0.13, z: 0.02}
 --- !u!54 &651391961063723443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2944,7 +2944,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &6037907093190872289
+--- !u!114 &6889890009254878395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2953,16 +2953,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4272689114713782055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &4356008778316100336
@@ -2989,14 +2989,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4356008778316100336}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.99258024, y: -0.04327539, z: -0.113521874, w: 0.004949396}
-  m_LocalPosition: {x: 0.0009571358, y: 0.19149381, z: -0.008727803}
+  m_LocalRotation: {x: -0.9935224, y: 0, z: 0.11363672, w: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7358001275744486264}
   m_Father: {fileID: 4382557132858692152}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: 13.05, z: 0}
 --- !u!1 &4381588419559830011
 GameObject:
   m_ObjectHideFlags: 0
@@ -3213,7 +3213,7 @@ Transform:
   m_GameObject: {fileID: 5458268821566157965}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.1034043, z: 0}
+  m_LocalPosition: {x: -0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3232,7 +3232,7 @@ GameObject:
   - component: {fileID: 5290999448309440664}
   - component: {fileID: 2893503584704541376}
   - component: {fileID: 3518221750265073056}
-  - component: {fileID: 9172945674055408838}
+  - component: {fileID: 181019366475274847}
   m_Layer: 6
   m_Name: Right_LowerLeg
   m_TagString: Player
@@ -3249,7 +3249,7 @@ Transform:
   m_GameObject: {fileID: 5505125646061986703}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000004514609, y: -0.41334414, z: 0.000000025994435}
+  m_LocalPosition: {x: 0, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3276,7 +3276,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.36
+  m_Height: 0.38
   m_Direction: 1
   m_Center: {x: 0, y: -0.22, z: 0}
 --- !u!54 &2893503584704541376
@@ -3408,7 +3408,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &9172945674055408838
+--- !u!114 &181019366475274847
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3417,16 +3417,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5505125646061986703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 0
   penalizeOnGroundContact: 0
-  groundContactPenalty: -1
-  isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  groundContactPenalty: 0
+  isTouchingGround: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &5595267431453177561
@@ -3473,7 +3473,7 @@ GameObject:
   - component: {fileID: 1502486453995980925}
   - component: {fileID: 5963643529908002450}
   - component: {fileID: 9219867207601231067}
-  - component: {fileID: 5578447160800650276}
+  - component: {fileID: 4877677842755376475}
   m_Layer: 6
   m_Name: UpperChest
   m_TagString: Player
@@ -3490,7 +3490,7 @@ Transform:
   m_GameObject: {fileID: 5609194199759742796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.1034043, z: 0}
+  m_LocalPosition: {x: -0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3518,8 +3518,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.23, y: 0.15, z: 0.16}
-  m_Center: {x: 0, y: 0.16, z: 0}
+  m_Size: {x: 0.23, y: 0.2, z: 0.16}
+  m_Center: {x: 0, y: 0.15, z: 0}
 --- !u!54 &5963643529908002450
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3649,7 +3649,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5578447160800650276
+--- !u!114 &4877677842755376475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3658,16 +3658,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 5609194199759742796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &5734269248398116447
@@ -3743,7 +3743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 778416191324611992}
-  - component: {fileID: 3833573549857445121}
+  - component: {fileID: 5470136268658314143}
   m_Layer: 6
   m_Name: LocalOrientationFrame
   m_TagString: Untagged
@@ -3766,7 +3766,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1859334317376422839}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3833573549857445121
+--- !u!114 &5470136268658314143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3775,7 +3775,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6172030741904162540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dabc29270ca78bb4fa3192a47c2849f5, type: 3}
+  m_Script: {fileID: 11500000, guid: bb49ddbbc0bba8e48bd689202d1ededa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LocalFrameController
 --- !u!1 &6304926350267239307
@@ -3916,7 +3916,7 @@ GameObject:
   - component: {fileID: 1318621108019401070}
   - component: {fileID: 5774547372244634231}
   - component: {fileID: 8236679929652338099}
-  - component: {fileID: 3589695141712415823}
+  - component: {fileID: 3451472599235008582}
   m_Layer: 6
   m_Name: Left_Hand
   m_TagString: Player
@@ -3932,8 +3932,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776818626974302513}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.042743362, y: 0.0010487299, z: 0.024505692, w: 0.998785}
-  m_LocalPosition: {x: -2.4123817e-10, y: 0.24036221, z: -1.4210853e-16}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3943,7 +3943,7 @@ Transform:
   - {fileID: 7994843504648116252}
   - {fileID: 1816639146494407332}
   m_Father: {fileID: 9080910980786723235}
-  m_LocalEulerAnglesHint: {x: -4.901, y: 0, z: 2.811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1318621108019401070
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4094,7 +4094,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3589695141712415823
+--- !u!114 &3451472599235008582
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4103,16 +4103,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6776818626974302513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &6780268953426438772
@@ -4235,14 +4235,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7215400230711180680}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0049494267, y: -0.113521874, z: 0.043275386, w: 0.99258024}
-  m_LocalPosition: {x: -0.0009571358, y: 0.19149224, z: -0.0087277945}
+  m_LocalRotation: {x: 0, y: -0.11363672, z: 0, w: 0.9935224}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3085303970221277104}
   m_Father: {fileID: 4382557132858692152}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -13.05, z: 0}
 --- !u!1 &7575611747393196506
 GameObject:
   m_ObjectHideFlags: 0
@@ -4255,7 +4255,7 @@ GameObject:
   - component: {fileID: 4989141836948222361}
   - component: {fileID: 6401417763225904735}
   - component: {fileID: 9109953086080437358}
-  - component: {fileID: 3840347146993620395}
+  - component: {fileID: 6367022519966222823}
   m_Layer: 6
   m_Name: Right_LowerArm
   m_TagString: Player
@@ -4272,7 +4272,7 @@ Transform:
   m_GameObject: {fileID: 7575611747393196506}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0000037273983, y: -0.285085, z: -0.00000035927226}
+  m_LocalPosition: {x: 0, y: -0.285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4340,10 +4340,10 @@ ConfigurableJoint:
   m_ConnectedBody: {fileID: 2718109117321515809}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SecondaryAxis: {x: 0, y: 0, z: 1}
+  m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
@@ -4361,11 +4361,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -160
+    limit: -5
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 5
+    limit: 160
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -4431,7 +4431,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3840347146993620395
+--- !u!114 &6367022519966222823
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4440,16 +4440,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7575611747393196506}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &7888691241965578050
@@ -4498,7 +4498,7 @@ GameObject:
   - component: {fileID: 417351531688590102}
   - component: {fileID: 7515871737570263460}
   - component: {fileID: 7817784250355771074}
-  - component: {fileID: 7039519331930047391}
+  - component: {fileID: 7070123093644418795}
   m_Layer: 6
   m_Name: Left_LowerArm
   m_TagString: Player
@@ -4515,7 +4515,7 @@ Transform:
   m_GameObject: {fileID: 7991007193764429207}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8421706e-16, y: 0.28508067, z: 0}
+  m_LocalPosition: {x: 0, y: 0.285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4583,10 +4583,10 @@ ConfigurableJoint:
   m_ConnectedBody: {fileID: 1705484303817719283}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
+  m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SecondaryAxis: {x: 0, y: 0, z: -1}
+  m_SecondaryAxis: {x: 0, y: 0, z: 1}
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
@@ -4604,11 +4604,11 @@ ConfigurableJoint:
     spring: 0
     damper: 0
   m_LowAngularXLimit:
-    limit: -160
+    limit: -5
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 5
+    limit: 160
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -4674,7 +4674,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7039519331930047391
+--- !u!114 &7070123093644418795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4683,16 +4683,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7991007193764429207}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 1
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &8097566020455651599
@@ -4801,8 +4801,8 @@ GameObject:
   - component: {fileID: 1859334317376422839}
   - component: {fileID: 9067659752767705255}
   - component: {fileID: 3441019356390322015}
-  - component: {fileID: 2891880378749516472}
-  - component: {fileID: 3462249807660799793}
+  - component: {fileID: 3360264570293577955}
+  - component: {fileID: 2590689069212368614}
   m_Layer: 6
   m_Name: PlayerAgent
   m_TagString: Player
@@ -4819,7 +4819,7 @@ Transform:
   m_GameObject: {fileID: 8630088158969153604}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38661, y: 0, z: -0.97517}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4842,7 +4842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 253
+    VectorObservationSize: 254
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 52
@@ -4875,7 +4875,7 @@ MonoBehaviour:
   DecisionPeriod: 5
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
---- !u!114 &2891880378749516472
+--- !u!114 &3360264570293577955
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4884,7 +4884,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8630088158969153604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111ae3f3de45abf4f9fefdabede35802, type: 3}
+  m_Script: {fileID: 11500000, guid: 1701ed5147e146f4394b8c0a4d5ed5a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAgent
   agentParameters:
@@ -4899,12 +4899,19 @@ MonoBehaviour:
   - {fileID: 777798858619073714}
   - {fileID: 7469504623529790106}
   - {fileID: 8150651438042456054}
+  _useReferenceMotion: 1
+  _referenceCharacter: {fileID: 0}
+  _isRSIEnabled: 0
+  _currentSkill: 1
   _target: {fileID: 0}
   _targetWalkingSpeed: 5
-  _targetDirection: {x: 0, y: 0, z: 1}
   _randomizeWalkSpeedEachEpisode: 1
   _debugLog: 
---- !u!114 &3462249807660799793
+  isTestMode: 0
+  poseReward: 0
+  velocityReward: 0
+  endEffectorReward: 0
+--- !u!114 &2590689069212368614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4913,12 +4920,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8630088158969153604}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6906b01851266b4896caf8f21d55695, type: 3}
+  m_Script: {fileID: 11500000, guid: 18d3a476e1883e3488aaf640418b8dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
-  jointSpring: 50000
-  jointDamper: 5000
-  maxJointForce: 25000
+  jointSpring: 100000
+  jointDamper: 10000
+  maxJointForce: 50000
   hips: {fileID: 8269204481502560142}
   bodyPartList: []
 --- !u!1 &8765993042395321230
@@ -4964,7 +4971,7 @@ GameObject:
   - component: {fileID: 7138980458055293278}
   - component: {fileID: 6426453048722406387}
   - component: {fileID: 930150631267289235}
-  - component: {fileID: 2597667331652599810}
+  - component: {fileID: 4871252829969073085}
   m_Layer: 6
   m_Name: Left_LowerLeg
   m_TagString: Player
@@ -4981,7 +4988,7 @@ Transform:
   m_GameObject: {fileID: 8783775941911869085}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.9864513e-16, y: 0.4133444, z: -5.4956034e-17}
+  m_LocalPosition: {x: 0, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5008,7 +5015,7 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.36
+  m_Height: 0.38
   m_Direction: 1
   m_Center: {x: 0, y: 0.22, z: 0}
 --- !u!54 &6426453048722406387
@@ -5140,7 +5147,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &2597667331652599810
+--- !u!114 &4871252829969073085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5149,16 +5156,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8783775941911869085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbeb867b02a54b40a8821753b792221, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d09044b4b0afc147af60f6ed9663c54, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GroundContact
+  m_EditorClassIdentifier: Assembly-CSharp::ContectChecker
   agent: {fileID: 0}
   earlyTerminateOnGroundContact: 0
   penalizeOnGroundContact: 0
-  groundContactPenalty: -1
-  isTouchingGround: 0
-  earlyTerminateOnWallContact: 1
-  rewardOnWallContact: 1
+  groundContactPenalty: 0
+  isTouchingGround: 1
+  earlyTerminateOnWallContact: 0
+  rewardOnWallContact: 0
   wallContactReward: 1
   isTouchingWall: 0
 --- !u!1 &8849341479494614485

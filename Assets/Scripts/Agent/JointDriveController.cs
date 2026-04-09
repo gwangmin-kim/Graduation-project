@@ -39,7 +39,7 @@ public class JointDriveController : MonoBehaviour
         CopyReferencePose(reference);
     }
 
-    private void CopyReferencePose(ReferenceCharacterController reference)
+    public void CopyReferencePose(ReferenceCharacterController reference)
     {
 
         for (int i = 0; i < bodyPartList.Count; i++)
@@ -55,7 +55,7 @@ public class JointDriveController : MonoBehaviour
                 continue;
             }
 
-            var targetRotation = refBodyPart.JointOrientation;
+            var targetRotation = refBodyPart.GetTargetRotation();
             bodyPart.joint.targetRotation = targetRotation;
         }
     }

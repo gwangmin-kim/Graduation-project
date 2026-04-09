@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1233355436313513442}
   - component: {fileID: 6742313817860472078}
   - component: {fileID: 1311900612842192273}
-  - component: {fileID: 810498019577615987}
-  m_Layer: 8
+  - component: {fileID: 7242554927051070023}
+  m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: Target
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &810498019577615987
+--- !u!114 &7242554927051070023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,13 +150,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3889307704958048885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04cafb938e77d7a4e898b7b45378a38c, type: 3}
+  m_Script: {fileID: 11500000, guid: c590d0eb6e79d8546b8ecec88d64ae7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TargetController
-  spawnRadius: 15
-  respawnOnTouched: 1
-  respawnOnFallOff: 1
-  fallDistance: 5
+  tagToDetect: Player
+  _spawnRadius: 15
+  _respawnOnTouched: 1
+  _respawnOnFallOff: 1
+  _fallDistance: 5
   onTriggerEnterEvent:
     m_PersistentCalls:
       m_Calls: []

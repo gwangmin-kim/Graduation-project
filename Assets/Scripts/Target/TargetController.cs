@@ -1,18 +1,20 @@
 using UnityEngine;
+using Random = UnityEngine.Random;
 using UnityEngine.Events;
 
 public class TargetController : MonoBehaviour
 {
-    [Header("Tag to Detect")]
-    public const string tagToDetect = "Player";
+
+    [Header("Collider Tag To Detect")]
+    public string tagToDetect = "Player";
 
     [Header("Target Placement")]
-    public float spawnRadius;
-    public bool respawnOnTouched = true;
+    [SerializeField] private float _spawnRadius;
+    [SerializeField] private bool _respawnOnTouched;
 
     [Header("Target Fell Protection")]
-    public bool respawnOnFallOff = true;
-    public float fallDistance = 5f;
+    [SerializeField] private bool _respawnOnFallOff = true;
+    [SerializeField] private float _fallDistance = 5;
 
     private Vector3 _initLocalPosition;
 
@@ -36,40 +38,33 @@ public class TargetController : MonoBehaviour
     public CollisionEvent onCollisionStayEvent = new CollisionEvent();
     public CollisionEvent onCollisionExitEvent = new CollisionEvent();
 
-    private static Vector3 RandomPointInBounds(Bounds bounds) => new Vector3(
-        Random.Range(bounds.min.x, bounds.max.x),
-        Random.Range(bounds.min.y, bounds.max.y),
-        Random.Range(bounds.min.z, bounds.max.z)
-    );
-
-    public void MoveTargetToRandomPosition()
-    {
-        var newPosition = _initLocalPosition + (Random.insideUnitSphere * spawnRadius);
-        newPosition.y = _initLocalPosition.y;
-        transform.localPosition = newPosition;
-    }
-
-    private void OnEnable()
+    // Start is called before the first frame update
+    void OnEnable()
     {
         _initLocalPosition = transform.localPosition;
-        if (respawnOnTouched)
+        if (_respawnOnTouched)
         {
             MoveTargetToRandomPosition();
         }
     }
 
-    private void Update()
+    void Update()
     {
-        if (respawnOnFallOff)
+        if (_respawnOnFallOff)
         {
-            if (transform.localPosition.y < _initLocalPosition.y - fallDistance)
+            if (transform.localPosition.y < _initLocalPosition.y - _fallDistance)
             {
-#if UNITY_EDITOR
                 Debug.Log($"{transform.name} Fell Off Platform");
-#endif
                 MoveTargetToRandomPosition();
             }
         }
+    }
+
+    public void MoveTargetToRandomPosition()
+    {
+        var newTargetPosition = _initLocalPosition + (Random.insideUnitSphere * _spawnRadius);
+        newTargetPosition.y = _initLocalPosition.y;
+        transform.localPosition = newTargetPosition;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -77,8 +72,7 @@ public class TargetController : MonoBehaviour
         if (collision.transform.CompareTag(tagToDetect))
         {
             onCollisionEnterEvent.Invoke(collision);
-
-            if (respawnOnTouched)
+            if (_respawnOnTouched)
             {
                 MoveTargetToRandomPosition();
             }
@@ -93,11 +87,11 @@ public class TargetController : MonoBehaviour
         }
     }
 
-    private void OnCollisionExit(Collision collsion)
+    private void OnCollisionExit(Collision collision)
     {
-        if (collsion.transform.CompareTag(tagToDetect))
+        if (collision.transform.CompareTag(tagToDetect))
         {
-            onCollisionExitEvent.Invoke(collsion);
+            onCollisionExitEvent.Invoke(collision);
         }
     }
 
@@ -125,11 +119,11 @@ public class TargetController : MonoBehaviour
         }
     }
 
-#if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.greenYellow;
-        Gizmos.DrawWireSphere(transform.parent.TransformPoint(_initLocalPosition), spawnRadius);
-    }
+#if UNITY_EDITOR
+        Gizmos.color = Color.yellowGreen;
+        Gizmos.DrawWireSphere(transform.parent.TransformPoint(_initLocalPosition), _spawnRadius);
 #endif
+    }
 }

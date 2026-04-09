@@ -6,8 +6,6 @@ TagManager:
   tags:
   - CinemachineTarget
   - Ground
-  - Wall
-  - Target
   layers:
   - Default
   - TransparentFX
@@ -17,7 +15,7 @@ TagManager:
   - UI
   - Player
   - Environment
-  - Target
+  - 
   - 
   - 
   - 

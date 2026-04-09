@@ -7,8 +7,8 @@ public class BodyPart
     public ConfigurableJoint joint;
     public Rigidbody rigidbody;
     public int dofCount;
-    [HideInInspector] public Vector3 initPosition;
-    [HideInInspector] public Quaternion initRotation;
+    public Vector3 initPosition;
+    public Quaternion initRotation;
 
     [Header("Contact Checker")]
     public ContectChecker contactChecker;
@@ -39,6 +39,11 @@ public class BodyPart
         bodyPart.rigidbody.transform.SetPositionAndRotation(bodyPart.initPosition, bodyPart.initRotation);
         bodyPart.rigidbody.linearVelocity = Vector3.zero;
         bodyPart.rigidbody.angularVelocity = Vector3.zero;
+
+        if (bodyPart.joint)
+        {
+            bodyPart.joint.targetRotation = Quaternion.identity;
+        }
 
         if (bodyPart.contactChecker)
         {
