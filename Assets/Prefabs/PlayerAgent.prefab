@@ -4904,8 +4904,8 @@ MonoBehaviour:
   _isRSIEnabled: 0
   _currentSkill: 1
   _target: {fileID: 0}
-  _targetWalkingSpeed: 5
-  _randomizeWalkSpeedEachEpisode: 1
+  _targetWalkingSpeed: 2
+  _randomizeWalkSpeedEachEpisode: 0
   _debugLog: 
   isTestMode: 0
   poseReward: 0

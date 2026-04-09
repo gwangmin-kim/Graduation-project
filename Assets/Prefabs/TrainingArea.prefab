@@ -739,6 +739,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: DynamicTarget
       objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8364189621305718277}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TouchedTarget
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerAgent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -823,6 +851,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1859334317376422839, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
   m_PrefabInstance: {fileID: 6535177121449533158}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8364189621305718277 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+  m_PrefabInstance: {fileID: 6535177121449533158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1701ed5147e146f4394b8c0a4d5ed5a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAgent
 --- !u!1001 &9102978781999730983
 PrefabInstance:
   m_ObjectHideFlags: 0

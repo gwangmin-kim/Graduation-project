@@ -14,12 +14,12 @@ behaviors:
             normalize: true
             hidden_units: 512
             num_layers: 3
-            vis_encode_type: nature_cnn
+            vis_encode_type: simple
         reward_signals:
             extrinsic:
                 gamma: 0.995
                 strength: 1.0
         keep_checkpoints: 5
-        max_steps: 10000000
+        max_steps: 50000000
         time_horizon: 1000
         summary_freq: 30000
