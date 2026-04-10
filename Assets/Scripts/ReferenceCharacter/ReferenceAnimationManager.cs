@@ -1,6 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Skill
+{
+    Idle,
+    Walk,
+    Run,
+}
+
 [System.Serializable]
 public struct SkillClipEntry
 {

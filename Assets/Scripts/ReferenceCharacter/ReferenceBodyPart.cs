@@ -3,16 +3,11 @@ using UnityEngine;
 
 public class ReferenceBodyPart : MonoBehaviour
 {
-    [HideInInspector][ReadOnly] public Vector3 initPosition;
-    [HideInInspector][ReadOnly] public Quaternion initRotation;
-    [ReadOnly] public Vector3 initUpAxis;
-    [ReadOnly] public Vector3 initForwardAxis;
-
-    public Transform hips;
-    public ArticulationJointType jointType;
-    // public Vector3 jointPosition;
-    [SerializeField] private Vector3 _jointPosition;
-    [TextArea(10, 10)] public string log;
+    [SerializeField] private ArticulationJointType _jointType;
+    [ReadOnly][SerializeField] private Vector3 _initPosition;
+    [ReadOnly][SerializeField] private Quaternion _initRotation;
+    [ReadOnly][SerializeField] private Vector3 _initUpAxis;
+    [ReadOnly][SerializeField] private Vector3 _initFrontAxis;
 
     // 속도 계산용
     private Vector3 _prevPosition;
@@ -20,29 +15,26 @@ public class ReferenceBodyPart : MonoBehaviour
 
     public Vector3 LinearVelocity { get; private set; }
     public Vector3 AngularVelocity { get; private set; }
-    public Quaternion JointOrientation => transform.localRotation * Quaternion.Inverse(initRotation);
+    public Quaternion JointOrientation => transform.localRotation * Quaternion.Inverse(_initRotation);
+
+    [Header("Debug Info")]
+    [TextArea(10, 10)][SerializeField] private string _debugLog = "";
+    [SerializeField] private Vector3 _targetRotation;
 
     [ContextMenu("Record Initial State")]
     private void RecordInitialState()
     {
-        initPosition = transform.localPosition;
-        initRotation = transform.localRotation;
-        if (hips == null) hips = transform.root.Find("Hips");
-        initUpAxis = hips.InverseTransformDirection(transform.up);
-        initForwardAxis = hips.InverseTransformDirection(transform.forward);
+        _initPosition = transform.localPosition;
+        _initRotation = transform.localRotation;
+
+        _initUpAxis = transform.parent.InverseTransformDirection(transform.up);
+        _initFrontAxis = transform.parent.InverseTransformDirection(transform.forward);
+
 #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
         Debug.Log($"[{name}] Initial State Recorded");
 #endif
     }
-
-    // private void Awake()
-    // {
-    //     // initPosition = transform.localPosition;
-    //     // initRotation = transform.localRotation;
-    //     if (hips == null) hips = transform.root.Find("Hips");
-    //     initUpAxis = hips.InverseTransformDirection(transform.up);
-    // }
 
     public void UpdateVelocities(float deltaTime)
     {
@@ -61,7 +53,7 @@ public class ReferenceBodyPart : MonoBehaviour
 
     public void ResetToInitialPosition()
     {
-        transform.SetLocalPositionAndRotation(initPosition, initRotation);
+        transform.SetLocalPositionAndRotation(_initPosition, _initRotation);
         ResetVelocities();
     }
 
@@ -73,108 +65,54 @@ public class ReferenceBodyPart : MonoBehaviour
         AngularVelocity = Vector3.zero;
     }
 
-    public void UpdateJointPosition()
+    public Quaternion GetTargetRotation()
     {
-        var relativeRotation = transform.localRotation * Quaternion.Inverse(initRotation);
-
-        switch (jointType)
+        switch (_jointType)
         {
             case ArticulationJointType.FixedJoint:
-                break;
-
             case ArticulationJointType.PrismaticJoint:
-                Debug.LogError($"[{name}] unexpected joint type: PrismaticJoint");
-                break;
+                return Quaternion.identity;
 
             case ArticulationJointType.RevoluteJoint:
-                // x축 회전 고정
-                float angle = 2.0f * Mathf.Atan2(relativeRotation.x, relativeRotation.w);
-                _jointPosition = new Vector3(angle * Mathf.Rad2Deg, 0f, 0f);
-                break;
+                JointOrientation.ToAngleAxis(out float angle, out Vector3 _);
+#if UNITY_EDITOR
+                _targetRotation = new Vector3(angle, 0f, 0f);
+#endif
+                return Quaternion.Euler(angle, 0f, 0f);
 
             case ArticulationJointType.SphericalJoint:
-                // Quaternion twist =
-                //     new Quaternion(0f, transform.localRotation.y, 0f, transform.localRotation.w).normalized
-                //     * Quaternion.Inverse(new Quaternion(0f, initRotation.y, 0f, initRotation.w).normalized);
-                // Quaternion twist =
-                //     new Quaternion(0f, transform.localRotation.y, 0f, transform.localRotation.w).normalized;
-                // Quaternion swing = Quaternion.Inverse(twist) * relativeRotation;
-                var upAxis = hips.InverseTransformDirection(transform.up);
-                var swing = Quaternion.FromToRotation(initUpAxis, upAxis);
-                var twist = Quaternion.Inverse(swing) * relativeRotation;
+                var upAxis = transform.parent.InverseTransformDirection(transform.up);
+                var swing = Quaternion.FromToRotation(_initUpAxis, upAxis);
+                var twist = Quaternion.Inverse(swing) * JointOrientation;
+                twist.ToAngleAxis(out float z, out Vector3 _);
 
-                // twist.ToAngleAxis(out var twistX, out var _);
+                var frontAxis = transform.parent.InverseTransformDirection(transform.forward);
+                var swingX = Quaternion.FromToRotation(_initFrontAxis, frontAxis) * Quaternion.Inverse(twist);
+                swingX.ToAngleAxis(out float x, out Vector3 _);
 
-                // float twistX = 2.0f * Mathf.Atan2(twist.y, twist.w);
-                // if (twistX > Mathf.PI) twistX -= 2.0f * Mathf.PI;
-                var twistX = 0f;
+                var swingY = swing * Quaternion.Inverse(swingX);
+                swingY.ToAngleAxis(out float y, out Vector3 _);
 
-                float swingY = -Mathf.DeltaAngle(0, swing.eulerAngles.x) * Mathf.Deg2Rad;
-                float swingZ = Mathf.DeltaAngle(0, swing.eulerAngles.z) * Mathf.Deg2Rad;
+#if UNITY_EDITOR
+                _targetRotation = new Vector3(x, y, z);
+#endif
 
-                _jointPosition = new Vector3(twistX, swingY, swingZ) * Mathf.Rad2Deg;
-
-                log = "";
-                log += $"relativeRot (in Quaternion): {relativeRotation}\n";
-                log += $"relativeRot (in EulerAngles): {relativeRotation.eulerAngles}\n";
-                log += $"twist (in Quaternion): {twist}\n";
-                log += $"twist (in EulerAngles): {twist.eulerAngles}\n";
-                log += $"swing (in Quaternion): {swing}\n";
-                log += $"swing (in EulerAngles): {swing.eulerAngles}\n";
-                // log += $"delta twist (DeltaAngle): {Mathf.DeltaAngle(initRotation.eulerAngles.y,)}\n";
-                log += $"twistX: {twistX * Mathf.Rad2Deg}\n";
-                log += $"swingY: {swingY * Mathf.Rad2Deg}\n";
-                log += $"swingZ: {swingZ * Mathf.Rad2Deg}\n";
-                break;
+                return Quaternion.Euler(x, y, z);
         }
+
+        return Quaternion.identity;
     }
 
-    public ArticulationReducedSpace GetJointPosition()
+    void FixedUpdate()
     {
-        UpdateJointPosition();
+        UpdateVelocities(Time.fixedDeltaTime);
 
-        return jointType switch
-        {
-            ArticulationJointType.FixedJoint => new ArticulationReducedSpace(),
-            ArticulationJointType.PrismaticJoint => new ArticulationReducedSpace(0f),
-            ArticulationJointType.RevoluteJoint => new ArticulationReducedSpace(_jointPosition.x),
-            ArticulationJointType.SphericalJoint => new ArticulationReducedSpace(_jointPosition.x, _jointPosition.y, _jointPosition.z),
-            _ => new ArticulationReducedSpace()
-        };
-    }
-
-    void Update()
-    {
-        // UpdateJointPosition();
-        // UpdateVelocities(Time.deltaTime);
-
-        // log = "";
-        // if (TryGetComponent<ArticulationBody>(out var body))
-        // {
-        //     var pos = body.jointPosition;
-        //     var q = Quaternion.identity;
-        //     var jointPosition = Vector3.zero;
-        //     switch (body.jointType)
-        //     {
-        //         case ArticulationJointType.RevoluteJoint:
-        //             q = Quaternion.Euler(pos[0] * Mathf.Rad2Deg, 0f, 0f);
-        //             jointPosition = new Vector3(pos[0], 0f, 0f) * Mathf.Rad2Deg;
-        //             break;
-        //         case ArticulationJointType.SphericalJoint:
-        //             q = Quaternion.Euler(pos[1] * Mathf.Rad2Deg, pos[0] * Mathf.Rad2Deg, pos[2] * Mathf.Rad2Deg);
-        //             jointPosition = new Vector3(pos[0], pos[1], pos[2]) * Mathf.Rad2Deg;
-        //             break;
-        //     }
-        //     log += $"joint : {jointPosition}\n";
-        //     log += $"ref   : {_jointPosition}\n";
-        //     log += $"\n";
-        //     log += $"Quaternion Representation\n";
-        //     log += $"joint : {q}\n";
-        //     log += $"rot   : {JointOrientation}\n";
-        //     log += $"diff  : {Quaternion.Angle(q, JointOrientation)}\n";
-        //     log += $"joint : {body.angularVelocity}\n";
-        //     log += $"ref   : {AngularVelocity}\n";
-        //     log += $"diff  : {Vector3.Distance(body.angularVelocity, AngularVelocity)}\n";
-        // }
+#if UNITY_EDITOR
+        _debugLog = "";
+        _debugLog += $"Linear Velocity: {LinearVelocity}\n";
+        _debugLog += $"Angular Velocity: {AngularVelocity}\n";
+        _debugLog += $"Joint Orientation: {JointOrientation}\n";
+        _debugLog += $"Joint Orientation(in Euler): {JointOrientation.eulerAngles}\n";
+#endif
     }
 }

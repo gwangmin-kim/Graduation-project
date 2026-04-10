@@ -10,8 +10,4 @@ public class LocalFrameController : MonoBehaviour
         var lookRotation = forward == Vector3.zero ? Quaternion.identity : Quaternion.LookRotation(forward);
         transform.SetPositionAndRotation(root.position, lookRotation);
     }
-
-    public Vector3 GetLocalDirection(Vector3 globalDirection) => transform.InverseTransformDirection(globalDirection);
-    public Vector3 GetLocalPosition(Vector3 globalPosition) => transform.InverseTransformPoint(globalPosition);
-    public Quaternion GetLocalRotation(Quaternion globalRotation) => globalRotation * Quaternion.Inverse(transform.rotation);
 }
