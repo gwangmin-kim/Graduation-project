@@ -128,7 +128,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359731465947113559}
   serializedVersion: 5
-  m_Mass: 1.5
+  m_Mass: 3
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2585,7 +2585,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006223620926119128}
   serializedVersion: 5
-  m_Mass: 1.5
+  m_Mass: 3
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2813,7 +2813,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.09
+  m_Radius: 0.08
   m_Center: {x: 0, y: 0.13, z: 0.02}
 --- !u!54 &651391961063723443
 Rigidbody:
@@ -3287,7 +3287,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5505125646061986703}
   serializedVersion: 5
-  m_Mass: 4.5
+  m_Mass: 5.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5026,7 +5026,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8783775941911869085}
   serializedVersion: 5
-  m_Mass: 4.5
+  m_Mass: 5.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
