@@ -11,6 +11,9 @@ public class ReferenceCharacterController : MonoBehaviour
 
     [Header("Body Parts")]
     public Transform hips;
+    // 지면 판별용
+    public ReferenceGroundChecker footL;
+    public ReferenceGroundChecker footR;
     // 전체 신체 부위
     // 반드시 에이전트와 동일한 순서의 계층 구조를 가지고 있어야 함
     public List<ReferenceBodyPart> bodyPartList = new List<ReferenceBodyPart>();

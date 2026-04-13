@@ -63,4 +63,12 @@ public class ContectChecker : MonoBehaviour
             isTouchingGround = false;
         }
     }
+
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.transform.CompareTag(_groundTag))
+        {
+            isTouchingGround = true;
+        }
+    }
 }

@@ -12,6 +12,8 @@ public class PlayerAgent : Agent
     [Header("Body Parts")]
     [SerializeField] private Transform _hips;
     [SerializeField] private Transform _head;
+    [SerializeField] private Transform _footL;
+    [SerializeField] private Transform _footR;
     // 전체 신체 부위
     [SerializeField] private List<Transform> _childTransformList = new List<Transform>();
     // 말단 부위 (L-hand, R-hand, L-foot, R-foot 순서)
@@ -31,6 +33,7 @@ public class PlayerAgent : Agent
     [SerializeField] private Transform _target;
     [SerializeField][Range(_minWalkingSpeed, _maxWalkingSpeed)] private float _targetWalkingSpeed = _maxWalkingSpeed;
     [SerializeField] private bool _randomizeWalkSpeedEachEpisode;
+    [SerializeField] private bool _lookAtTargetEachEpisode;
 
     private const float _minWalkingSpeed = 0.1f;
     private const float _maxWalkingSpeed = 10f;
@@ -71,12 +74,35 @@ public class PlayerAgent : Agent
         if (_useReferenceMotion && _isRSIEnabled)
         {
             _jointDriveController.RandomSampleInitialize(_referenceCharacter, _currentSkill);
-            _hips.Rotate(0f, Random.Range(0f, 360f), 0f);
+
+            if (_lookAtTargetEachEpisode)
+            {
+                var forward = _target.position - _hips.position;
+                forward.y = 0;
+                forward = forward.normalized;
+                _hips.rotation = Quaternion.LookRotation(forward);
+            }
+            else
+            {
+                _hips.Rotate(0f, Random.Range(0f, 360f), 0f);
+            }
         }
         else
         {
             _jointDriveController.Reset();
-            _hips.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+
+            if (_lookAtTargetEachEpisode)
+            {
+                var forward = _target.position - _hips.position;
+                forward.y = 0;
+                forward = forward.normalized;
+                _hips.rotation = Quaternion.LookRotation(forward);
+            }
+            else
+            {
+                _hips.rotation = Quaternion.Euler(0f, Random.Range(0f, 360f), 0f);
+            }
+
             if (_useReferenceMotion) _referenceCharacter.InitPose(_currentSkill, Random.value);
         }
 
@@ -137,7 +163,7 @@ public class PlayerAgent : Agent
         }
 
         // (모션 모방 시) 위상 정보
-        sensor.AddObservation(_useReferenceMotion ? _referenceCharacter.CurrentPhase : 0f);
+        sensor.AddObservation(_useReferenceMotion ? _referenceCharacter.CurrentPhase : -1f);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -180,7 +206,7 @@ public class PlayerAgent : Agent
         }
 
 #if UNITY_EDITOR
-        Debug.Log(actionIndex);
+        // Debug.Log(actionIndex);
 #endif
 
         // // 생존 보상 (서 있는 것이 유리하도록)
@@ -231,7 +257,7 @@ public class PlayerAgent : Agent
         return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorReward;
     }
 
-    private float GetPoseReward(float weight = -0.5f)
+    private float GetPoseReward(float weight = -1f)
     {
         float diffSquaredSum = 0f;
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
@@ -267,7 +293,7 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetEndEffectorReward(float weight = -1f)
+    private float GetEndEffectorReward(float weight = -25f)
     {
         if (_endEffectorList.Count != _referenceCharacter.endEffectorList.Count)
         {
@@ -333,6 +359,26 @@ public class PlayerAgent : Agent
     }
 
     /// <summary>
+    /// 걷기 학습 시 추가되는 보상 함수
+    /// 레퍼런스 모션과 비교하여 발이 지면에 닿은 상태를 일치하도록 유도
+    /// </summary>
+    public float GetFootGroundingReward(BodyPart footL, BodyPart footR)
+    {
+        if (!_useReferenceMotion) return 0f;
+
+        float footReward = 0f;
+        footReward += footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround ? 0.5f : 0f;
+        footReward += footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround ? 0.5f : 0f;
+
+        return footReward * footReward;
+    }
+
+    public float GetStableSpineReward()
+    {
+        return 0f;
+    }
+
+    /// <summary>
     /// 목표 오브젝트와 충돌 시 획득하는 보상
     /// </summary>
     public void TouchedTarget()
@@ -360,8 +406,14 @@ public class PlayerAgent : Agent
         var matchingVelocityReward = GetMatchingVelocityReward(TargetWalkingSpeed * localForward, GetAverageVelocity());
         var targetHeadingReward = GetTargetHeadingReward(localForward, _head.forward);
         var taskReward = matchingVelocityReward * targetHeadingReward;
+        // 추가: 발을 떼도록 유도
+        var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
-        var reward = _useReferenceMotion ? (0.7f * imitationReward + 0.3f * taskReward) : taskReward;
+        var reward = _useReferenceMotion ?
+            (0.7f * imitationReward
+            + 0.25f * taskReward
+            + 0.05f * footReward)
+            : taskReward;
         AddReward(reward);
 
 #if UNITY_EDITOR
@@ -370,11 +422,13 @@ public class PlayerAgent : Agent
         if (!_useReferenceMotion && isTestMode) _debugLog += $"imitation reward: {GetImitationReward():F5}\n";
         _debugLog += $"velocity reward: {matchingVelocityReward:F5}\n";
         _debugLog += $"heading reward: {targetHeadingReward:F5}\n";
+        _debugLog += $"foot grounding reward: {footReward}\n";
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
     }
 
     // 테스트용 함수
+#if UNITY_EDITOR
     public void TestRSI()
     {
         _jointDriveController.RandomSampleInitialize(_referenceCharacter, _currentSkill);
@@ -396,4 +450,5 @@ public class PlayerAgent : Agent
     {
         _useReferenceMotion = !_useReferenceMotion;
     }
+#endif
 }
