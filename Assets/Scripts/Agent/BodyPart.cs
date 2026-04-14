@@ -9,6 +9,7 @@ public class BodyPart
     public int dofCount;
     public Vector3 initPosition;
     public Quaternion initRotation;
+    public bool isRoot = false;
 
     [Header("Contact Checker")]
     public ContectChecker contactChecker;

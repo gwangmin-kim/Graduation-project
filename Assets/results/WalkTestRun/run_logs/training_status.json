@@ -1,23 +1,23 @@
 {
-    "PlayerAgent": {
+    "Walker": {
         "checkpoints": [
             {
-                "steps": 63172,
-                "file_path": "results\\WalkTestRun\\PlayerAgent\\PlayerAgent-63172.onnx",
-                "reward": -0.9992059014919328,
-                "creation_time": 1775931088.55609,
+                "steps": 178335,
+                "file_path": "results\\WalkTestRun\\Walker\\Walker-178335.onnx",
+                "reward": 5.714244490224212,
+                "creation_time": 1776154728.9913769,
                 "auxillary_file_paths": [
-                    "results\\WalkTestRun\\PlayerAgent\\PlayerAgent-63172.pt"
+                    "results\\WalkTestRun\\Walker\\Walker-178335.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 63172,
-            "file_path": "results\\WalkTestRun\\PlayerAgent.onnx",
-            "reward": -0.9992059014919328,
-            "creation_time": 1775931088.55609,
+            "steps": 178335,
+            "file_path": "results\\WalkTestRun\\Walker.onnx",
+            "reward": 5.714244490224212,
+            "creation_time": 1776154728.9913769,
             "auxillary_file_paths": [
-                "results\\WalkTestRun\\PlayerAgent\\PlayerAgent-63172.pt"
+                "results\\WalkTestRun\\Walker\\Walker-178335.pt"
             ]
         }
     },

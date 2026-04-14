@@ -11,7 +11,6 @@ public class JointDriveController : MonoBehaviour
     public float jointDamper;
     public float maxJointForce;
 
-    public Transform hips;
     public List<BodyPart> bodyPartList = new List<BodyPart>();
     [HideInInspector] public Dictionary<Transform, BodyPart> bodyPartDict = new Dictionary<Transform, BodyPart>();
 
@@ -49,7 +48,7 @@ public class JointDriveController : MonoBehaviour
 
             bodyPart.Reset(bodyPart);
 
-            if (bodyPart.rigidbody.transform == hips)
+            if (bodyPart.isRoot)
             {
                 bodyPart.rigidbody.rotation = refBodyPart.transform.rotation;
                 continue;

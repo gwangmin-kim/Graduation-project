@@ -91,14 +91,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359731465947113559}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.021378603, w: 0.9997715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6010493697295013400}
   m_Father: {fileID: 8347447395557151379}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1577028289006684658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -118,8 +118,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.12, y: 0.04, z: 0.25}
-  m_Center: {x: 0, y: -0.068, z: 0.064}
+  m_Size: {x: 0.12, y: 0.05, z: 0.25}
+  m_Center: {x: 0.01, y: -0.065, z: 0.064}
 --- !u!54 &1057374932925279469
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359731465947113559}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 2.2
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -483,7 +483,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.08
+  m_Radius: 0.09
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1819425278213820866
 Rigidbody:
@@ -493,7 +493,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742272749638676160}
   serializedVersion: 5
-  m_Mass: 15
+  m_Mass: 22
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -592,14 +592,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937244917088809031}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.99984235, y: 0.017757814, z: 0, w: 0}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: -0.09, y: -0.05, z: -0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8087327206794833440}
   m_Father: {fileID: 8269204481502560142}
-  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 2.035}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!136 &9095815684306513920
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -620,9 +620,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.38
+  m_Height: 0.4
   m_Direction: 1
-  m_Center: {x: -0.02, y: 0.21, z: -0.01}
+  m_Center: {x: -0.01, y: 0.22, z: -0.01}
 --- !u!54 &7217250468409203508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937244917088809031}
   serializedVersion: 5
-  m_Mass: 14
+  m_Mass: 15.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -670,7 +670,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -833,14 +833,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294718076117716848}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09229593, y: 0.09229593, z: 0.7010574, w: 0.7010574}
+  m_LocalRotation: {x: 0.1302827, y: 0.00796844, z: 0.98959565, w: 0.060526326}
   m_LocalPosition: {x: -0.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9080910980786723235}
   m_Father: {fileID: 6660465439885334496}
-  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 173}
 --- !u!136 &3447714681239407274
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ CapsuleCollider:
   m_Radius: 0.04
   m_Height: 0.25
   m_Direction: 1
-  m_Center: {x: 0, y: 0.12, z: 0}
+  m_Center: {x: 0.005, y: 0.13, z: 0}
 --- !u!54 &1705484303817719283
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -872,7 +872,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294718076117716848}
   serializedVersion: 5
-  m_Mass: 2.5
+  m_Mass: 4.3
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -911,7 +911,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -927,7 +927,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 160
+    limit: 130
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -1166,14 +1166,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292312108095308049}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0.017757814, w: 0.99984235}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.09, y: -0.05, z: -0.011}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8347447395557151379}
   m_Father: {fileID: 8269204481502560142}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 2.035}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7666530218452517100
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1194,9 +1194,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.06
-  m_Height: 0.38
+  m_Height: 0.4
   m_Direction: 1
-  m_Center: {x: 0.02, y: -0.21, z: 0.01}
+  m_Center: {x: 0.01, y: -0.22, z: 0.01}
 --- !u!54 &4703025885412118106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1205,7 +1205,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292312108095308049}
   serializedVersion: 5
-  m_Mass: 14
+  m_Mass: 15.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1244,7 +1244,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -1448,7 +1448,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2352896182941193299}
   serializedVersion: 5
-  m_Mass: 0.5
+  m_Mass: 0.9
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1485,9 +1485,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 0
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -1972,14 +1972,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2695605392833975485}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09229593, y: 0.09229593, z: 0.7010574, w: 0.7010574}
+  m_LocalRotation: {x: 0.1302827, y: 0.00796844, z: 0.98959565, w: 0.060526326}
   m_LocalPosition: {x: 0.16, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3981329082061538535}
   m_Father: {fileID: 8576793931328355386}
-  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 15, z: 173}
 --- !u!136 &8104406191148419614
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2002,7 +2002,7 @@ CapsuleCollider:
   m_Radius: 0.04
   m_Height: 0.25
   m_Direction: 1
-  m_Center: {x: 0, y: -0.12, z: 0}
+  m_Center: {x: -0.005, y: -0.13, z: 0}
 --- !u!54 &2718109117321515809
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2011,7 +2011,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2695605392833975485}
   serializedVersion: 5
-  m_Mass: 2.5
+  m_Mass: 4.3
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2050,7 +2050,7 @@ ConfigurableJoint:
   m_ZMotion: 0
   m_AngularXMotion: 1
   m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -2066,7 +2066,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 160
+    limit: 130
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
@@ -2283,7 +2283,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3453336669629074642}
   serializedVersion: 5
-  m_Mass: 1
+  m_Mass: 12.6
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2349,7 +2349,7 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 50
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -2548,14 +2548,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006223620926119128}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.021378603, w: 0.9997715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.41, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8574593506751001154}
   m_Father: {fileID: 8087327206794833440}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -2.45}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6193695108339404882
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2575,8 +2575,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.12, y: 0.04, z: 0.25}
-  m_Center: {x: 0, y: 0.068, z: -0.064}
+  m_Size: {x: 0.12, y: 0.05, z: 0.25}
+  m_Center: {x: -0.01, y: 0.065, z: -0.064}
 --- !u!54 &9125550201156978664
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2585,7 +2585,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006223620926119128}
   serializedVersion: 5
-  m_Mass: 5
+  m_Mass: 2.2
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2814,7 +2814,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.08
-  m_Center: {x: 0, y: 0.13, z: 0.02}
+  m_Center: {x: 0, y: 0.14, z: 0.02}
 --- !u!54 &651391961063723443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2823,7 +2823,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4272689114713782055}
   serializedVersion: 5
-  m_Mass: 10
+  m_Mass: 21.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2878,18 +2878,18 @@ ConfigurableJoint:
     bounciness: 0
     contactDistance: 0
   m_HighAngularXLimit:
-    limit: 80
+    limit: 50
     bounciness: 0
     contactDistance: 0
   m_AngularYZLimitSpring:
     spring: 0
     damper: 0
   m_AngularYLimit:
-    limit: 30
+    limit: 20
     bounciness: 0
     contactDistance: 0
   m_AngularZLimit:
-    limit: 30
+    limit: 15
     bounciness: 0
     contactDistance: 0
   m_TargetPosition: {x: 0, y: 0, z: 0}
@@ -3276,9 +3276,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.05
-  m_Height: 0.38
+  m_Height: 0.4
   m_Direction: 1
-  m_Center: {x: 0, y: -0.22, z: 0}
+  m_Center: {x: 0.01, y: -0.23, z: 0}
 --- !u!54 &2893503584704541376
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3287,7 +3287,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5505125646061986703}
   serializedVersion: 5
-  m_Mass: 7
+  m_Mass: 7.2
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3518,8 +3518,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.23, y: 0.2, z: 0.16}
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Size: {x: 0.24, y: 0.15, z: 0.16}
+  m_Center: {x: 0, y: 0.13, z: 0}
 --- !u!54 &5963643529908002450
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3528,7 +3528,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5609194199759742796}
   serializedVersion: 5
-  m_Mass: 12
+  m_Mass: 33.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3973,7 +3973,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776818626974302513}
   serializedVersion: 5
-  m_Mass: 0.5
+  m_Mass: 0.9
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4010,9 +4010,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 0
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -4310,7 +4310,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7575611747393196506}
   serializedVersion: 5
-  m_Mass: 1.5
+  m_Mass: 2.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4553,7 +4553,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7991007193764429207}
   serializedVersion: 5
-  m_Mass: 1.5
+  m_Mass: 2.5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4842,17 +4842,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.Policies.BehaviorParameters
   m_BrainParameters:
-    VectorObservationSize: 254
+    VectorObservationSize: 244
     NumStackedVectorObservations: 1
     m_ActionSpec:
-      m_NumContinuousActions: 52
+      m_NumContinuousActions: 40
       BranchSizes: 
-    VectorActionSize: 34000000
+    VectorActionSize: 28000000
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
   m_Model: {fileID: 5022602860645237092, guid: 25a7c59f2c88d8b47b4b46762188434b, type: 3}
-  m_InferenceDevice: 2
+  m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
   TeamId: 0
@@ -4901,14 +4901,14 @@ MonoBehaviour:
   - {fileID: 777798858619073714}
   - {fileID: 7469504623529790106}
   - {fileID: 8150651438042456054}
-  _useReferenceMotion: 0
+  _useReferenceMotion: 1
   _referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
   _target: {fileID: 0}
   _targetWalkingSpeed: 2
   _randomizeWalkSpeedEachEpisode: 0
-  _lookAtTargetEachEpisode: 0
+  _lookAtTargetEachEpisode: 1
   _debugLog: 
   isTestMode: 0
   poseReward: 0
@@ -4926,10 +4926,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d3a476e1883e3488aaf640418b8dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
-  jointSpring: 50000
-  jointDamper: 6000
+  jointSpring: 100000
+  jointDamper: 8000
   maxJointForce: 25000
-  hips: {fileID: 8269204481502560142}
   bodyPartList: []
 --- !u!1 &8765993042395321230
 GameObject:
@@ -5018,9 +5017,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.05
-  m_Height: 0.38
+  m_Height: 0.4
   m_Direction: 1
-  m_Center: {x: 0, y: 0.22, z: 0}
+  m_Center: {x: -0.01, y: 0.23, z: 0}
 --- !u!54 &6426453048722406387
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5029,7 +5028,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8783775941911869085}
   serializedVersion: 5
-  m_Mass: 7
+  m_Mass: 7.2
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

@@ -44,12 +44,14 @@ public class PlayerAgent : Agent
         set { _targetWalkingSpeed = Mathf.Clamp(value, _minWalkingSpeed, _maxWalkingSpeed); }
     }
 
+#if UNITY_EDITOR
     [Header("Debug Info")]
     [TextArea(10, 10)][SerializeField] private string _debugLog;
     public bool isTestMode = false;
     public float poseReward;
     public float velocityReward;
     public float endEffectorReward;
+#endif
 
     public override void Initialize()
     {
@@ -63,7 +65,7 @@ public class PlayerAgent : Agent
             _childTransformList.Add(body);
             _jointDriveController.SetupBodyPart(body);
         }
-        _jointDriveController.hips = _hips;
+        _jointDriveController.bodyPartDict[_hips].isRoot = true;
 
         _resetParams = Academy.Instance.EnvironmentParameters;
     }
@@ -124,7 +126,7 @@ public class PlayerAgent : Agent
         sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(bodyPart.rigidbody.position - _hips.position));
 
         // 관절 정보 (방향, 힘)
-        if (bodyPart.rigidbody.transform != _hips)
+        if (bodyPart.dofCount > 0)
         {
             sensor.AddObservation(bodyPart.rigidbody.transform.localRotation);
             sensor.AddObservation(bodyPart.currentStrength / _jointDriveController.maxJointForce);
@@ -168,7 +170,9 @@ public class PlayerAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
+#if UNITY_EDITOR
         if (isTestMode) return;
+#endif
 
         var continuousActions = actions.ContinuousActions;
         int actionIndex = -1;
@@ -186,7 +190,6 @@ public class PlayerAgent : Agent
                     break;
                 case 2:
                     // 이 경우 반드시 x축과 y축 회전만 존재하도록 Configurable Joint의 축을 설정해야 함
-                    // 현재 휴머노이드 모델엔 해당 관절은 존재하지 않음
                     bodyPart.SetJointTargetRotation(continuousActions[++actionIndex], continuousActions[++actionIndex], 0f);
                     break;
                 case 3:
@@ -201,16 +204,13 @@ public class PlayerAgent : Agent
         // 관절 힘 설정
         foreach (var bodyPart in _jointDriveController.bodyPartList)
         {
-            if (bodyPart.rigidbody.transform == _hips) continue;
+            if (bodyPart.dofCount == 0) continue;
             bodyPart.SetJointStrength(continuousActions[++actionIndex]);
         }
 
 #if UNITY_EDITOR
-        // Debug.Log(actionIndex);
+        Debug.Log($"action count: {actionIndex + 1}");
 #endif
-
-        // // 생존 보상 (서 있는 것이 유리하도록)
-        // AddReward(0.1f);
     }
 
     private void UpdateOrientation()
@@ -257,7 +257,7 @@ public class PlayerAgent : Agent
         return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorReward;
     }
 
-    private float GetPoseReward(float weight = -1f)
+    private float GetPoseReward(float weight = -0.5f)
     {
         float diffSquaredSum = 0f;
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
@@ -276,7 +276,7 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetVelocityReward(float weight = -0.1f)
+    private float GetVelocityReward(float weight = -0.05f)
     {
         float diffSquaredSum = 0f;
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
@@ -293,7 +293,7 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetEndEffectorReward(float weight = -25f)
+    private float GetEndEffectorReward(float weight = -15f)
     {
         if (_endEffectorList.Count != _referenceCharacter.endEffectorList.Count)
         {
@@ -366,16 +366,17 @@ public class PlayerAgent : Agent
     {
         if (!_useReferenceMotion) return 0f;
 
-        float footReward = 0f;
-        footReward += footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround ? 0.5f : 0f;
-        footReward += footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround ? 0.5f : 0f;
+        var isMatchedL = footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround;
+        var isMatchedR = footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround;
 
-        return footReward * footReward;
-    }
+        var footReward = 0f;
+        if (isMatchedL) footReward += 0.5f;
+        if (isMatchedR) footReward += 0.5f;
 
-    public float GetStableSpineReward()
-    {
-        return 0f;
+        footReward *= footReward;
+        // footReward = (isMatchedL && isMatchedR) ? 1f : 0f;
+
+        return footReward;
     }
 
     /// <summary>
@@ -409,11 +410,9 @@ public class PlayerAgent : Agent
         // 추가: 발을 떼도록 유도
         var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
-        var reward = _useReferenceMotion ?
-            (0.7f * imitationReward
-            + 0.25f * taskReward
-            + 0.05f * footReward)
-            : taskReward;
+        var reward = !_useReferenceMotion ? taskReward :
+            (0.75f * imitationReward + 0.20f * taskReward + 0.05f * footReward);
+
         AddReward(reward);
 
 #if UNITY_EDITOR
