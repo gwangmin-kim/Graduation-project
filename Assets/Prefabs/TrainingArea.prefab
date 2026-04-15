@@ -785,9 +785,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3094524632810842548}
     m_Modifications:
+    - target: {fileID: 651391961063723443, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1057374932925279469, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Mass
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1819425278213820866, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1859334317376422839, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -833,6 +841,10 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 2390641251805212813}
+    - target: {fileID: 2893503584704541376, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _target
       value: 
@@ -841,6 +853,34 @@ PrefabInstance:
       propertyPath: _referenceCharacter
       value: 
       objectReference: {fileID: 4155826763452583642}
+    - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: _useReferenceMotion
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: _lookAtTargetEachEpisode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: _randomizeWalkSpeedEachEpisode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703025885412118106, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5963643529908002450, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6426453048722406387, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7217250468409203508, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Mass
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Name
       value: PlayerAgent

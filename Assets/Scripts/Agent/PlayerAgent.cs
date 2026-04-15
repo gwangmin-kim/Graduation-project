@@ -80,7 +80,7 @@ public class PlayerAgent : Agent
             if (_lookAtTargetEachEpisode)
             {
                 var forward = _target.position - _hips.position;
-                forward.y = 0;
+                forward.y = 0f;
                 forward = forward.normalized;
                 _hips.rotation = Quaternion.LookRotation(forward);
             }
@@ -96,7 +96,7 @@ public class PlayerAgent : Agent
             if (_lookAtTargetEachEpisode)
             {
                 var forward = _target.position - _hips.position;
-                forward.y = 0;
+                forward.y = 0f;
                 forward = forward.normalized;
                 _hips.rotation = Quaternion.LookRotation(forward);
             }
@@ -263,15 +263,25 @@ public class PlayerAgent : Agent
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
         {
             var bodyPart = _jointDriveController.bodyPartList[i];
+            if (bodyPart.dofCount == 0) continue;
+
             var refbodyPart = _referenceCharacter.bodyPartList[i];
 
             // Pose Error
-            // 루트(hips) 기준 상대 회전을 비교
-            var orientation = bodyPart.rigidbody.transform.rotation * Quaternion.Inverse(_hips.rotation);
-            var refOrientation = refbodyPart.transform.rotation * Quaternion.Inverse(_referenceCharacter.hips.rotation);
-            float diff = Quaternion.Angle(orientation, refOrientation) * Mathf.Deg2Rad;
+            // // 루트(hips) 기준 상대 회전을 비교
+            // var orientation = bodyPart.rigidbody.transform.rotation * Quaternion.Inverse(_hips.rotation);
+            // var refOrientation = refbodyPart.transform.rotation * Quaternion.Inverse(_referenceCharacter.hips.rotation);
+            // float diff = Quaternion.Angle(orientation, refOrientation) * Mathf.Deg2Rad;
 
-            diffSquaredSum += diff * diff;
+            // diffSquaredSum += diff * diff;
+
+            // 변경: 회전이 아니라, 로컬 축의 방향을 비교
+            // 조금 더 느슨한 기준이지만, 현재 모델이 제대로 동작을 재현하지 못하고 있기에 이렇게 시도
+            var orientation = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.up);
+            var refOrientation = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.up);
+            float diff = Vector3.SqrMagnitude(orientation - refOrientation);
+
+            diffSquaredSum += diff;
         }
         return Mathf.Exp(weight * diffSquaredSum);
     }
@@ -282,6 +292,8 @@ public class PlayerAgent : Agent
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
         {
             var bodyPart = _jointDriveController.bodyPartList[i];
+            if (bodyPart.dofCount == 0) continue;
+
             var refbodyPart = _referenceCharacter.bodyPartList[i];
 
             // Velocity Error
@@ -314,6 +326,26 @@ public class PlayerAgent : Agent
             diffSquaredSum += Vector3.SqrMagnitude(position - refPosition);
         }
         return Mathf.Exp(weight * diffSquaredSum);
+    }
+
+    public float GetBalanceReward()
+    {
+        float energeSquaredSum = 0f;
+        foreach (var bodyPart in _jointDriveController.bodyPartList)
+        {
+            if (bodyPart.dofCount == 0) continue;
+            energeSquaredSum += Mathf.Pow(bodyPart.currentStrength / _jointDriveController.maxJointForce, 2f);
+        }
+        float energeReward = Mathf.Exp(-0.5f * energeSquaredSum);
+
+        // float hipsVerticalVelocity = _jointDriveController.bodyPartDict[_hips].rigidbody.linearVelocity.y;
+        // float stabilityReward = Mathf.Exp(-2f * hipsVerticalVelocity * hipsVerticalVelocity);
+
+        var hipsVelocity = _jointDriveController.bodyPartDict[_hips].rigidbody.linearVelocity;
+        var headVelocity = _jointDriveController.bodyPartDict[_head].rigidbody.linearVelocity;
+        float stabilityReward = Mathf.Exp(-0.5f * Vector3.SqrMagnitude(hipsVelocity - headVelocity));
+
+        return 0.5f * energeReward + 0.5f * stabilityReward;
     }
 
     /// <summary>
@@ -403,6 +435,8 @@ public class PlayerAgent : Agent
         // 보상 지급
         var imitationReward = _useReferenceMotion ? GetImitationReward() : 0f;
 
+        var balanceReward = GetBalanceReward();
+
         var localForward = _localFrameController.transform.forward;
         var matchingVelocityReward = GetMatchingVelocityReward(TargetWalkingSpeed * localForward, GetAverageVelocity());
         var targetHeadingReward = GetTargetHeadingReward(localForward, _head.forward);
@@ -410,8 +444,8 @@ public class PlayerAgent : Agent
         // 추가: 발을 떼도록 유도
         var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
-        var reward = !_useReferenceMotion ? taskReward :
-            (0.75f * imitationReward + 0.20f * taskReward + 0.05f * footReward);
+        var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
+            (0.70f * imitationReward + 0.08f * balanceReward + 0.20f * taskReward + 0.02f * footReward);
 
         AddReward(reward);
 
@@ -419,6 +453,7 @@ public class PlayerAgent : Agent
         _debugLog = "";
         if (_useReferenceMotion) _debugLog += $"imitation reward: {imitationReward:F5}\n";
         if (!_useReferenceMotion && isTestMode) _debugLog += $"imitation reward: {GetImitationReward():F5}\n";
+        _debugLog += $"balance reward: {balanceReward:F5}\n";
         _debugLog += $"velocity reward: {matchingVelocityReward:F5}\n";
         _debugLog += $"heading reward: {targetHeadingReward:F5}\n";
         _debugLog += $"foot grounding reward: {footReward}\n";

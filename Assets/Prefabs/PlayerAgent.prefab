@@ -622,7 +622,7 @@ CapsuleCollider:
   m_Radius: 0.06
   m_Height: 0.4
   m_Direction: 1
-  m_Center: {x: -0.01, y: 0.22, z: -0.01}
+  m_Center: {x: -0.01, y: 0.22, z: 0}
 --- !u!54 &7217250468409203508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1196,7 +1196,7 @@ CapsuleCollider:
   m_Radius: 0.06
   m_Height: 0.4
   m_Direction: 1
-  m_Center: {x: 0.01, y: -0.22, z: 0.01}
+  m_Center: {x: 0.01, y: -0.22, z: 0}
 --- !u!54 &4703025885412118106
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2273,8 +2273,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0.17, z: 0}
+  m_Radius: 0.09
+  m_Center: {x: 0, y: 0.17, z: 0.01}
 --- !u!54 &5491527809901098897
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2814,7 +2814,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.08
-  m_Center: {x: 0, y: 0.14, z: 0.02}
+  m_Center: {x: 0, y: 0.14, z: 0.01}
 --- !u!54 &651391961063723443
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3519,7 +3519,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.24, y: 0.15, z: 0.16}
-  m_Center: {x: 0, y: 0.13, z: 0}
+  m_Center: {x: 0, y: 0.13, z: -0.01}
 --- !u!54 &5963643529908002450
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4892,7 +4892,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
   _hips: {fileID: 8269204481502560142}
-  _head: {fileID: 3459767032923832072}
+  _head: {fileID: 7972865300392021751}
   _footL: {fileID: 7469504623529790106}
   _footR: {fileID: 8150651438042456054}
   _childTransformList: []
@@ -4926,8 +4926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d3a476e1883e3488aaf640418b8dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
-  jointSpring: 100000
-  jointDamper: 8000
+  jointSpring: 140000
+  jointDamper: 6000
   maxJointForce: 25000
   bodyPartList: []
 --- !u!1 &8765993042395321230
