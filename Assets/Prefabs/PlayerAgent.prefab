@@ -266,10 +266,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 0
   groundContactPenalty: 0
   isTouchingGround: 1
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &374586408810648194
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,10 +528,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &766734018980184892
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,10 +767,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &1150355159894529709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,10 +1007,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &1358284121837582573
 GameObject:
   m_ObjectHideFlags: 0
@@ -1343,10 +1339,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &2306880928180377287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,10 +1581,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &2376458647346784436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,10 +2143,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &2766026226010623784
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,10 +2414,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &3768896771751895806
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,10 +2715,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 0
   groundContactPenalty: 0
   isTouchingGround: 1
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &4151872751908981305
 GameObject:
   m_ObjectHideFlags: 0
@@ -2961,10 +2952,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &4356008778316100336
 GameObject:
   m_ObjectHideFlags: 0
@@ -3425,10 +3415,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 0
   groundContactPenalty: 0
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &5595267431453177561
 GameObject:
   m_ObjectHideFlags: 0
@@ -3666,10 +3655,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &5734269248398116447
 GameObject:
   m_ObjectHideFlags: 0
@@ -3760,7 +3748,7 @@ Transform:
   m_GameObject: {fileID: 6172030741904162540}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.965, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4111,10 +4099,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &6780268953426438772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4448,10 +4435,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &7888691241965578050
 GameObject:
   m_ObjectHideFlags: 0
@@ -4691,10 +4677,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 1
   groundContactPenalty: -1
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &8097566020455651599
 GameObject:
   m_ObjectHideFlags: 0
@@ -4905,6 +4890,7 @@ MonoBehaviour:
   _referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
+  _animationSpeed: 0.8
   _target: {fileID: 0}
   _targetWalkingSpeed: 2
   _randomizeWalkSpeedEachEpisode: 0
@@ -4927,7 +4913,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
   jointSpring: 140000
-  jointDamper: 6000
+  jointDamper: 9000
   maxJointForce: 25000
   bodyPartList: []
 --- !u!1 &8765993042395321230
@@ -5166,10 +5152,9 @@ MonoBehaviour:
   penalizeOnGroundContact: 0
   groundContactPenalty: 0
   isTouchingGround: 0
-  earlyTerminateOnWallContact: 0
-  rewardOnWallContact: 0
-  wallContactReward: 1
-  isTouchingWall: 0
+  penalizeOnObstacleContact: 1
+  obstacleContactPenalty: -1
+  isTouchingObstacle: 0
 --- !u!1 &8849341479494614485
 GameObject:
   m_ObjectHideFlags: 0

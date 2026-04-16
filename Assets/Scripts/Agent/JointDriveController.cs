@@ -54,6 +54,8 @@ public class JointDriveController : MonoBehaviour
                 continue;
             }
 
+            if (bodyPart.dofCount == 0) continue;
+
             var targetRotation = refBodyPart.GetTargetRotation();
             bodyPart.joint.targetRotation = targetRotation;
         }

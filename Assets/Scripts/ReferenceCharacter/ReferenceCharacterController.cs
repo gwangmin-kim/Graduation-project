@@ -66,10 +66,10 @@ public class ReferenceCharacterController : MonoBehaviour
         _animator.Play(_currentClipName, 0, CurrentPhase);
     }
 
-    public void Tick(float deltaTime)
+    public void Tick(float deltaTime, float speedRate = 1f)
     {
         // 위상 전진
-        CurrentPhase = (CurrentPhase + (deltaTime / currentClip.length)) % 1f;
+        CurrentPhase = (CurrentPhase + (deltaTime * speedRate / currentClip.length)) % 1f;
 
         // 동작 샘플링
         _animator.Play(_currentClipName, 0, CurrentPhase);

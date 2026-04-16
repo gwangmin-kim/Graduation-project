@@ -17,9 +17,11 @@ public class ReferenceBodyPart : MonoBehaviour
     public Vector3 AngularVelocity { get; private set; }
     public Quaternion JointOrientation => transform.localRotation * Quaternion.Inverse(_initRotation);
 
+#if UNITY_EDITOR
     [Header("Debug Info")]
     [TextArea(10, 10)][SerializeField] private string _debugLog = "";
-    [SerializeField] private Vector3 _targetRotation;
+    [SerializeField] private Vector3 _targetRotation = Vector3.zero;
+#endif
 
     [ContextMenu("Record Initial State")]
     private void RecordInitialState()
@@ -65,6 +67,9 @@ public class ReferenceBodyPart : MonoBehaviour
         AngularVelocity = Vector3.zero;
     }
 
+    /// ! 현재 문제 많음...
+    /// TODO: angle이 항상 양수로 출력됨, ToAngleAxis에서 Axis 방향과 축 방향을 비교해서 부호를 결정해주어야 함
+    /// Spherical joint에서 각도 추출하는 로직 자체가 오류가 너무 심함
     public Quaternion GetTargetRotation()
     {
         switch (_jointType)
@@ -74,9 +79,12 @@ public class ReferenceBodyPart : MonoBehaviour
                 return Quaternion.identity;
 
             case ArticulationJointType.RevoluteJoint:
-                JointOrientation.ToAngleAxis(out float angle, out Vector3 _);
+                JointOrientation.ToAngleAxis(out float angle, out Vector3 axis);
+                // if (Vector3.Dot(axis, transform.right) < 0) angle *= -1f;
 #if UNITY_EDITOR
-                _targetRotation = new Vector3(angle, 0f, 0f);
+                _targetRotation.x = angle;
+                _targetRotation.y = 0f;
+                _targetRotation.z = 0f;
 #endif
                 return Quaternion.Euler(angle, 0f, 0f);
 
@@ -94,7 +102,9 @@ public class ReferenceBodyPart : MonoBehaviour
                 swingY.ToAngleAxis(out float y, out Vector3 _);
 
 #if UNITY_EDITOR
-                _targetRotation = new Vector3(x, y, z);
+                _targetRotation.x = x;
+                _targetRotation.y = y;
+                _targetRotation.z = z;
 #endif
 
                 return Quaternion.Euler(x, y, z);
@@ -108,6 +118,7 @@ public class ReferenceBodyPart : MonoBehaviour
         UpdateVelocities(Time.fixedDeltaTime);
 
 #if UNITY_EDITOR
+        GetTargetRotation();
         _debugLog = "";
         _debugLog += $"Linear Velocity: {LinearVelocity}\n";
         _debugLog += $"Angular Velocity: {AngularVelocity}\n";

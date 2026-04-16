@@ -28,15 +28,19 @@ public class PlayerAgent : Agent
     [SerializeField] private ReferenceCharacterController _referenceCharacter;
     [SerializeField] private bool _isRSIEnabled = false;
     [SerializeField] private Skill _currentSkill = Skill.Walk;
+    [Range(_minAnimationSpeed, _maxAnimationSpeed)][SerializeField] private float _animationSpeed = 1f;
+    private const float _minAnimationSpeed = 0.1f;
+    private const float _maxAnimationSpeed = 2f;
 
     [Header("Walk")]
     [SerializeField] private Transform _target;
+    [SerializeField] private float _targetTouchReward = 1f;
     [SerializeField][Range(_minWalkingSpeed, _maxWalkingSpeed)] private float _targetWalkingSpeed = _maxWalkingSpeed;
     [SerializeField] private bool _randomizeWalkSpeedEachEpisode;
     [SerializeField] private bool _lookAtTargetEachEpisode;
 
     private const float _minWalkingSpeed = 0.1f;
-    private const float _maxWalkingSpeed = 10f;
+    private const float _maxWalkingSpeed = 5f;
     private Vector3 _worldDirectionToWalk = Vector3.forward;
     public float TargetWalkingSpeed
     {
@@ -108,7 +112,13 @@ public class PlayerAgent : Agent
             if (_useReferenceMotion) _referenceCharacter.InitPose(_currentSkill, Random.value);
         }
 
-        TargetWalkingSpeed = _randomizeWalkSpeedEachEpisode ? Random.Range(_minWalkingSpeed, _maxWalkingSpeed) : TargetWalkingSpeed;
+        // TargetWalkingSpeed = _randomizeWalkSpeedEachEpisode ? Random.Range(_minWalkingSpeed, _maxWalkingSpeed) : TargetWalkingSpeed;
+        if (_randomizeWalkSpeedEachEpisode)
+        {
+            TargetWalkingSpeed = Random.Range(_minWalkingSpeed, _maxWalkingSpeed);
+            // float t = Mathf.InverseLerp(_minWalkingSpeed, _maxWalkingSpeed, TargetWalkingSpeed);
+            // _animationSpeed = Mathf.Lerp(_minAnimationSpeed, _maxAnimationSpeed, t);
+        }
 
         UpdateOrientation();
     }
@@ -165,7 +175,7 @@ public class PlayerAgent : Agent
         }
 
         // (모션 모방 시) 위상 정보
-        sensor.AddObservation(_useReferenceMotion ? _referenceCharacter.CurrentPhase : -1f);
+        sensor.AddObservation(_referenceCharacter.CurrentPhase);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -328,6 +338,10 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
+    /// <summary>
+    /// 힘을 적게 쓰고, 상체가 안정적일 때(기준: 머리와 골반의 움직임 차이) 높은 보상 제공
+    /// </summary>
+    /// <returns></returns>
     public float GetBalanceReward()
     {
         float energeSquaredSum = 0f;
@@ -419,7 +433,7 @@ public class PlayerAgent : Agent
 #if UNITY_EDITOR
         Debug.Log("Called Touched Target");
 #endif
-        AddReward(1f);
+        AddReward(_targetTouchReward);
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -430,7 +444,7 @@ public class PlayerAgent : Agent
     private void FixedUpdate()
     {
         UpdateOrientation();
-        if (_useReferenceMotion) _referenceCharacter.Tick(Time.fixedDeltaTime);
+        if (_useReferenceMotion) _referenceCharacter.Tick(Time.fixedDeltaTime, _animationSpeed);
 
         // 보상 지급
         var imitationReward = _useReferenceMotion ? GetImitationReward() : 0f;
@@ -445,7 +459,10 @@ public class PlayerAgent : Agent
         var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
         var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.70f * imitationReward + 0.08f * balanceReward + 0.20f * taskReward + 0.02f * footReward);
+            (0.30f * imitationReward
+            + 0.10f * balanceReward
+            + 0.55f * taskReward
+            + 0.05f * footReward);
 
         AddReward(reward);
 

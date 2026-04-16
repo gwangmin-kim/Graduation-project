@@ -13,18 +13,21 @@ public class ContectChecker : MonoBehaviour
     public bool isTouchingGround = false;
     private const string _groundTag = "Ground";
 
-    [Header("Wall Check")]
-    public bool earlyTerminateOnWallContact = false;
-    public bool rewardOnWallContact = false;
-    public float wallContactReward = 1f;
-    public bool isTouchingWall = false;
-    private const string _wallTag = "Wall";
+    [Header("Obstacle Check")]
+    public bool penalizeOnObstacleContact = true; // 장애물에 닿았을 때 페널티 부여 여부
+    public float obstacleContactPenalty = -1f; // 페널티 강도 (ex: -1)
+    public bool isTouchingObstacle = false;
+    private const string _obstacleTag = "Obstacle";
 
     private void OnCollisionEnter(Collision other)
     {
         if (other.transform.CompareTag(_groundTag))
         {
             isTouchingGround = true;
+
+#if UNITY_EDITOR
+            Debug.Log($"{name} touched the ground");
+#endif
 
             if (penalizeOnGroundContact)
             {
@@ -33,25 +36,21 @@ public class ContectChecker : MonoBehaviour
 
             if (earlyTerminateOnGroundContact)
             {
-#if UNITY_EDITOR
-                // Debug.Log($"{name} touched the ground");
-#endif
-
                 agent.EndEpisode();
             }
         }
-        else if (other.transform.CompareTag(_wallTag))
+
+        else if (other.transform.CompareTag(_obstacleTag))
         {
-            isTouchingWall = true;
+            isTouchingObstacle = true;
 
-            if (rewardOnWallContact)
-            {
-                agent.AddReward(wallContactReward);
-            }
+#if UNITY_EDITOR
+            Debug.Log($"{name} touched the obstacle");
+#endif
 
-            if (earlyTerminateOnWallContact)
+            if (penalizeOnObstacleContact)
             {
-                agent.EndEpisode();
+                agent.AddReward(obstacleContactPenalty);
             }
         }
     }
@@ -61,6 +60,19 @@ public class ContectChecker : MonoBehaviour
         if (other.transform.CompareTag(_groundTag))
         {
             isTouchingGround = false;
+
+#if UNITY_EDITOR
+            Debug.Log($"{name} detatched from the ground");
+#endif
+        }
+
+        else if (other.transform.CompareTag(_obstacleTag))
+        {
+            isTouchingObstacle = false;
+
+#if UNITY_EDITOR
+            Debug.Log($"{name} detatched from the obstacle");
+#endif
         }
     }
 
