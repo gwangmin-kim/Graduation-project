@@ -878,10 +878,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2390641251805212813}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: _targetTouchReward
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _referenceCharacter
       value: 
       objectReference: {fileID: 4155826763452583642}

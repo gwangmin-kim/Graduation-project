@@ -4892,7 +4892,7 @@ MonoBehaviour:
   _referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
-  _animationSpeed: 0.8
+  _animationSpeed: 0.9
   _target: {fileID: 0}
   _targetTouchReward: 1
   _targetWalkingSpeed: 2

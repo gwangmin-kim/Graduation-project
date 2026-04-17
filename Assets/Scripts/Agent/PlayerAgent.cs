@@ -477,9 +477,9 @@ public class PlayerAgent : Agent
         var handReward = GetHandStableReward(_jointDriveController.bodyPartDict[_handL], _jointDriveController.bodyPartDict[_handR]);
 
         var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.50f * imitationReward
-            + 0.10f * balanceReward
-            + 0.35f * taskReward
+            (0.20f * imitationReward
+            + 0.05f * balanceReward
+            + 0.70f * taskReward
             + 0.03f * footReward
             + 0.02f * handReward);
 
