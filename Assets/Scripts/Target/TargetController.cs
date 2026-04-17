@@ -100,6 +100,10 @@ public class TargetController : MonoBehaviour
         if (collider.CompareTag(tagToDetect))
         {
             onTriggerEnterEvent.Invoke(collider);
+            if (_respawnOnTouched)
+            {
+                MoveTargetToRandomPosition();
+            }
         }
     }
 

@@ -14,6 +14,8 @@ public class PlayerAgent : Agent
     [SerializeField] private Transform _head;
     [SerializeField] private Transform _footL;
     [SerializeField] private Transform _footR;
+    [SerializeField] private Transform _handL;
+    [SerializeField] private Transform _handR;
     // 전체 신체 부위
     [SerializeField] private List<Transform> _childTransformList = new List<Transform>();
     // 말단 부위 (L-hand, R-hand, L-foot, R-foot 순서)
@@ -410,7 +412,7 @@ public class PlayerAgent : Agent
     /// </summary>
     public float GetFootGroundingReward(BodyPart footL, BodyPart footR)
     {
-        if (!_useReferenceMotion) return 0f;
+        if (!_useReferenceMotion) return 1f;
 
         var isMatchedL = footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround;
         var isMatchedR = footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround;
@@ -423,6 +425,20 @@ public class PlayerAgent : Agent
         // footReward = (isMatchedL && isMatchedR) ? 1f : 0f;
 
         return footReward;
+    }
+
+    /// <summary>
+    /// 손을 과도하게 흔들며 균형을 잡는 행동을 방지하는 보상 함수
+    /// </summary>
+    public float GetHandStableReward(BodyPart handL, BodyPart handR)
+    {
+        var velocityL = handL.rigidbody.linearVelocity.sqrMagnitude;
+        var velocityR = handR.rigidbody.linearVelocity.sqrMagnitude;
+
+        var squaredSum = velocityL + velocityR;
+        var reward = Mathf.Exp(-0.1f * squaredSum);
+
+        return reward;
     }
 
     /// <summary>
@@ -457,12 +473,15 @@ public class PlayerAgent : Agent
         var taskReward = matchingVelocityReward * targetHeadingReward;
         // 추가: 발을 떼도록 유도
         var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
+        // 추가: 손을 과도하게 흔들지 않도록 유도
+        var handReward = GetHandStableReward(_jointDriveController.bodyPartDict[_handL], _jointDriveController.bodyPartDict[_handR]);
 
         var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.30f * imitationReward
+            (0.50f * imitationReward
             + 0.10f * balanceReward
-            + 0.55f * taskReward
-            + 0.05f * footReward);
+            + 0.35f * taskReward
+            + 0.03f * footReward
+            + 0.02f * handReward);
 
         AddReward(reward);
 
@@ -473,7 +492,9 @@ public class PlayerAgent : Agent
         _debugLog += $"balance reward: {balanceReward:F5}\n";
         _debugLog += $"velocity reward: {matchingVelocityReward:F5}\n";
         _debugLog += $"heading reward: {targetHeadingReward:F5}\n";
-        _debugLog += $"foot grounding reward: {footReward}\n";
+        _debugLog += $"task reward: {taskReward:F5}\n";
+        _debugLog += $"foot grounding reward: {footReward:F5}\n";
+        _debugLog += $"hand stable reward: {handReward:F5}\n";
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
     }

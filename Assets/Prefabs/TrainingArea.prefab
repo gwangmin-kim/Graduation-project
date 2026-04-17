@@ -740,7 +740,15 @@ PrefabInstance:
       value: DynamicTarget
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
@@ -748,9 +756,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8364189621305718277}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8364189621305718277}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TouchedTarget
+      objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -760,8 +780,16 @@ PrefabInstance:
       value: TouchedTarget
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerAgent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PlayerAgent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -863,7 +891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _lookAtTargetEachEpisode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4703025885412118106, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Mass

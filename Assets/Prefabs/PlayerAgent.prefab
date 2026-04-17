@@ -4880,6 +4880,8 @@ MonoBehaviour:
   _head: {fileID: 7972865300392021751}
   _footL: {fileID: 7469504623529790106}
   _footR: {fileID: 8150651438042456054}
+  _handL: {fileID: 709981993169956293}
+  _handR: {fileID: 777798858619073714}
   _childTransformList: []
   _endEffectorList:
   - {fileID: 709981993169956293}
@@ -4892,6 +4894,7 @@ MonoBehaviour:
   _currentSkill: 1
   _animationSpeed: 0.8
   _target: {fileID: 0}
+  _targetTouchReward: 1
   _targetWalkingSpeed: 2
   _randomizeWalkSpeedEachEpisode: 0
   _lookAtTargetEachEpisode: 1
@@ -4913,7 +4916,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
   jointSpring: 140000
-  jointDamper: 9000
+  jointDamper: 10000
   maxJointForce: 25000
   bodyPartList: []
 --- !u!1 &8765993042395321230
