@@ -31,8 +31,8 @@ public class PlayerAgent : Agent
     [SerializeField] private bool _isRSIEnabled = false;
     [SerializeField] private Skill _currentSkill = Skill.Walk;
     [Range(_minAnimationSpeed, _maxAnimationSpeed)][SerializeField] private float _animationSpeed = 1f;
-    private const float _minAnimationSpeed = 0.1f;
-    private const float _maxAnimationSpeed = 2f;
+    private const float _minAnimationSpeed = 0.5f;
+    private const float _maxAnimationSpeed = 1.8f;
 
     [Header("Walk")]
     [SerializeField] private Transform _target;
@@ -246,7 +246,7 @@ public class PlayerAgent : Agent
         return averageVelocity;
     }
 
-    public float GetImitationReward(float poseWeight = 0.7f, float velocityWeight = 0.1f, float endEffectorWeight = 0.2f)
+    private float GetImitationReward(float poseWeight = 0.7f, float velocityWeight = 0.1f, float endEffectorWeight = 0.2f)
     {
         if (_jointDriveController.bodyPartList.Count != _referenceCharacter.bodyPartList.Count)
         {
@@ -269,7 +269,7 @@ public class PlayerAgent : Agent
         return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorReward;
     }
 
-    private float GetPoseReward(float weight = -0.5f)
+    private float GetPoseReward(float weight = -0.8f)
     {
         float diffSquaredSum = 0f;
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
@@ -298,7 +298,7 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetVelocityReward(float weight = -0.05f)
+    private float GetVelocityReward(float weight = -0.08f)
     {
         float diffSquaredSum = 0f;
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
@@ -317,7 +317,7 @@ public class PlayerAgent : Agent
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetEndEffectorReward(float weight = -15f)
+    private float GetEndEffectorReward(float weight = -20f)
     {
         if (_endEffectorList.Count != _referenceCharacter.endEffectorList.Count)
         {
@@ -341,10 +341,12 @@ public class PlayerAgent : Agent
     }
 
     /// <summary>
-    /// 힘을 적게 쓰고, 상체가 안정적일 때(기준: 머리와 골반의 움직임 차이) 높은 보상 제공
+    /// 힘을 적게 쓰면 높은 보상
+    /// 상체가 안정적일 때(기준: 머리와 골반의 움직임 차이) 높은 보상
+    /// 손을 과도하게 흔들지 않을 때 높은 보상
     /// </summary>
     /// <returns></returns>
-    public float GetBalanceReward()
+    private float GetBalanceReward()
     {
         float energeSquaredSum = 0f;
         foreach (var bodyPart in _jointDriveController.bodyPartList)
@@ -361,13 +363,17 @@ public class PlayerAgent : Agent
         var headVelocity = _jointDriveController.bodyPartDict[_head].rigidbody.linearVelocity;
         float stabilityReward = Mathf.Exp(-0.5f * Vector3.SqrMagnitude(hipsVelocity - headVelocity));
 
+        // 추가: 손을 과도하게 흔들지 않도록 유도
+        // var handReward = GetHandStableReward(_jointDriveController.bodyPartDict[_handL], _jointDriveController.bodyPartDict[_handR]);
+
+        // return 0.5f * energeReward + 0.4f * stabilityReward + 0.1f * handReward;
         return 0.5f * energeReward + 0.5f * stabilityReward;
     }
 
     /// <summary>
     /// 목표 속도와 실제 속도의 일치 정도에 따른 보상
     /// </summary>
-    public float GetMatchingVelocityReward(Vector3 targetVelocity, Vector3 actualVelocity)
+    private float GetMatchingVelocityReward(Vector3 targetVelocity, Vector3 actualVelocity)
     {
         var diff = Mathf.Clamp(Vector3.Distance(actualVelocity, targetVelocity), 0f, TargetWalkingSpeed);
         var matchSpeedReward = Mathf.Pow(1f - Mathf.Pow(diff / TargetWalkingSpeed, 2f), 2f);
@@ -389,7 +395,7 @@ public class PlayerAgent : Agent
     /// <summary>
     /// 머리 방향과 목표 방향의 일치 정도에 따른 보상
     /// </summary>
-    public float GetTargetHeadingReward(Vector3 targetDirection, Vector3 headForward)
+    private float GetTargetHeadingReward(Vector3 targetDirection, Vector3 headForward)
     {
         var lookAtTargetReward = (Vector3.Dot(targetDirection, headForward) + 1) * 0.5f;
 
@@ -410,7 +416,7 @@ public class PlayerAgent : Agent
     /// 걷기 학습 시 추가되는 보상 함수
     /// 레퍼런스 모션과 비교하여 발이 지면에 닿은 상태를 일치하도록 유도
     /// </summary>
-    public float GetFootGroundingReward(BodyPart footL, BodyPart footR)
+    private float GetFootGroundingReward(BodyPart footL, BodyPart footR)
     {
         if (!_useReferenceMotion) return 1f;
 
@@ -430,7 +436,7 @@ public class PlayerAgent : Agent
     /// <summary>
     /// 손을 과도하게 흔들며 균형을 잡는 행동을 방지하는 보상 함수
     /// </summary>
-    public float GetHandStableReward(BodyPart handL, BodyPart handR)
+    private float GetHandStableReward(BodyPart handL, BodyPart handR)
     {
         var velocityL = handL.rigidbody.linearVelocity.sqrMagnitude;
         var velocityR = handR.rigidbody.linearVelocity.sqrMagnitude;
@@ -473,15 +479,12 @@ public class PlayerAgent : Agent
         var taskReward = matchingVelocityReward * targetHeadingReward;
         // 추가: 발을 떼도록 유도
         var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
-        // 추가: 손을 과도하게 흔들지 않도록 유도
-        var handReward = GetHandStableReward(_jointDriveController.bodyPartDict[_handL], _jointDriveController.bodyPartDict[_handR]);
 
         var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.20f * imitationReward
-            + 0.05f * balanceReward
-            + 0.70f * taskReward
-            + 0.03f * footReward
-            + 0.02f * handReward);
+            (0.65f * imitationReward
+            + 0.09f * balanceReward
+            + 0.25f * taskReward
+            + 0.01f * footReward);
 
         AddReward(reward);
 
@@ -494,7 +497,6 @@ public class PlayerAgent : Agent
         _debugLog += $"heading reward: {targetHeadingReward:F5}\n";
         _debugLog += $"task reward: {taskReward:F5}\n";
         _debugLog += $"foot grounding reward: {footReward:F5}\n";
-        _debugLog += $"hand stable reward: {handReward:F5}\n";
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
     }

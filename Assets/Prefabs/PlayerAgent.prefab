@@ -4836,7 +4836,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 25a7c59f2c88d8b47b4b46762188434b, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: c5573c750ec3b13448a50630adbdbf05, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
@@ -4892,12 +4892,12 @@ MonoBehaviour:
   _referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
-  _animationSpeed: 0.9
+  _animationSpeed: 1
   _target: {fileID: 0}
   _targetTouchReward: 1
   _targetWalkingSpeed: 2
   _randomizeWalkSpeedEachEpisode: 0
-  _lookAtTargetEachEpisode: 1
+  _lookAtTargetEachEpisode: 0
   _debugLog: 
   isTestMode: 0
   poseReward: 0

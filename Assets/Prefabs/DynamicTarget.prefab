@@ -128,6 +128,8 @@ MonoBehaviour:
   tagToDetect: Player
   _spawnRadius: 15
   _respawnOnTouched: 1
+  _respawnPeriodically: 0
+  _respawnInterval: 10
   _respawnOnFallOff: 1
   _fallDistance: 5
   onTriggerEnterEvent:

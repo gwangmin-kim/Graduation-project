@@ -10,13 +10,19 @@ public class TargetController : MonoBehaviour
 
     [Header("Target Placement")]
     [SerializeField] private float _spawnRadius;
-    [SerializeField] private bool _respawnOnTouched;
+    [SerializeField] private bool _respawnOnTouched = true;
+    [SerializeField] private bool _respawnPeriodically = false;
+    [Range(_minRespawnInterval, _maxRespawnInterval)][SerializeField] private float _respawnInterval = _maxRespawnInterval;
+
 
     [Header("Target Fell Protection")]
     [SerializeField] private bool _respawnOnFallOff = true;
     [SerializeField] private float _fallDistance = 5;
 
     private Vector3 _initLocalPosition;
+    private float _respawnTimer = 0f;
+    private const float _minRespawnInterval = 1.0f;
+    private const float _maxRespawnInterval = 10.0f;
 
     [System.Serializable]
     public class TriggerEvent : UnityEvent<Collider>
@@ -46,6 +52,11 @@ public class TargetController : MonoBehaviour
         {
             MoveTargetToRandomPosition();
         }
+        if (_respawnPeriodically)
+        {
+            _respawnInterval = Random.Range(_minRespawnInterval, _maxRespawnInterval);
+            _respawnTimer = _respawnInterval;
+        }
     }
 
     void Update()
@@ -56,6 +67,16 @@ public class TargetController : MonoBehaviour
             {
                 Debug.Log($"{transform.name} Fell Off Platform");
                 MoveTargetToRandomPosition();
+            }
+        }
+        if (_respawnPeriodically)
+        {
+            _respawnTimer -= Time.deltaTime;
+            if (_respawnTimer <= 0f)
+            {
+                MoveTargetToRandomPosition();
+                _respawnInterval = Random.Range(_minRespawnInterval, _maxRespawnInterval);
+                _respawnTimer = _respawnInterval;
             }
         }
     }
