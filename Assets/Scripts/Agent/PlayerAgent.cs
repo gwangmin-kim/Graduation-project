@@ -32,7 +32,7 @@ public class PlayerAgent : Agent
     [SerializeField] private Skill _currentSkill = Skill.Walk;
     [Range(_minAnimationSpeed, _maxAnimationSpeed)][SerializeField] private float _animationSpeed = 1f;
     private const float _minAnimationSpeed = 0.5f;
-    private const float _maxAnimationSpeed = 1.8f;
+    private const float _maxAnimationSpeed = 1.5f;
 
     [Header("Walk")]
     [SerializeField] private Transform _target;
@@ -41,8 +41,8 @@ public class PlayerAgent : Agent
     [SerializeField] private bool _randomizeWalkSpeedEachEpisode;
     [SerializeField] private bool _lookAtTargetEachEpisode;
 
-    private const float _minWalkingSpeed = 0.1f;
-    private const float _maxWalkingSpeed = 5f;
+    private const float _minWalkingSpeed = 0.0f;
+    private const float _maxWalkingSpeed = 3.5f;
     private Vector3 _worldDirectionToWalk = Vector3.forward;
     public float TargetWalkingSpeed
     {
@@ -343,7 +343,6 @@ public class PlayerAgent : Agent
     /// <summary>
     /// 힘을 적게 쓰면 높은 보상
     /// 상체가 안정적일 때(기준: 머리와 골반의 움직임 차이) 높은 보상
-    /// 손을 과도하게 흔들지 않을 때 높은 보상
     /// </summary>
     /// <returns></returns>
     private float GetBalanceReward()
@@ -363,10 +362,6 @@ public class PlayerAgent : Agent
         var headVelocity = _jointDriveController.bodyPartDict[_head].rigidbody.linearVelocity;
         float stabilityReward = Mathf.Exp(-0.5f * Vector3.SqrMagnitude(hipsVelocity - headVelocity));
 
-        // 추가: 손을 과도하게 흔들지 않도록 유도
-        // var handReward = GetHandStableReward(_jointDriveController.bodyPartDict[_handL], _jointDriveController.bodyPartDict[_handR]);
-
-        // return 0.5f * energeReward + 0.4f * stabilityReward + 0.1f * handReward;
         return 0.5f * energeReward + 0.5f * stabilityReward;
     }
 
@@ -412,40 +407,26 @@ public class PlayerAgent : Agent
         return lookAtTargetReward;
     }
 
-    /// <summary>
-    /// 걷기 학습 시 추가되는 보상 함수
-    /// 레퍼런스 모션과 비교하여 발이 지면에 닿은 상태를 일치하도록 유도
-    /// </summary>
-    private float GetFootGroundingReward(BodyPart footL, BodyPart footR)
-    {
-        if (!_useReferenceMotion) return 1f;
+    // /// <summary>
+    // /// 걷기 학습 시 추가되는 보상 함수
+    // /// 레퍼런스 모션과 비교하여 발이 지면에 닿은 상태를 일치하도록 유도
+    // /// </summary>
+    // private float GetFootGroundingReward(BodyPart footL, BodyPart footR)
+    // {
+    //     if (!_useReferenceMotion) return 1f;
 
-        var isMatchedL = footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround;
-        var isMatchedR = footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround;
+    //     var isMatchedL = footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround;
+    //     var isMatchedR = footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround;
 
-        var footReward = 0f;
-        if (isMatchedL) footReward += 0.5f;
-        if (isMatchedR) footReward += 0.5f;
+    //     var footReward = 0f;
+    //     if (isMatchedL) footReward += 0.5f;
+    //     if (isMatchedR) footReward += 0.5f;
 
-        footReward *= footReward;
-        // footReward = (isMatchedL && isMatchedR) ? 1f : 0f;
+    //     footReward *= footReward;
+    //     // footReward = (isMatchedL && isMatchedR) ? 1f : 0f;
 
-        return footReward;
-    }
-
-    /// <summary>
-    /// 손을 과도하게 흔들며 균형을 잡는 행동을 방지하는 보상 함수
-    /// </summary>
-    private float GetHandStableReward(BodyPart handL, BodyPart handR)
-    {
-        var velocityL = handL.rigidbody.linearVelocity.sqrMagnitude;
-        var velocityR = handR.rigidbody.linearVelocity.sqrMagnitude;
-
-        var squaredSum = velocityL + velocityR;
-        var reward = Mathf.Exp(-0.1f * squaredSum);
-
-        return reward;
-    }
+    //     return footReward;
+    // }
 
     /// <summary>
     /// 목표 오브젝트와 충돌 시 획득하는 보상
@@ -469,34 +450,35 @@ public class PlayerAgent : Agent
         if (_useReferenceMotion) _referenceCharacter.Tick(Time.fixedDeltaTime, _animationSpeed);
 
         // 보상 지급
+        // 모방 보상
         var imitationReward = _useReferenceMotion ? GetImitationReward() : 0f;
-
+        // 균형 보상
         var balanceReward = GetBalanceReward();
-
+        // 목표 보상
         var localForward = _localFrameController.transform.forward;
         var matchingVelocityReward = GetMatchingVelocityReward(TargetWalkingSpeed * localForward, GetAverageVelocity());
         var targetHeadingReward = GetTargetHeadingReward(localForward, _head.forward);
         var taskReward = matchingVelocityReward * targetHeadingReward;
-        // 추가: 발을 떼도록 유도
-        var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
+        // // 추가: 발을 떼도록 유도
+        // var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
         var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.65f * imitationReward
-            + 0.09f * balanceReward
-            + 0.25f * taskReward
-            + 0.01f * footReward);
+            (0.0f * imitationReward
+            + 1.0f * taskReward);
 
         AddReward(reward);
 
 #if UNITY_EDITOR
         _debugLog = "";
+        _debugLog += $"current step: {Academy.Instance.StepCount}\n";
+        _debugLog += $"current speed: {GetAverageVelocity().magnitude}\n";
         if (_useReferenceMotion) _debugLog += $"imitation reward: {imitationReward:F5}\n";
         if (!_useReferenceMotion && isTestMode) _debugLog += $"imitation reward: {GetImitationReward():F5}\n";
         _debugLog += $"balance reward: {balanceReward:F5}\n";
         _debugLog += $"velocity reward: {matchingVelocityReward:F5}\n";
         _debugLog += $"heading reward: {targetHeadingReward:F5}\n";
         _debugLog += $"task reward: {taskReward:F5}\n";
-        _debugLog += $"foot grounding reward: {footReward:F5}\n";
+        // _debugLog += $"foot grounding reward: {footReward:F5}\n";
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
     }

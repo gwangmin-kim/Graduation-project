@@ -116,3 +116,7 @@ ehthumbs.db
 # document format/example files
 /[Dd]ocs/devlog/example.md
 /[Dd]ocs/devlog/format.md
+
+# local trained files
+/[Aa]ssets/[Rr]esults
+/[Aa]ssets/[Rr]esults.meta
