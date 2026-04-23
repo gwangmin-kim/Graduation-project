@@ -879,7 +879,7 @@ PrefabInstance:
       objectReference: {fileID: 2390641251805212813}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _animationSpeed
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _referenceCharacter
@@ -891,11 +891,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _lookAtTargetEachEpisode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _randomizeWalkSpeedEachEpisode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4703025885412118106, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Mass

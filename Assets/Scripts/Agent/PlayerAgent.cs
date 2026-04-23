@@ -463,8 +463,8 @@ public class PlayerAgent : Agent
         // var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
         var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.0f * imitationReward
-            + 1.0f * taskReward);
+            (0.5f * imitationReward
+            + 0.5f * taskReward);
 
         AddReward(reward);
 
