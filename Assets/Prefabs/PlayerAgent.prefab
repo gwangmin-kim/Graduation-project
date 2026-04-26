@@ -4895,7 +4895,7 @@ MonoBehaviour:
   _animationSpeed: 1
   _target: {fileID: 0}
   _targetTouchReward: 1
-  _targetWalkingSpeed: 1.5
+  _targetWalkingSpeed: 1
   _randomizeWalkSpeedEachEpisode: 0
   _lookAtTargetEachEpisode: 0
   _debugLog: 

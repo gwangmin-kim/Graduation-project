@@ -471,6 +471,9 @@ public class PlayerAgent : Agent
 #if UNITY_EDITOR
         _debugLog = "";
         _debugLog += $"current step: {Academy.Instance.StepCount}\n";
+        _debugLog += $"current total step: {Academy.Instance.TotalStepCount}\n";
+        _debugLog += $"current episode count: {Academy.Instance.EpisodeCount}\n";
+        _debugLog += $"cumulative reward: {GetCumulativeReward():F5}\n";
         _debugLog += $"current speed: {GetAverageVelocity().magnitude}\n";
         if (_useReferenceMotion) _debugLog += $"imitation reward: {imitationReward:F5}\n";
         if (!_useReferenceMotion && isTestMode) _debugLog += $"imitation reward: {GetImitationReward():F5}\n";
