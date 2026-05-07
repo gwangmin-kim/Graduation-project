@@ -128,7 +128,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 359731465947113559}
   serializedVersion: 5
-  m_Mass: 2.2
+  m_Mass: 5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -492,7 +492,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742272749638676160}
   serializedVersion: 5
-  m_Mass: 22
+  m_Mass: 25
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -629,7 +629,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937244917088809031}
   serializedVersion: 5
-  m_Mass: 15.5
+  m_Mass: 15
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -869,7 +869,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1294718076117716848}
   serializedVersion: 5
-  m_Mass: 4.3
+  m_Mass: 4
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1201,7 +1201,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2292312108095308049}
   serializedVersion: 5
-  m_Mass: 15.5
+  m_Mass: 15
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1443,7 +1443,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2352896182941193299}
   serializedVersion: 5
-  m_Mass: 0.9
+  m_Mass: 1
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2005,7 +2005,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2695605392833975485}
   serializedVersion: 5
-  m_Mass: 4.3
+  m_Mass: 4
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2577,7 +2577,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4006223620926119128}
   serializedVersion: 5
-  m_Mass: 2.2
+  m_Mass: 5
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2814,7 +2814,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4272689114713782055}
   serializedVersion: 5
-  m_Mass: 21.5
+  m_Mass: 15
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3277,7 +3277,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5505125646061986703}
   serializedVersion: 5
-  m_Mass: 7.2
+  m_Mass: 10
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3517,7 +3517,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5609194199759742796}
   serializedVersion: 5
-  m_Mass: 33.5
+  m_Mass: 20
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -3961,7 +3961,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6776818626974302513}
   serializedVersion: 5
-  m_Mass: 0.9
+  m_Mass: 1
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -4836,7 +4836,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 6b00acd7a7a04824db2c460264e7f709, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
@@ -4857,7 +4857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.ML-Agents::Unity.MLAgents.DecisionRequester
-  DecisionPeriod: 5
+  DecisionPeriod: 1
   DecisionStep: 0
   TakeActionsBetweenDecisions: 1
 --- !u!114 &3360264570293577955
@@ -4878,10 +4878,6 @@ MonoBehaviour:
   MaxStep: 5000
   _hips: {fileID: 8269204481502560142}
   _head: {fileID: 7972865300392021751}
-  _footL: {fileID: 7469504623529790106}
-  _footR: {fileID: 8150651438042456054}
-  _handL: {fileID: 709981993169956293}
-  _handR: {fileID: 777798858619073714}
   _childTransformList: []
   _endEffectorList:
   - {fileID: 709981993169956293}
@@ -4892,12 +4888,12 @@ MonoBehaviour:
   _referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
-  _animationSpeed: 1
+  _animationSpeed: 0.9
   _target: {fileID: 0}
   _targetTouchReward: 1
-  _targetWalkingSpeed: 1
+  _targetWalkingSpeed: 1.5
   _randomizeWalkSpeedEachEpisode: 0
-  _lookAtTargetEachEpisode: 0
+  _lookAtTargetEachEpisode: 1
   _debugLog: 
   isTestMode: 0
   poseReward: 0
@@ -4915,9 +4911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d3a476e1883e3488aaf640418b8dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
-  jointSpring: 150000
-  jointDamper: 10000
-  maxJointForce: 30000
+  jointSpring: 15000
+  jointDamper: 1100
+  maxJointForce: 50000
   bodyPartList: []
 --- !u!1 &8765993042395321230
 GameObject:
@@ -5017,7 +5013,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8783775941911869085}
   serializedVersion: 5
-  m_Mass: 7.2
+  m_Mass: 10
   m_LinearDamping: 0.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

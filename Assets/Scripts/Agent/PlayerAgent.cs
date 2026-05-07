@@ -12,10 +12,6 @@ public class PlayerAgent : Agent
     [Header("Body Parts")]
     [SerializeField] private Transform _hips;
     [SerializeField] private Transform _head;
-    [SerializeField] private Transform _footL;
-    [SerializeField] private Transform _footR;
-    [SerializeField] private Transform _handL;
-    [SerializeField] private Transform _handR;
     // 전체 신체 부위
     [SerializeField] private List<Transform> _childTransformList = new List<Transform>();
     // 말단 부위 (L-hand, R-hand, L-foot, R-foot 순서)
@@ -362,7 +358,7 @@ public class PlayerAgent : Agent
         var headVelocity = _jointDriveController.bodyPartDict[_head].rigidbody.linearVelocity;
         float stabilityReward = Mathf.Exp(-0.5f * Vector3.SqrMagnitude(hipsVelocity - headVelocity));
 
-        return 0.5f * energeReward + 0.5f * stabilityReward;
+        return 0.3f * energeReward + 0.7f * stabilityReward;
     }
 
     /// <summary>
@@ -393,6 +389,8 @@ public class PlayerAgent : Agent
     private float GetTargetHeadingReward(Vector3 targetDirection, Vector3 headForward)
     {
         var lookAtTargetReward = (Vector3.Dot(targetDirection, headForward) + 1) * 0.5f;
+        // 조금 더 높은 일치율을 유도하기 위해 제곱한 값을 사용
+        lookAtTargetReward *= lookAtTargetReward;
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
@@ -462,9 +460,28 @@ public class PlayerAgent : Agent
         // // 추가: 발을 떼도록 유도
         // var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
-        var reward = !_useReferenceMotion ? (0.2f * balanceReward + 0.8f * taskReward) :
-            (0.5f * imitationReward
-            + 0.5f * taskReward);
+        float reward;
+
+        if (!_useReferenceMotion)
+        {
+            reward = 0.2f * balanceReward
+                    + 0.8f * taskReward;
+        }
+        else
+        {
+            if (Vector3.Angle(localForward, _head.forward) < 45f)
+            {
+                reward = 0.7f * imitationReward
+                        + 0.2f * taskReward
+                        + 0.1f * balanceReward;
+            }
+            else
+            {
+                reward = 0.6f * targetHeadingReward
+                        + 0.1f * taskReward
+                        + 0.3f * balanceReward;
+            }
+        }
 
         AddReward(reward);
 

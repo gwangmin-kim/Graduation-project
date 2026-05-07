@@ -147,8 +147,11 @@ public class TargetController : MonoBehaviour
     private void OnDrawGizmos()
     {
 #if UNITY_EDITOR
-        Gizmos.color = Color.yellowGreen;
-        Gizmos.DrawWireSphere(transform.parent.TransformPoint(_initLocalPosition), _spawnRadius);
+        if (transform.parent != null)
+        {
+            Gizmos.color = Color.yellowGreen;
+            Gizmos.DrawWireSphere(transform.parent.TransformPoint(_initLocalPosition), _spawnRadius);
+        }
 #endif
     }
 }
