@@ -739,13 +739,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: DynamicTarget
       objectReference: {fileID: 0}
+    - target: {fileID: 3889307704958048885, guid: d527b48c89144be4688112c503b17041, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onCollisionEnterEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode

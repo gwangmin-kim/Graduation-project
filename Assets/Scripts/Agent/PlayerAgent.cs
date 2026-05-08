@@ -469,19 +469,22 @@ public class PlayerAgent : Agent
         }
         else
         {
-            if (Vector3.Angle(localForward, _head.forward) < 45f)
-            {
-                reward = 0.7f * imitationReward
-                        + 0.2f * taskReward
-                        + 0.1f * balanceReward;
-            }
-            else
-            {
-                reward = 0.6f * targetHeadingReward
-                        + 0.1f * taskReward
-                        + 0.3f * balanceReward
-                        - 1f;
-            }
+            // if (Vector3.Angle(localForward, _head.forward) < 45f)
+            // {
+            //     reward = 0.7f * imitationReward
+            //             + 0.2f * taskReward
+            //             + 0.1f * balanceReward;
+            // }
+            // else
+            // {
+            //     reward = 0.6f * targetHeadingReward
+            //             + 0.1f * taskReward
+            //             + 0.3f * balanceReward
+            //             - 1f;
+            // }
+            reward = 0.7f * imitationReward
+                    + 0.2f * taskReward
+                    + 0.1f * balanceReward;
         }
 
         AddReward(reward);
