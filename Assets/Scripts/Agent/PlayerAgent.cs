@@ -265,7 +265,7 @@ public class PlayerAgent : Agent
         return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorReward;
     }
 
-    private float GetPoseReward(float weight = -0.5f)
+    private float GetPoseReward(float weight = -0.8f)
     {
         float diffSquaredSum = 0f;
         for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
@@ -275,19 +275,23 @@ public class PlayerAgent : Agent
 
             var refbodyPart = _referenceCharacter.bodyPartList[i];
 
-            // Pose Error
-            // 루트(hips) 기준 상대 회전을 비교
-            var orientation = bodyPart.rigidbody.transform.rotation * Quaternion.Inverse(_hips.rotation);
-            var refOrientation = refbodyPart.transform.rotation * Quaternion.Inverse(_referenceCharacter.hips.rotation);
-            float diff = Quaternion.Angle(orientation, refOrientation) * Mathf.Deg2Rad;
+            // // Pose Error
+            // // 루트(hips) 기준 상대 회전을 비교
+            // var orientation = bodyPart.rigidbody.transform.rotation * Quaternion.Inverse(_hips.rotation);
+            // var refOrientation = refbodyPart.transform.rotation * Quaternion.Inverse(_referenceCharacter.hips.rotation);
+            // float diff = Quaternion.Angle(orientation, refOrientation) * Mathf.Deg2Rad;
 
-            diffSquaredSum += diff * diff;
+            // diffSquaredSum += diff * diff;
 
-            // // 변경: 회전이 아니라, 로컬 축의 방향을 비교
+            // 변경: 회전이 아니라, 로컬 축의 방향을 비교
             // // 조금 더 느슨한 기준이지만, 현재 모델이 제대로 동작을 재현하지 못하고 있기에 이렇게 시도
-            // var orientation = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.up);
-            // var refOrientation = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.up);
-            // float diff = Vector3.SqrMagnitude(orientation - refOrientation);
+            var up = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.up);
+            var refUp = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.up);
+
+            var forward = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.forward);
+            var refForward = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.forward);
+
+            float diff = Vector3.SqrMagnitude(up - refUp) + 0.5f * Vector3.SqrMagnitude(forward - refForward);
 
             diffSquaredSum += diff;
         }

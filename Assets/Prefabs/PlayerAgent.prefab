@@ -4912,7 +4912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
   jointSpring: 15000
-  jointDamper: 1200
+  jointDamper: 1000
   maxJointForce: 50000
   bodyPartList: []
 --- !u!1 &8765993042395321230
