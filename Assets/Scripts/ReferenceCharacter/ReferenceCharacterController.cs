@@ -11,6 +11,7 @@ public class ReferenceCharacterController : MonoBehaviour
 
     [Header("Body Parts")]
     public Transform hips;
+    public Transform head;
     // 지면 판별용
     public ReferenceGroundChecker footL;
     public ReferenceGroundChecker footR;

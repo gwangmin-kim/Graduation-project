@@ -1075,6 +1075,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReferenceCharacterController
   currentClip: {fileID: 1657602633327794031, guid: a4ff77ffae83a524bbfff0886a94ce4c, type: 3}
   hips: {fileID: 4560303629480737219}
+  head: {fileID: 8192509556603159611}
   footL: {fileID: 2642328611534365497}
   footR: {fileID: 7204192413572184637}
   bodyPartList: []

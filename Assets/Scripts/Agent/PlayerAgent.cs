@@ -242,7 +242,7 @@ public class PlayerAgent : Agent
         return averageVelocity;
     }
 
-    private float GetImitationReward(float poseWeight = 0.7f, float velocityWeight = 0.1f, float endEffectorWeight = 0.2f)
+    private float GetImitationReward(float poseWeight = 0.75f, float velocityWeight = 0.0f, float endEffectorWeight = 0.25f)
     {
         if (_jointDriveController.bodyPartList.Count != _referenceCharacter.bodyPartList.Count)
         {
@@ -250,7 +250,7 @@ public class PlayerAgent : Agent
         }
 
         float poseReward = GetPoseReward();
-        float velocityReward = GetVelocityReward();
+        // float velocityReward = GetVelocityReward();
         float endEffectorReward = GetEndEffectorReward();
 
 #if UNITY_EDITOR
@@ -258,11 +258,13 @@ public class PlayerAgent : Agent
         // Debug.Log($"velocity reward: {velocityReward}");
         // Debug.Log($"end effector reward: {endEffectorreward}");
         this.poseReward = poseReward;
-        this.velocityReward = velocityReward;
+        // this.velocityReward = velocityReward;
         this.endEffectorReward = endEffectorReward;
 #endif
 
-        return poseWeight * poseReward + velocityWeight * velocityReward + endEffectorWeight * endEffectorReward;
+        return poseWeight * poseReward
+                // + velocityWeight * velocityReward
+                + endEffectorWeight * endEffectorReward;
     }
 
     private float GetPoseReward(float weight = -0.8f)
@@ -284,38 +286,55 @@ public class PlayerAgent : Agent
             // diffSquaredSum += diff * diff;
 
             // 변경: 회전이 아니라, 로컬 축의 방향을 비교
-            // // 조금 더 느슨한 기준이지만, 현재 모델이 제대로 동작을 재현하지 못하고 있기에 이렇게 시도
+            // 조금 더 느슨한 기준이지만, 현재 모델이 제대로 동작을 재현하지 못하고 있기에 이렇게 시도
             var up = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.up);
             var refUp = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.up);
 
-            var forward = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.forward);
-            var refForward = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.forward);
+            float diff = Vector3.SqrMagnitude(up - refUp);
 
-            float diff = Vector3.SqrMagnitude(up - refUp) + 0.5f * Vector3.SqrMagnitude(forward - refForward);
+            // var forward = _hips.InverseTransformDirection(bodyPart.rigidbody.transform.forward);
+            // var refForward = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.transform.forward);
+
+            // float diff = Vector3.SqrMagnitude(up - refUp) + 0.5f * Vector3.SqrMagnitude(forward - refForward);
 
             diffSquaredSum += diff;
         }
+
+        // 테스트: hip과 head의 경우 forward 방향도 반영
+        // 기존 결과는 상체가 좌우로 너무 비틀리는 모습을 보이기 때문에 추가
+        float hipsDiff = Vector3.SqrMagnitude(
+            _localFrameController.transform.InverseTransformDirection(_hips.forward)
+            - _referenceCharacter.transform.InverseTransformDirection(_referenceCharacter.hips.forward));
+
+        float headDiff = Vector3.SqrMagnitude(
+            _localFrameController.transform.InverseTransformDirection(_head.forward)
+            - _referenceCharacter.transform.InverseTransformDirection(_referenceCharacter.head.forward));
+
+        diffSquaredSum += hipsDiff + headDiff;
+
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    private float GetVelocityReward(float weight = -0.08f)
-    {
-        float diffSquaredSum = 0f;
-        for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
-        {
-            var bodyPart = _jointDriveController.bodyPartList[i];
-            if (bodyPart.dofCount == 0) continue;
+    // private float GetVelocityReward(float weight = -0.08f)
+    // {
+    //     float diffSquaredSum = 0f;
+    //     for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
+    //     {
+    //         var bodyPart = _jointDriveController.bodyPartList[i];
+    //         if (bodyPart.dofCount == 0) continue;
 
-            var refbodyPart = _referenceCharacter.bodyPartList[i];
+    //         var refbodyPart = _referenceCharacter.bodyPartList[i];
 
-            // Velocity Error
-            var velocity = bodyPart.rigidbody.angularVelocity;
-            var refVelocity = refbodyPart.AngularVelocity;
+    //         // Velocity Error
+    //         var velocity = bodyPart.rigidbody.angularVelocity;
+    //         var refVelocity = refbodyPart.AngularVelocity;
 
-            diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
-        }
-        return Mathf.Exp(weight * diffSquaredSum);
-    }
+    //         Debug.Log($"{bodyPart.rigidbody.gameObject.name}\naxis: {velocity.normalized}, {refVelocity.normalized}\nangle: {velocity.magnitude}, {refVelocity.magnitude}");
+
+    //         diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
+    //     }
+    //     return Mathf.Exp(weight * diffSquaredSum);
+    // }
 
     private float GetEndEffectorReward(float weight = -30f)
     {
@@ -395,6 +414,9 @@ public class PlayerAgent : Agent
         var lookAtTargetReward = (Vector3.Dot(targetDirection, headForward) + 1) * 0.5f;
         // 조금 더 높은 일치율을 유도하기 위해 제곱한 값을 사용
         lookAtTargetReward *= lookAtTargetReward;
+
+        // Debug.Log($"reward: {lookAtTargetReward}");
+        // Debug.Log($"angle: {Vector3.Angle(targetDirection, headForward)}");
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
