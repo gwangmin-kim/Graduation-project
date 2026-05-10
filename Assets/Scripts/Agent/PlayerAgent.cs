@@ -488,12 +488,7 @@ public class PlayerAgent : Agent
 
         float reward;
 
-        if (!_useReferenceMotion)
-        {
-            reward = 0.2f * balanceReward
-                    + 0.8f * taskReward;
-        }
-        else
+        if (_useReferenceMotion)
         {
             // if (Vector3.Angle(localForward, _head.forward) < 45f)
             // {
@@ -511,6 +506,11 @@ public class PlayerAgent : Agent
             reward = 0.7f * imitationReward
                     + 0.2f * taskReward
                     + 0.1f * balanceReward;
+        }
+        else
+        {
+            reward = 0.2f * balanceReward
+                    + 0.8f * taskReward;
         }
 
         AddReward(reward);
