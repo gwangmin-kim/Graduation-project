@@ -242,7 +242,7 @@ public class PlayerAgent : Agent
         return averageVelocity;
     }
 
-    private float GetImitationReward(float poseWeight = 0.75f, float velocityWeight = 0.0f, float endEffectorWeight = 0.25f)
+    private float GetImitationReward(float poseWeight = 0.7f, float velocityWeight = 0.1f, float endEffectorWeight = 0.2f)
     {
         if (_jointDriveController.bodyPartList.Count != _referenceCharacter.bodyPartList.Count)
         {
@@ -250,7 +250,7 @@ public class PlayerAgent : Agent
         }
 
         float poseReward = GetPoseReward();
-        // float velocityReward = GetVelocityReward();
+        float velocityReward = GetVelocityReward();
         float endEffectorReward = GetEndEffectorReward();
 
 #if UNITY_EDITOR
@@ -258,12 +258,12 @@ public class PlayerAgent : Agent
         // Debug.Log($"velocity reward: {velocityReward}");
         // Debug.Log($"end effector reward: {endEffectorreward}");
         this.poseReward = poseReward;
-        // this.velocityReward = velocityReward;
+        this.velocityReward = velocityReward;
         this.endEffectorReward = endEffectorReward;
 #endif
 
         return poseWeight * poseReward
-                // + velocityWeight * velocityReward
+                + velocityWeight * velocityReward
                 + endEffectorWeight * endEffectorReward;
     }
 
@@ -300,41 +300,33 @@ public class PlayerAgent : Agent
             diffSquaredSum += diff;
         }
 
-        // 테스트: hip과 head의 경우 forward 방향도 반영
-        // 기존 결과는 상체가 좌우로 너무 비틀리는 모습을 보이기 때문에 추가
-        float hipsDiff = Vector3.SqrMagnitude(
-            _localFrameController.transform.InverseTransformDirection(_hips.forward)
-            - _referenceCharacter.transform.InverseTransformDirection(_referenceCharacter.hips.forward));
-
-        float headDiff = Vector3.SqrMagnitude(
-            _localFrameController.transform.InverseTransformDirection(_head.forward)
-            - _referenceCharacter.transform.InverseTransformDirection(_referenceCharacter.head.forward));
-
-        diffSquaredSum += hipsDiff + headDiff;
-
         return Mathf.Exp(weight * diffSquaredSum);
     }
 
-    // private float GetVelocityReward(float weight = -0.08f)
-    // {
-    //     float diffSquaredSum = 0f;
-    //     for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
-    //     {
-    //         var bodyPart = _jointDriveController.bodyPartList[i];
-    //         if (bodyPart.dofCount == 0) continue;
+    private float GetVelocityReward(float weight = -0.05f)
+    {
+        float diffSquaredSum = 0f;
+        for (int i = 0; i < _jointDriveController.bodyPartList.Count; i++)
+        {
+            var bodyPart = _jointDriveController.bodyPartList[i];
+            if (bodyPart.dofCount == 0) continue;
 
-    //         var refbodyPart = _referenceCharacter.bodyPartList[i];
+            var refbodyPart = _referenceCharacter.bodyPartList[i];
 
-    //         // Velocity Error
-    //         var velocity = bodyPart.rigidbody.angularVelocity;
-    //         var refVelocity = refbodyPart.AngularVelocity;
+            // // Velocity Error
+            // var velocity = bodyPart.rigidbody.angularVelocity;
+            // var refVelocity = refbodyPart.AngularVelocity;
 
-    //         Debug.Log($"{bodyPart.rigidbody.gameObject.name}\naxis: {velocity.normalized}, {refVelocity.normalized}\nangle: {velocity.magnitude}, {refVelocity.magnitude}");
+            // diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
 
-    //         diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
-    //     }
-    //     return Mathf.Exp(weight * diffSquaredSum);
-    // }
+            // 테스트: 선속도로 대체
+            var velocity = _hips.InverseTransformDirection(bodyPart.rigidbody.linearVelocity);
+            var refVelocity = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.LinearVelocity);
+
+            diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
+        }
+        return Mathf.Exp(weight * diffSquaredSum);
+    }
 
     private float GetEndEffectorReward(float weight = -30f)
     {
