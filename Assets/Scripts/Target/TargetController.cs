@@ -21,7 +21,7 @@ public class TargetController : MonoBehaviour
 
     private Vector3 _initLocalPosition;
     private float _respawnTimer = 0f;
-    private const float _minRespawnInterval = 1.0f;
+    private const float _minRespawnInterval = 3.0f;
     private const float _maxRespawnInterval = 10.0f;
 
     [System.Serializable]
