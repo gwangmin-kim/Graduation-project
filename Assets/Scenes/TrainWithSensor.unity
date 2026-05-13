@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -326,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c6f45543736574ebc7a95584ee5b5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  target: {fileID: 0}
+  target: {fileID: 1979716992}
   smoothingTime: 0.3
 --- !u!1 &410087039
 GameObject:
@@ -467,6 +471,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -573,6 +581,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 64
@@ -629,6 +641,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -687,6 +703,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 96
@@ -743,6 +763,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -801,6 +825,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 96
@@ -857,6 +885,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -915,6 +947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -971,6 +1007,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1029,6 +1069,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1074,6 +1118,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+--- !u!4 &1979716992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6538349843285684310, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+  m_PrefabInstance: {fileID: 2144796588}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2017557984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1085,6 +1134,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1143,6 +1196,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -1200,6 +1257,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 64
@@ -1256,6 +1317,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x

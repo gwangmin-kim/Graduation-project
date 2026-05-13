@@ -60,6 +60,10 @@ PrefabInstance:
       propertyPath: _animationSpeed
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 8941679393970742878, guid: 4ed5c4d9e35ebdd409d4a6bf69848813, type: 3}
+      propertyPath: _referenceCharacter
+      value: 
+      objectReference: {fileID: 525313230061679633}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -162,6 +166,17 @@ PrefabInstance:
       addedObject: {fileID: 5313175919936706169}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ecbedd781fd3c0943a9488ade55ffa81, type: 3}
+--- !u!114 &525313230061679633 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4155826763452583642, guid: ecbedd781fd3c0943a9488ade55ffa81, type: 3}
+  m_PrefabInstance: {fileID: 4532380397669235403}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d123d3b54b5392943a9a52e09bf48c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ReferenceCharacterController
 --- !u!4 &1447848144026358655 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3094524632810842548, guid: ecbedd781fd3c0943a9488ade55ffa81, type: 3}
