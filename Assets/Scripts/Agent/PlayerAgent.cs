@@ -482,22 +482,22 @@ public class PlayerAgent : Agent
 
         if (_useReferenceMotion)
         {
-            if (Vector3.Angle(localForward, _head.forward) < 30f)
-            {
-                reward = 0.7f * imitationReward
-                        + 0.2f * taskReward
-                        + 0.1f * balanceReward;
-            }
-            else
-            {
-                reward = 0.1f * imitationReward
-                        + 0.2f * taskReward
-                        + 0.2f * balanceReward
-                        + 0.5f * targetHeadingReward;
-            }
-            // reward = 0.7f * imitationReward
-            //         + 0.2f * taskReward
-            //         + 0.1f * balanceReward;
+            // if (Vector3.Angle(localForward, _head.forward) < 30f)
+            // {
+            //     reward = 0.7f * imitationReward
+            //             + 0.2f * taskReward
+            //             + 0.1f * balanceReward;
+            // }
+            // else
+            // {
+            //     reward = 0.1f * imitationReward
+            //             + 0.2f * taskReward
+            //             + 0.2f * balanceReward
+            //             + 0.5f * targetHeadingReward;
+            // }
+            reward = 0.7f * imitationReward
+                    + 0.2f * taskReward
+                    + 0.1f * balanceReward;
         }
         else
         {
