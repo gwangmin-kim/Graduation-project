@@ -32,6 +32,7 @@ public class PlayerAgent : Agent
 
     [Header("Walk")]
     [SerializeField] private Transform _target;
+    [SerializeField] private Transform _nextTarget;
     [SerializeField] private float _targetTouchReward = 1f;
     [SerializeField][Range(_minWalkingSpeed, _maxWalkingSpeed)] private float _targetWalkingSpeed = _maxWalkingSpeed;
     [SerializeField] private bool _randomizeWalkSpeedEachEpisode;
@@ -161,6 +162,7 @@ public class PlayerAgent : Agent
         sensor.AddObservation(_localFrameController.transform.InverseTransformDirection(targetVelocity));
 
         sensor.AddObservation(_localFrameController.transform.InverseTransformPoint(_target.transform.position));
+        sensor.AddObservation(_localFrameController.transform.InverseTransformPoint(_nextTarget.position));
 
         // 몸 정렬 상태
         sensor.AddObservation(Quaternion.FromToRotation(_hips.forward, localForward));
@@ -300,7 +302,12 @@ public class PlayerAgent : Agent
             diffSquaredSum += diff;
         }
 
-        return Mathf.Exp(weight * diffSquaredSum);
+        // 추가: 몸 전체가 기울어져 있어도 관절의 로컬 각도가 맞으면 보상이 높게 지급되는 문제를 해결하기 위함
+        var hipOrientationReward = GetTargetHeadingReward(
+            _localFrameController.transform.InverseTransformDirection(_hips.up),
+            _referenceCharacter.transform.InverseTransformDirection(_referenceCharacter.hips.up));
+
+        return hipOrientationReward * Mathf.Exp(weight * diffSquaredSum);
     }
 
     private float GetVelocityReward(float weight = -0.05f)

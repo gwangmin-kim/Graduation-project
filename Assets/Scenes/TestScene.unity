@@ -1876,6 +1876,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368734316}
   m_CullTransparentMesh: 1
+--- !u!4 &1794484276 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8334010930592503451, guid: 1a770137b846c614f89658b4e72a0f55, type: 3}
+  m_PrefabInstance: {fileID: 386645320541164124}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1927231968 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
@@ -2202,7 +2207,7 @@ PrefabInstance:
     - target: {fileID: 4443436990480380774, guid: 1a770137b846c614f89658b4e72a0f55, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 6b00acd7a7a04824db2c460264e7f709, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 29e78563644264ee4accfbdb0086bf83, type: 3}
     - target: {fileID: 4636732429361233782, guid: 1a770137b846c614f89658b4e72a0f55, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2251,6 +2256,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7988963752296270626, guid: 1a770137b846c614f89658b4e72a0f55, type: 3}
+      propertyPath: _nextTarget
+      value: 
+      objectReference: {fileID: 1794484276}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

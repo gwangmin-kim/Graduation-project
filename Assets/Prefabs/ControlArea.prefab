@@ -793,7 +793,7 @@ MonoBehaviour:
   collisionLayer:
     serializedVersion: 2
     m_Bits: 129
-  maxDistance: 10
+  maxDistance: 3
   updateInterval: 0.1
   smoothTime: 0.3
 --- !u!1 &7940362899646149723

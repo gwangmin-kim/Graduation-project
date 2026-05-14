@@ -14,6 +14,8 @@ public class TargetController : MonoBehaviour
     [SerializeField] private bool _respawnPeriodically = false;
     [Range(_minRespawnInterval, _maxRespawnInterval)][SerializeField] private float _respawnInterval = _maxRespawnInterval;
 
+    [Header("Next Target")]
+    [SerializeField] private Transform _nextTarget;
 
     [Header("Target Fell Protection")]
     [SerializeField] private bool _respawnOnFallOff = true;
@@ -83,9 +85,11 @@ public class TargetController : MonoBehaviour
 
     public void MoveTargetToRandomPosition()
     {
+        transform.localPosition = _nextTarget.localPosition;
+
         var newTargetPosition = _initLocalPosition + (Random.insideUnitSphere * _spawnRadius);
         newTargetPosition.y = _initLocalPosition.y;
-        transform.localPosition = newTargetPosition;
+        _nextTarget.localPosition = newTargetPosition;
     }
 
     private void OnCollisionEnter(Collision collision)
