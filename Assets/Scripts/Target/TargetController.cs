@@ -23,8 +23,8 @@ public class TargetController : MonoBehaviour
 
     private Vector3 _initLocalPosition;
     private float _respawnTimer = 0f;
-    private const float _minRespawnInterval = 3.0f;
-    private const float _maxRespawnInterval = 10.0f;
+    private const float _minRespawnInterval = 1.0f;
+    private const float _maxRespawnInterval = 5.0f;
 
     [System.Serializable]
     public class TriggerEvent : UnityEvent<Collider>
@@ -90,6 +90,8 @@ public class TargetController : MonoBehaviour
         var newTargetPosition = _initLocalPosition + (Random.insideUnitSphere * _spawnRadius);
         newTargetPosition.y = _initLocalPosition.y;
         _nextTarget.localPosition = newTargetPosition;
+
+        _respawnTimer = _respawnInterval;
     }
 
     private void OnCollisionEnter(Collision collision)

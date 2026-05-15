@@ -497,9 +497,9 @@ public class PlayerAgent : Agent
             // }
             // else
             // {
-            //     reward = 0.1f * imitationReward
-            //             + 0.2f * taskReward
-            //             + 0.2f * balanceReward
+            //     reward = 0.3f * imitationReward
+            //             + 0.1f * taskReward
+            //             + 0.1f * balanceReward
             //             + 0.5f * targetHeadingReward;
             // }
             reward = 0.7f * imitationReward
