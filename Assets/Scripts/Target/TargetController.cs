@@ -24,7 +24,7 @@ public class TargetController : MonoBehaviour
     private Vector3 _initLocalPosition;
     private float _respawnTimer = 0f;
     private const float _minRespawnInterval = 1.0f;
-    private const float _maxRespawnInterval = 5.0f;
+    private const float _maxRespawnInterval = 6.0f;
 
     [System.Serializable]
     public class TriggerEvent : UnityEvent<Collider>

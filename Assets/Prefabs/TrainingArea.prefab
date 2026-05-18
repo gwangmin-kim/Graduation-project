@@ -898,7 +898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: _respawnPeriodically
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7242554927051070023, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: onTriggerEnterEvent.m_PersistentCalls.m_Calls.Array.size
@@ -1015,10 +1015,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2590689069212368614, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: jointDamper
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2590689069212368614, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: jointSpring
       value: 16000
       objectReference: {fileID: 0}
@@ -1040,11 +1036,19 @@ PrefabInstance:
       objectReference: {fileID: 4155826763452583642}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _lookAtTargetEachEpisode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
+      objectReference: {fileID: 0}
+    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 13f0e0c521aeb4f019ae526570837c8b, type: 3}
+    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
+      propertyPath: m_InferenceDevice
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize

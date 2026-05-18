@@ -320,13 +320,11 @@ public class PlayerAgent : Agent
 
             var refbodyPart = _referenceCharacter.bodyPartList[i];
 
-            // // Velocity Error
-            // var velocity = bodyPart.rigidbody.angularVelocity;
-            // var refVelocity = refbodyPart.AngularVelocity;
+            // Velocity Error
+            // var velocity = _hips.InverseTransformDirection(bodyPart.rigidbody.angularVelocity);
+            // var refVelocity = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.AngularVelocity);
 
-            // diffSquaredSum += Vector3.SqrMagnitude(velocity - refVelocity);
-
-            // 테스트: 선속도로 대체
+            // // 테스트: 선속도로 대체
             var velocity = _hips.InverseTransformDirection(bodyPart.rigidbody.linearVelocity);
             var refVelocity = _referenceCharacter.hips.InverseTransformDirection(refbodyPart.LinearVelocity);
 
@@ -380,7 +378,7 @@ public class PlayerAgent : Agent
         var headVelocity = _jointDriveController.bodyPartDict[_head].rigidbody.linearVelocity;
         float stabilityReward = Mathf.Exp(-0.5f * Vector3.SqrMagnitude(hipsVelocity - headVelocity));
 
-        return 0.3f * energeReward + 0.7f * stabilityReward;
+        return 0.4f * energeReward + 0.6f * stabilityReward;
     }
 
     /// <summary>
@@ -430,27 +428,6 @@ public class PlayerAgent : Agent
         return lookAtTargetReward;
     }
 
-    // /// <summary>
-    // /// 걷기 학습 시 추가되는 보상 함수
-    // /// 레퍼런스 모션과 비교하여 발이 지면에 닿은 상태를 일치하도록 유도
-    // /// </summary>
-    // private float GetFootGroundingReward(BodyPart footL, BodyPart footR)
-    // {
-    //     if (!_useReferenceMotion) return 1f;
-
-    //     var isMatchedL = footL.contactChecker.isTouchingGround == _referenceCharacter.footL.isTouchingGround;
-    //     var isMatchedR = footR.contactChecker.isTouchingGround == _referenceCharacter.footR.isTouchingGround;
-
-    //     var footReward = 0f;
-    //     if (isMatchedL) footReward += 0.5f;
-    //     if (isMatchedR) footReward += 0.5f;
-
-    //     footReward *= footReward;
-    //     // footReward = (isMatchedL && isMatchedR) ? 1f : 0f;
-
-    //     return footReward;
-    // }
-
     /// <summary>
     /// 목표 오브젝트와 충돌 시 획득하는 보상
     /// </summary>
@@ -482,29 +459,27 @@ public class PlayerAgent : Agent
         var matchingVelocityReward = GetMatchingVelocityReward(TargetWalkingSpeed * localForward, GetAverageVelocity());
         var targetHeadingReward = GetTargetHeadingReward(localForward, _head.forward);
         var taskReward = matchingVelocityReward * targetHeadingReward;
-        // // 추가: 발을 떼도록 유도
-        // var footReward = GetFootGroundingReward(_jointDriveController.bodyPartDict[_footL], _jointDriveController.bodyPartDict[_footR]);
 
         float reward;
 
         if (_useReferenceMotion)
         {
-            // if (Vector3.Angle(localForward, _head.forward) < 30f)
-            // {
-            //     reward = 0.7f * imitationReward
-            //             + 0.2f * taskReward
-            //             + 0.1f * balanceReward;
-            // }
-            // else
-            // {
-            //     reward = 0.3f * imitationReward
-            //             + 0.1f * taskReward
-            //             + 0.1f * balanceReward
-            //             + 0.5f * targetHeadingReward;
-            // }
-            reward = 0.7f * imitationReward
-                    + 0.2f * taskReward
-                    + 0.1f * balanceReward;
+            if (Vector3.Angle(localForward, _head.forward) < 30f)
+            {
+                reward = 0.8f * imitationReward
+                        + 0.1f * taskReward
+                        + 0.1f * balanceReward;
+            }
+            else
+            {
+                reward = 0.3f * imitationReward
+                        + 0.1f * taskReward
+                        + 0.2f * balanceReward
+                        + 0.4f * targetHeadingReward;
+            }
+            // reward = 0.7f * imitationReward
+            //         + 0.2f * taskReward
+            //         + 0.1f * balanceReward;
         }
         else
         {
