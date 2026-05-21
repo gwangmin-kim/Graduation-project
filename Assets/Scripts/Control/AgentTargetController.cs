@@ -5,13 +5,14 @@ public class AgentTargetController : MonoBehaviour
     [Header("Origin")]
     public Transform playerOrigin;
     public Transform target;
+    public Transform nextTarget;
     private Vector3 _targetPosition = Vector3.zero;
 
     [Header("Calc Target Position")]
     public LayerMask collisionLayer;
-    public float maxDistance = 10f;
-    public float updateInterval = 0.1f;
-    public float smoothTime = 0.3f;
+    public float maxDistance;
+    public float updateInterval;
+    public float smoothTime;
 
     private float _updateTimer = 0f;
     private Vector3 _velocity = Vector3.zero;
@@ -25,17 +26,23 @@ public class AgentTargetController : MonoBehaviour
             UpdateTargetPosition();
         }
 
-        MoveTarget();
+        // MoveTarget();
     }
 
     private void UpdateTargetPosition()
     {
         var rawInput = InputManager.Instance.move;
         var move = new Vector3(rawInput.x, 0f, rawInput.y);
+        if (move.sqrMagnitude < 0.01f)
+        {
+            move = Vector3.forward;
+        }
         var direction = playerOrigin.TransformDirection(move);
 
         direction.y = 0f;
         direction = direction.normalized;
+
+        target.position = nextTarget.position;
 
         var ray = new Ray(playerOrigin.position, direction);
         if (Physics.Raycast(ray, out var hitInfo, maxDistance, collisionLayer))
@@ -46,10 +53,12 @@ public class AgentTargetController : MonoBehaviour
         {
             _targetPosition = playerOrigin.position + direction * maxDistance;
         }
+
+        nextTarget.position = _targetPosition;
     }
 
-    private void MoveTarget()
-    {
-        target.position = Vector3.SmoothDamp(target.position, _targetPosition, ref _velocity, smoothTime);
-    }
+    // private void MoveTarget()
+    // {
+    //     target.position = Vector3.SmoothDamp(target.position, _targetPosition, ref _velocity, smoothTime);
+    // }
 }

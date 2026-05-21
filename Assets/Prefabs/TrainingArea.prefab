@@ -780,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 9091164111600739814}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 2}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -847,10 +847,6 @@ PrefabInstance:
     - target: {fileID: 2455044420990883304, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2455044420990883304, guid: d527b48c89144be4688112c503b17041, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2455044420990883304, guid: d527b48c89144be4688112c503b17041, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1014,10 +1010,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2590689069212368614, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: jointSpring
-      value: 16000
-      objectReference: {fileID: 0}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _target
       value: 
@@ -1027,32 +1019,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7620588318748338811}
     - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: _animationSpeed
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: _referenceCharacter
       value: 
       objectReference: {fileID: 4155826763452583642}
-    - target: {fileID: 3360264570293577955, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: _lookAtTargetEachEpisode
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
-      objectReference: {fileID: 0}
-    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_Model
-      value: 
-      objectReference: {fileID: 5022602860645237092, guid: 13f0e0c521aeb4f019ae526570837c8b, type: 3}
-    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_InferenceDevice
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
-      propertyPath: m_BrainParameters.VectorObservationSize
-      value: 247
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

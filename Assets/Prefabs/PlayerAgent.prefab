@@ -4836,7 +4836,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 6db3be7ef9dd7452ca310b23a81a5a42, type: 3}
   m_InferenceDevice: 0
   m_BehaviorType: 0
   m_BehaviorName: PlayerAgent
@@ -4888,7 +4888,7 @@ MonoBehaviour:
   _referenceCharacter: {fileID: 0}
   _isRSIEnabled: 0
   _currentSkill: 1
-  _animationSpeed: 1
+  _animationSpeed: 0.9
   _target: {fileID: 0}
   _nextTarget: {fileID: 0}
   _targetTouchReward: 1
@@ -4912,7 +4912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18d3a476e1883e3488aaf640418b8dd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JointDriveController
-  jointSpring: 15000
+  jointSpring: 16000
   jointDamper: 1200
   maxJointForce: 50000
   bodyPartList: []

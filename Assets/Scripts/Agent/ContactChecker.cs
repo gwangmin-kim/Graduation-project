@@ -26,7 +26,7 @@ public class ContectChecker : MonoBehaviour
             isTouchingGround = true;
 
 #if UNITY_EDITOR
-            Debug.Log($"{name} touched the ground");
+            // Debug.Log($"{name} touched the ground");
 #endif
 
             if (penalizeOnGroundContact)
@@ -45,7 +45,7 @@ public class ContectChecker : MonoBehaviour
             isTouchingObstacle = true;
 
 #if UNITY_EDITOR
-            Debug.Log($"{name} touched the obstacle");
+            // Debug.Log($"{name} touched the obstacle");
 #endif
 
             if (penalizeOnObstacleContact)
@@ -62,7 +62,7 @@ public class ContectChecker : MonoBehaviour
             isTouchingGround = false;
 
 #if UNITY_EDITOR
-            Debug.Log($"{name} detatched from the ground");
+            // Debug.Log($"{name} detatched from the ground");
 #endif
         }
 
@@ -71,7 +71,7 @@ public class ContectChecker : MonoBehaviour
             isTouchingObstacle = false;
 
 #if UNITY_EDITOR
-            Debug.Log($"{name} detatched from the obstacle");
+            // Debug.Log($"{name} detatched from the obstacle");
 #endif
         }
     }

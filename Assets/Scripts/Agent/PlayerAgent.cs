@@ -75,6 +75,14 @@ public class PlayerAgent : Agent
 
     public override void OnEpisodeBegin()
     {
+        if (TrajectoryLogger.Instance != null)
+        {
+            TrajectoryLogger.Instance.SaveTrajectory();
+        }
+        if (TestTargetController.Instance != null)
+        {
+            TestTargetController.Instance.Initialize();
+        }
 
         if (_useReferenceMotion && _isRSIEnabled)
         {
@@ -120,6 +128,11 @@ public class PlayerAgent : Agent
         }
 
         UpdateOrientation();
+
+        if (TrajectoryLogger.Instance != null)
+        {
+            TrajectoryLogger.Instance.StartRecording();
+        }
     }
 
     public void CollectObservationBodyPart(BodyPart bodyPart, VectorSensor sensor)
@@ -378,7 +391,7 @@ public class PlayerAgent : Agent
         var headVelocity = _jointDriveController.bodyPartDict[_head].rigidbody.linearVelocity;
         float stabilityReward = Mathf.Exp(-0.5f * Vector3.SqrMagnitude(hipsVelocity - headVelocity));
 
-        return 0.4f * energeReward + 0.6f * stabilityReward;
+        return 0.3f * energeReward + 0.7f * stabilityReward;
     }
 
     /// <summary>
@@ -464,22 +477,22 @@ public class PlayerAgent : Agent
 
         if (_useReferenceMotion)
         {
-            if (Vector3.Angle(localForward, _head.forward) < 30f)
-            {
-                reward = 0.8f * imitationReward
-                        + 0.1f * taskReward
-                        + 0.1f * balanceReward;
-            }
-            else
-            {
-                reward = 0.3f * imitationReward
-                        + 0.1f * taskReward
-                        + 0.2f * balanceReward
-                        + 0.4f * targetHeadingReward;
-            }
-            // reward = 0.7f * imitationReward
-            //         + 0.2f * taskReward
-            //         + 0.1f * balanceReward;
+            // if (Vector3.Angle(localForward, _head.forward) < 30f)
+            // {
+            //     reward = 0.8f * imitationReward
+            //             + 0.1f * taskReward
+            //             + 0.1f * balanceReward;
+            // }
+            // else
+            // {
+            //     reward = 0.3f * imitationReward
+            //             + 0.1f * taskReward
+            //             + 0.2f * balanceReward
+            //             + 0.5f * targetHeadingReward;
+            // }
+            reward = 0.7f * imitationReward
+                    + 0.2f * taskReward
+                    + 0.1f * balanceReward;
         }
         else
         {
@@ -505,6 +518,11 @@ public class PlayerAgent : Agent
         // _debugLog += $"foot grounding reward: {footReward:F5}\n";
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
+
+        if (TrajectoryLogger.Instance != null)
+        {
+            TrajectoryLogger.Instance.RecordStep();
+        }
     }
 
     // 테스트용 함수
