@@ -1971,7 +1971,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrajectoryLogger
   hipTransform: {fileID: 1824266985}
   targetTransform: {fileID: 2390641250691625877}
-  modelName: Phase1
+  modelName: Phase2
 --- !u!4 &1191743536
 Transform:
   m_ObjectHideFlags: 0
@@ -3599,7 +3599,7 @@ PrefabInstance:
     - target: {fileID: 9067659752767705255, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 44a835627d90f46acb5f4d475074447c, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: 6db3be7ef9dd7452ca310b23a81a5a42, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
