@@ -52,7 +52,6 @@ public class TestTargetController : MonoBehaviour
             for (int i = 0; i < _count; i++)
             {
                 _positions[i] = _targetRoot.GetChild(i);
-                _intervals[i] = Random.Range(_intervalRange.x, _intervalRange.y);
             }
         }
     }
