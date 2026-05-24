@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2590689069212368614, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: jointSpring
-      value: 18000
+      value: 16000
       objectReference: {fileID: 0}
     - target: {fileID: 8630088158969153604, guid: 75d6ee5264b0744f4a330a9c5ef268dc, type: 3}
       propertyPath: m_Name

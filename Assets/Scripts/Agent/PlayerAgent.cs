@@ -75,6 +75,7 @@ public class PlayerAgent : Agent
 
     public override void OnEpisodeBegin()
     {
+#if UNITY_EDITOR
         if (TrajectoryLogger.Instance != null)
         {
             TrajectoryLogger.Instance.SaveTrajectory();
@@ -83,6 +84,7 @@ public class PlayerAgent : Agent
         {
             TestTargetController.Instance.Initialize();
         }
+#endif
 
         if (_useReferenceMotion && _isRSIEnabled)
         {
@@ -129,10 +131,12 @@ public class PlayerAgent : Agent
 
         UpdateOrientation();
 
+#if UNITY_EDITOR
         if (TrajectoryLogger.Instance != null)
         {
             TrajectoryLogger.Instance.StartRecording();
         }
+#endif
     }
 
     public void CollectObservationBodyPart(BodyPart bodyPart, VectorSensor sensor)
@@ -519,10 +523,12 @@ public class PlayerAgent : Agent
         _debugLog += $"total reward: {reward:F5}\n";
 #endif
 
+#if UNITY_EDITOR
         if (TrajectoryLogger.Instance != null)
         {
             TrajectoryLogger.Instance.RecordStep();
         }
+#endif
     }
 
     // 테스트용 함수
