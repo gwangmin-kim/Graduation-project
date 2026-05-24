@@ -131,6 +131,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (21)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24
@@ -199,6 +203,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (27)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -269,6 +277,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72
@@ -338,6 +350,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (20)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -406,6 +422,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -755,6 +775,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -823,6 +847,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -893,6 +921,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -961,6 +993,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1209,6 +1245,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72
@@ -1277,6 +1317,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1396,6 +1440,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (22)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -1464,6 +1512,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1534,6 +1586,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -1602,6 +1658,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1672,6 +1732,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -1740,6 +1804,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1810,6 +1878,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72
@@ -1878,6 +1950,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (25)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1948,6 +2024,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72
@@ -2016,6 +2096,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2086,6 +2170,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2154,6 +2242,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2224,6 +2316,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -2292,6 +2388,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (29)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2362,6 +2462,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24
@@ -2431,6 +2535,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2499,6 +2607,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (16)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2574,6 +2686,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 72
@@ -2643,6 +2759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TrainingAreaWithSensor (30)
       objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 48
@@ -2711,6 +2831,10 @@ PrefabInstance:
     - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Name
       value: TrainingAreaWithSensor (17)
+      objectReference: {fileID: 0}
+    - target: {fileID: 659846777234159457, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1447848144026358655, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2825,6 +2949,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3289689776185509225, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: c6d7e1ca482a14fcaad2b2888988af60, type: 3}
     - target: {fileID: 6107568161323569075, guid: cb3b79c2dd99d3648a9b453e8f9ae8be, type: 3}
       propertyPath: m_Mesh
       value: 

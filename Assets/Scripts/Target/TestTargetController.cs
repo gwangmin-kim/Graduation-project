@@ -9,8 +9,12 @@ public class TestTargetController : MonoBehaviour
         Instance = this;
     }
 
+    [Header("Collider Tag To Detect")]
+    public string tagToDetect = "Player";
+
     // 동일한 상황에서의 모델 간 비교를 위해, 랜덤성을 제거하고 타겟을 정해진 규칙대로 이동시키는 로직
     [Header("General Settings")]
+    [SerializeField] private bool _respawnPeriodically = false;
     [SerializeField] private Vector2 _intervalRange;
     [SerializeField] private Transform _target;
     [SerializeField] private Transform _nextTarget;
@@ -83,11 +87,14 @@ public class TestTargetController : MonoBehaviour
     {
         if (_count < 2) return;
 
-        _respawnTimer -= Time.deltaTime;
-
-        if (_respawnTimer <= 0f)
+        if (_respawnPeriodically)
         {
-            MoveToNextPosition();
+            _respawnTimer -= Time.deltaTime;
+
+            if (_respawnTimer <= 0f)
+            {
+                MoveToNextPosition();
+            }
         }
     }
 
@@ -104,6 +111,14 @@ public class TestTargetController : MonoBehaviour
 
         // 4. 타이머 초기화 (새로 도착한 목표 지점에서의 대기 시간 적용)
         _respawnTimer = _intervals[_currentIndex];
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.CompareTag(tagToDetect))
+        {
+            MoveToNextPosition();
+        }
     }
 
     // 에디터 상에서 경로를 시각적으로 확인하기 위한 기즈모 (논문용 캡처 시 유용함)
