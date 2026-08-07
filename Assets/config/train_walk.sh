@@ -1,6 +1,5 @@
 DIR="/root/workspace/MLAgents"
-NAME="PlayerAgent"
-TAG="PPO_721-2"
+NAME="WalkAgent"
 EXE_NAME="Train_Walk.x86_64"
 
 mlagents-learn "$DIR/config/Walk.yaml" \
